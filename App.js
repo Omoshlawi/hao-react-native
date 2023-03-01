@@ -7,15 +7,13 @@ import WelcomeScreen from "./app/screens/WelcomeScreen";
 import colors from "./app/utils/colors";
 
 export default function App() {
-  return (
-    <MessagesScreen/>
-  );
+  return <MessagesScreen />;
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginTop:StatusBar.currentHeight,
+    marginTop: StatusBar.currentHeight,
     backgroundColor: colors.grey,
-    padding:20
+    padding: 20,
   },
 });

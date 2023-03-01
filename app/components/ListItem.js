@@ -10,9 +10,13 @@ import {
 import AppText from "./AppText";
 import colors from "../utils/colors";
 
-function ListItem({ image, title, subTitle, onPress }) {
+function ListItem({ image, title, subTitle, onPress, style }) {
   return (
-    <TouchableHighlight onPress={() => {}} underlayColor={colors.light} /**Changes color of highlight */>
+    <TouchableHighlight
+      style={style}
+      onPress={onPress}
+      underlayColor={colors.light} /**Changes color of highlight */
+    >
       <View style={styles.container}>
         <Image style={styles.image} source={image} />
         <View>
