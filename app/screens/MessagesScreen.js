@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import ListItem from "../components/ListItem";
 import AppSafeAreaScreen from "../components/AppSafeAreaScreen";
+import ListItemSeparator from "../components/ListItemSeparator";
 
 const messages = [
   {
@@ -44,6 +45,7 @@ function MessagesScreen(props) {
             subTitle={item.description}
           />
         )}
+        ItemSeparatorComponent={ListItemSeparator}
       />
     </AppSafeAreaScreen>
   );

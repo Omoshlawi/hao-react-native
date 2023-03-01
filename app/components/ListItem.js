@@ -21,6 +21,7 @@ ListItem.propTypes = {};
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
+    padding: 15,
   },
   image: {
     width: 70,
@@ -28,12 +29,12 @@ const styles = StyleSheet.create({
     borderRadius: 35,
     marginRight: 10,
   },
-  title:{
-    fontWeight:600
+  title: {
+    fontWeight: 600,
   },
   subTitle: {
-    color: colors.medium
-  }
+    color: colors.medium,
+  },
 });
 
 export default ListItem;
