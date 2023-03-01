@@ -10,6 +10,7 @@ function AppSafeAreaScreen({ children }) {
 const styles = StyleSheet.create({
   screen: {
     paddingTop: Constants.statusBarHeight,
+    flex: 1
   },
 });
 

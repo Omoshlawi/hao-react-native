@@ -43,6 +43,7 @@ const initialMessages = [
 
 function MessagesScreen(props) {
   const [messages, setMessages] = useState(initialMessages);
+  const [refreshing, setRefreshing] = useState(false);
   const handleDelete = (message) => {
     const newMessages = messages.filter((ms) => ms.id !== message.id);
     setMessages(newMessages);
@@ -75,6 +76,10 @@ function MessagesScreen(props) {
         renderHiddenItem={renderHiddentBackRow}
         disableRightSwipe={true}
         rightOpenValue={-75}
+        refreshing={refreshing}
+        onRefresh={() => {
+          setMessages([...initialMessages]);
+        }}
         // leftOpenValue={75}
       />
     </AppSafeAreaScreen>
