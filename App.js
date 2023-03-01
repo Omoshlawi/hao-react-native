@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, StatusBar } from "react-native";
 import AppCard from "./app/components/AppCard";
 import AppIcon from "./app/components/AppIcon";
 import AppSafeAreaScreen from "./app/components/AppSafeAreaScreen";
+import ListItem from "./app/components/ListItem";
 import MessagesScreen from "./app/screens/MessagesScreen";
 import PropertyDetailScreen from "./app/screens/PropertyDetailScreen";
 import ViewImageScreen from "./app/screens/ViewImageScreen";
@@ -11,9 +12,12 @@ import colors from "./app/utils/colors";
 export default function App() {
   return (
     <AppSafeAreaScreen>
-      <AppIcon
-        name="email"
-        
+      <ListItem
+        title="Ous"
+        subTitle="Sumthing"
+        ImageComponent={
+          <AppIcon name="email" backgroundColor="red" size={60} />
+        }
       />
     </AppSafeAreaScreen>
   );
