@@ -1,28 +1,71 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { View, StyleSheet, TextInput, Platform } from "react-native";
+import {
+  View,
+  StyleSheet,
+  TextInput,
+  Platform,
+  TouchableWithoutFeedback,
+  Modal,
+  Button,
+  FlatList,
+} from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../utils/colors";
 import AppText from "./AppText";
+import PickerItem from "./PickerItem";
 
-function AppPicker({ icon, placeHolder, ...otherProps }) {
+function AppPicker({ icon, placeHolder, items, selectedItem, onSelectItem }) {
+  const [modalVisible, setModalVisible] = useState(false);
   return (
-    <View style={styles.container}>
-      {icon && (
-        <MaterialCommunityIcons
-          name={icon}
-          size={30}
-          color={colors.medium}
-          style={styles.icon}
+    <>
+      <TouchableWithoutFeedback
+        onPress={() => {
+          setModalVisible(true);
+        }}
+      >
+        <View style={styles.container}>
+          {icon && (
+            <MaterialCommunityIcons
+              name={icon}
+              size={30}
+              color={colors.medium}
+              style={styles.icon}
+            />
+          )}
+          <AppText style={styles.text}>
+            {selectedItem ? selectedItem.label : placeHolder}
+          </AppText>
+          <MaterialCommunityIcons
+            name="chevron-down"
+            size={30}
+            color={colors.medium}
+          />
+        </View>
+      </TouchableWithoutFeedback>
+      <Modal visible={modalVisible} animationType="slide">
+        <Button
+          title="Close Button"
+          onPress={() => {
+            setModalVisible(false);
+          }}
         />
-      )}
-      <AppText style={styles.text}>{placeHolder}</AppText>
-      <MaterialCommunityIcons
-        name="chevron-down"
-        size={30}
-        color={colors.medium}
-      />
-    </View>
+        <FlatList
+          data={items}
+          keyExtractor={(item) => item.value}
+          renderItem={({ item }) => (
+            <PickerItem
+              label={item.label}
+              value={item.value}
+              onPress={() => {
+                setModalVisible(false);
+                onSelectItem(item);
+              }}
+            />
+          )}
+        />
+      </Modal>
+    </>
   );
 }
 
