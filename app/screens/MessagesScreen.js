@@ -1,7 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { FlatList, SafeAreaView, StyleSheet, Platform, StatusBar } from "react-native";
+import {
+  FlatList,
+  SafeAreaView,
+  StyleSheet,
+  Platform,
+  StatusBar,
+} from "react-native";
 import ListItem from "../components/ListItem";
+import AppSafeAreaScreen from "../components/AppSafeAreaScreen";
 
 const messages = [
   {
@@ -26,7 +33,7 @@ const messages = [
 
 function MessagesScreen(props) {
   return (
-    <SafeAreaView style={styles.screen}>
+    <AppSafeAreaScreen>
       <FlatList
         data={messages}
         keyExtractor={(message) => message.id.toString}
@@ -38,15 +45,11 @@ function MessagesScreen(props) {
           />
         )}
       />
-    </SafeAreaView>
+    </AppSafeAreaScreen>
   );
 }
 
-const styles = StyleSheet.create({
-    screen: {
-        paddingTop: Platform.OS === "android" ?StatusBar.currentHeight:0
-    }
-})
+const styles = StyleSheet.create({});
 
 MessagesScreen.propTypes = {};
 
