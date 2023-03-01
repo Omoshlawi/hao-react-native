@@ -1,16 +1,24 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, StatusBar } from "react-native";
+import AppCard from "./app/components/AppCard";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
+import colors from "./app/utils/colors";
 
 export default function App() {
-  return <WelcomeScreen />;
+  return (
+    <View style={styles.container}>
+      <AppCard
+        title="Black Jacket"
+        subTitle="$20"
+        image={require("./app/assets/logoBlack.png")}
+      />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    marginTop:StatusBar.currentHeight,
+    backgroundColor: colors.grey,
+    padding:20
   },
 });
