@@ -10,7 +10,7 @@ import {
 import AppText from "./AppText";
 import colors from "../utils/colors";
 
-function ListItem({ image, title, subTitle, onPress, style, ImageComponent }) {
+function ListItem({ image, title, subTitle, onPress, style, IconComponent }) {
   return (
     <TouchableHighlight
       style={style}
@@ -18,7 +18,7 @@ function ListItem({ image, title, subTitle, onPress, style, ImageComponent }) {
       underlayColor={colors.light} /**Changes color of highlight */
     >
       <View style={styles.container}>
-        {ImageComponent}
+        {IconComponent}
         {image && <Image style={styles.image} source={image} />}
         <View style={styles.containerDetails}>
           <AppText style={styles.title}>{title}</AppText>
@@ -33,12 +33,13 @@ ListItem.propTypes = {};
 
 const styles = StyleSheet.create({
   containerDetails: {
-     marginLeft: 10,
-     justifyContent:"center"
+    marginLeft: 10,
+    justifyContent: "center",
   },
   container: {
     flexDirection: "row",
     padding: 15,
+    backgroundColor: colors.white
   },
   image: {
     width: 70,
