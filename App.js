@@ -1,12 +1,13 @@
 import { StyleSheet, Text, View, StatusBar } from "react-native";
 import AppCard from "./app/components/AppCard";
 import PropertyDetailScreen from "./app/screens/PropertyDetailScreen";
+import ViewImageScreen from "./app/screens/ViewImageScreen";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 import colors from "./app/utils/colors";
 
 export default function App() {
   return (
-    <PropertyDetailScreen/>
+    <ViewImageScreen/>
   );
 }
 
