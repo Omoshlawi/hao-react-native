@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, StatusBar } from "react-native";
 import AppCard from "./app/components/AppCard";
 import AppIcon from "./app/components/AppIcon";
+import AppPicker from "./app/components/AppPicker";
 import AppSafeAreaScreen from "./app/components/AppSafeAreaScreen";
 import AppTextInput from "./app/components/AppTextInput";
 import ListItem from "./app/components/ListItem";
@@ -16,6 +17,7 @@ export default function App() {
   return (
     <AppSafeAreaScreen>
       <AppTextInput placeholder="Enter Full name" icon="account" />
+      <AppPicker icon="apps" placeHolder="Categories"/>
     </AppSafeAreaScreen>
   );
 }
