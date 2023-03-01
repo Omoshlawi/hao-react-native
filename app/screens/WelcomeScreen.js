@@ -16,6 +16,7 @@ function WelcomeScreen(props) {
   return (
     <ImageBackground
       resizeMode="cover"
+      blurRadius={5}
       style={styles.imageBackground}
       source={require("../assets/housebg.jpg")}
     >
