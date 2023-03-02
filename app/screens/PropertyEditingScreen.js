@@ -63,31 +63,25 @@ function PropertyEditingScreen(props) {
             layout="grid"
             displayExractor={(item) => item.title}
             keyExtractor={(item) => item.url}
-            defaultIndex={5}
+            // defaultIndex={5}
           >
             {({ item, setSelectedItem, currentSelectedItem }) => {
               return (
-                <TouchableOpacity
-                  onPress={() => {
-                    setSelectedItem(item);
+                <View
+                  style={{
+                    borderColor: "red",
+                    borderWidth: 1,
+                    borderRadius: 10,
+                    width: 80,
+                    height: 80,
+                    backgroundColor: colors.light,
+                    margin: 10,
                   }}
-                  style={{ margin: 20 }}
                 >
-                  <View
-                    style={{
-                      borderColor: "red",
-                      borderWidth: 1,
-                      borderRadius: 10,
-                      width: 80,
-                      height: 80,
-                      backgroundColor: colors.light,
-                    }}
-                  >
-                    <Text style={{ fontSize: 30, textAlign: "center" }}>
-                      {item.title}
-                    </Text>
-                  </View>
-                </TouchableOpacity>
+                  <Text style={{ fontSize: 30, textAlign: "center" }}>
+                    {item.title}
+                  </Text>
+                </View>
               );
             }}
           </Picker>

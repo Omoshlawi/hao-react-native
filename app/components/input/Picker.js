@@ -8,6 +8,7 @@ import {
   Button,
   TouchableWithoutFeedback,
   FlatList,
+  TouchableOpacity,
 } from "react-native";
 import colors from "../../utils/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -33,6 +34,10 @@ function Picker({
   const [currentIndex, setCurentIndex] = useState(
     defaultIndex > -1 ? defaultIndex : -1
   );
+  const setSelectedItem = (item) => {
+    setShowModal(false);
+    setCurentIndex(data.indexOf(item));
+  };
   return (
     <TouchableWithoutFeedback onPress={() => setShowModal(true)}>
       <View style={styles.container}>
@@ -52,15 +57,16 @@ function Picker({
             {layout === "linear" ? (
               <FlatList
                 renderItem={({ item, ...otherProps }) => {
-                  return children({
-                    currentSelectedItem:
-                      currentIndex === -1 ? null : data[currentIndex],
-                    item: item,
-                    setSelectedItem: (item) => {
-                      setShowModal(false);
-                      setCurentIndex(data.indexOf(item));
-                    },
-                  });
+                  return (
+                    <TouchableOpacity onPress={() => setSelectedItem(item)}>
+                      {children({
+                        currentSelectedItem:
+                          currentIndex === -1 ? null : data[currentIndex],
+                        item: item,
+                        setSelectedItem: setSelectedItem,
+                      })}
+                    </TouchableOpacity>
+                  );
                 }}
                 keyExtractor={keyExtractor}
                 data={data}
@@ -70,17 +76,17 @@ function Picker({
               <>
                 <View style={styles.gridContainer}>
                   {data.map((item) => (
-                    <View key={keyExtractor(item)}>
+                    <TouchableOpacity
+                      key={keyExtractor(item)}
+                      onPress={() => setSelectedItem(item)}
+                    >
                       {children({
                         currentSelectedItem:
                           currentIndex === -1 ? null : data[currentIndex],
                         item: item,
-                        setSelectedItem: (item) => {
-                          setShowModal(false);
-                          setCurentIndex(data.indexOf(item));
-                        },
+                        setSelectedItem: setSelectedItem,
                       })}
-                    </View>
+                    </TouchableOpacity>
                   ))}
                 </View>
               </>
