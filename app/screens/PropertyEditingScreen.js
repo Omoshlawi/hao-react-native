@@ -63,6 +63,7 @@ function PropertyEditingScreen(props) {
             layout="grid"
             displayExractor={(item) => item.title}
             keyExtractor={(item) => item.url}
+            defaultIndex={5}
           >
             {({ item, setSelectedItem, currentSelectedItem }) => {
               return (

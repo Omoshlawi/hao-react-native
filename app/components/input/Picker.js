@@ -31,7 +31,7 @@ function Picker({
 }) {
   const [showModal, setShowModal] = useState(false);
   const [currentIndex, setCurentIndex] = useState(
-    defaultIndex ? defaultIndex : -1
+    defaultIndex > -1 ? defaultIndex : -1
   );
   return (
     <TouchableWithoutFeedback onPress={() => setShowModal(true)}>
