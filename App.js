@@ -11,13 +11,14 @@ import LoginScreen from "./app/screens/LoginScreen";
 import MessagesScreen from "./app/screens/MessagesScreen";
 import NortificationScreen from "./app/screens/NortificationScreen";
 import PropertyDetailScreen from "./app/screens/PropertyDetailScreen";
+import PropertyEditingScreen from "./app/screens/PropertyEditingScreen";
 import PropertyListScreen from "./app/screens/PropertyListScreen";
 import ViewImageScreen from "./app/screens/ViewImageScreen";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 import colors from "./app/utils/colors";
 
 export default function App() {
-  return <NortificationScreen />;
+  return <PropertyEditingScreen />;
 }
 
 const styles = StyleSheet.create({
