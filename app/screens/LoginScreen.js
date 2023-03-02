@@ -6,10 +6,10 @@ import AppSafeAreaScreen from "../components/AppSafeAreaScreen";
 import AppTextInput from "../components/AppTextInput";
 import * as Yup from "yup";
 import AppText from "../components/AppText";
-import AppErrorMessage from "../components/AppErrorMessage";
-import AppFormField from "../components/AppFormField";
-import AppFormSubmitButton from "../components/AppFormSubmitButton";
-import AppForm from "../components/AppForm";
+import AppErrorMessage from "../components/forms/AppErrorMessage";
+import AppFormField from "../components/forms/AppFormField";
+import AppFormSubmitButton from "../components/forms/AppFormSubmitButton";
+import AppForm from "../components/forms/AppForm";
 
 const validationScheema = Yup.object().shape({
   username: Yup.string().required().email().label("Email"),

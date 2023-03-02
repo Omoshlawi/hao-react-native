@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import AppText from "./AppText";
+import AppText from "../AppText";
 import { StyleSheet } from "react-native";
 
 function AppErrorMessage({ error, visible }) {
