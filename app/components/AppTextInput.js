@@ -7,8 +7,15 @@ import colors from "../utils/colors";
 function AppTextInput({ icon, ...otherProps }) {
   return (
     <View style={styles.container}>
-      {icon && <MaterialCommunityIcons name={icon} size={30} color={colors.medium } style={styles.icon} />}
-      <TextInput  {...otherProps}  />
+      {icon && (
+        <MaterialCommunityIcons
+          name={icon}
+          size={30}
+          color={colors.medium}
+          style={styles.icon}
+        />
+      )}
+      <TextInput style={styles.textInput} {...otherProps} />
     </View>
   );
 }
@@ -26,10 +33,11 @@ const styles = StyleSheet.create({
     color: colors.dark,
     fontSize: 18,
     fontFamily: Platform.OS === "android" ? "Robot" : "Avenir",
+    flex: 1,
   },
   icon: {
-    marginRight: 10
-  }
+    marginRight: 10,
+  },
 });
 
 AppTextInput.propTypes = {};

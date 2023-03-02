@@ -15,16 +15,8 @@ import ViewImageScreen from "./app/screens/ViewImageScreen";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 import colors from "./app/utils/colors";
 
-const cats = [
-  { label: "Furniture", value: 1 },
-  { label: "Utensils", value: 2 },
-  { label: "Stationary", value: 3 },
-  { label: "Stupida", value: 4 },
-];
-
 export default function App() {
-  const [cartegory, setCategory] = useState();
-  return <WelcomeScreen />;
+  return <LoginScreen />;
 }
 
 const styles = StyleSheet.create({
