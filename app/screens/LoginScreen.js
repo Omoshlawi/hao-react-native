@@ -4,6 +4,13 @@ import { View, StyleSheet, Image } from "react-native";
 import AppButton from "../components/AppButton";
 import AppSafeAreaScreen from "../components/AppSafeAreaScreen";
 import AppTextInput from "../components/AppTextInput";
+import * as Yup from "yup";
+import AppText from "../components/AppText";
+
+const validationScheema = Yup.object().shape({
+  username: Yup.string().required().email().label("Email"),
+  password: Yup.string().required().min(8).label("Password"),
+});
 
 function LoginScreen() {
   return (
@@ -19,8 +26,9 @@ function LoginScreen() {
         <Formik
           initialValues={{ username: "", password: "" }}
           onSubmit={(values) => console.log(values)}
+          validationSchema={validationScheema}
         >
-          {({ handleChange, handleSubmit }) => (
+          {({ handleChange, handleSubmit, errors }) => (
             <>
               <AppTextInput
                 placeholder="Username or Email"
@@ -31,6 +39,7 @@ function LoginScreen() {
                 textContentType="emailAddress" //Only works on ios
                 onChangeText={handleChange("username")}
               />
+              <AppText style={styles.errors}>{errors.username}</AppText>
               <AppTextInput
                 placeholder="Passsword"
                 icon="lock-outline"
@@ -40,6 +49,7 @@ function LoginScreen() {
                 textContentType="password" //Only works on ios
                 onChangeText={handleChange("password")}
               />
+              <AppText style={styles.errors}>{errors.password}</AppText>
               <AppButton title="Login" onPress={handleSubmit} />
             </>
           )}
@@ -63,6 +73,9 @@ const styles = StyleSheet.create({
   formContainer: {
     marginTop: 20,
     padding: 10,
+  },
+  errors: {
+    color: "red",
   },
 });
 
