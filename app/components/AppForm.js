@@ -1,12 +1,19 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react";
+import PropTypes from "prop-types";
+import { Formik } from "formik";
 
-function AppForm(props) {
+function AppForm({ initialValues, onSubmit, validationSchema, children }) {
   return (
-    <div>AppForm</div>
-  )
+    <Formik
+      initialValues={initialValues}
+      onSubmit={onSubmit}
+      validationSchema={validationSchema}
+    >
+      {() => <>{children}</>}
+    </Formik>
+  );
 }
 
-AppForm.propTypes = {}
+AppForm.propTypes = {};
 
-export default AppForm
+export default AppForm;

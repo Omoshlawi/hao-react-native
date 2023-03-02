@@ -9,6 +9,7 @@ import AppText from "../components/AppText";
 import AppErrorMessage from "../components/AppErrorMessage";
 import AppFormField from "../components/AppFormField";
 import AppFormSubmitButton from "../components/AppFormSubmitButton";
+import AppForm from "../components/AppForm";
 
 const validationScheema = Yup.object().shape({
   username: Yup.string().required().email().label("Email"),
@@ -26,35 +27,31 @@ function LoginScreen() {
         />
       </View>
       <View style={styles.formContainer}>
-        <Formik
+        <AppForm
           initialValues={{ username: "", password: "" }}
           onSubmit={(values) => console.log(values)}
           validationSchema={validationScheema}
         >
-          {({ handleSubmit }) => (
-            <>
-              <AppFormField
-                name="username"
-                placeholder="Username or Email"
-                icon="account-circle-outline"
-                autoCapitalize="none"
-                autoCorrect={false}
-                keyboardType="email-address"
-                textContentType="emailAddress" //Only works on ios
-              />
-              <AppFormField
-                name="password"
-                placeholder="Passsword"
-                icon="lock-outline"
-                autoCapitalize="none"
-                autoCorrect={false}
-                secureTextEntry={true}
-                textContentType="password" //Only works on ios
-              />
-              <AppFormSubmitButton title="Login" />
-            </>
-          )}
-        </Formik>
+          <AppFormField
+            name="username"
+            placeholder="Username or Email"
+            icon="account-circle-outline"
+            autoCapitalize="none"
+            autoCorrect={false}
+            keyboardType="email-address"
+            textContentType="emailAddress" //Only works on ios
+          />
+          <AppFormField
+            name="password"
+            placeholder="Passsword"
+            icon="lock-outline"
+            autoCapitalize="none"
+            autoCorrect={false}
+            secureTextEntry={true}
+            textContentType="password" //Only works on ios
+          />
+          <AppFormSubmitButton title="Login" />
+        </AppForm>
       </View>
     </AppSafeAreaScreen>
   );
