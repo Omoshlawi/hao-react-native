@@ -13,6 +13,12 @@ import colors from "../../utils/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import ListItemSeparator from "../ListItemSeparator";
 
+/**
+ *
+ * @param {*displayExractor} param0 -> Used as display field for the currently selected item, replaces the placeholder
+ * @returns
+ */
+
 function Picker({
   placeHolder,
   icon,
@@ -20,13 +26,22 @@ function Picker({
   keyExtractor,
   data,
   children,
+  defaultIndex,
+  displayExractor,
 }) {
   const [showModal, setShowModal] = useState(false);
+  const [currentIndex, setCurentIndex] = useState(
+    defaultIndex ? defaultIndex : -1
+  );
   return (
     <TouchableWithoutFeedback onPress={() => setShowModal(true)}>
       <View style={styles.container}>
         {icon && <MaterialCommunityIcons name={icon} size={30} />}
-        <Text style={styles.text}>{placeHolder}</Text>
+        <Text style={styles.text}>
+          {currentIndex === -1
+            ? placeHolder
+            : displayExractor(data[currentIndex])}
+        </Text>
         <MaterialCommunityIcons
           name="chevron-down"
           color={colors.dark}
@@ -38,11 +53,12 @@ function Picker({
               <FlatList
                 renderItem={({ item, ...otherProps }) => {
                   return children({
-                    setCurrntItem: () => {},
+                    currentSelectedItem:
+                      currentIndex === -1 ? null : data[currentIndex],
                     item: item,
-                    onItemSelected: (item) => {
+                    setSelectedItem: (item) => {
                       setShowModal(false);
-                      // console.log(item);
+                      setCurentIndex(data.indexOf(item));
                     },
                   });
                 }}

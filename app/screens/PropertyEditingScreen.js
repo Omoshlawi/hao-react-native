@@ -52,12 +52,18 @@ function PropertyEditingScreen(props) {
           onSubmit={(values) => console.log(values)}
         >
           <AppFormField name="title" placeholder="Title" />
-          <Picker placeHolder="Types" icon="apps" data={items}>
-            {({ item, onItemSelected }) => {
+          <Picker
+            placeHolder="Types"
+            icon="apps"
+            data={items}
+            displayExractor={(item) => item.title}
+            keyExtractor={(item) => item.url}
+          >
+            {({ item, setSelectedItem }) => {
               return (
                 <TouchableOpacity
                   onPress={() => {
-                    onItemSelected(item);
+                    setSelectedItem(item);
                   }}
                   style={{ margin: 20 }}
                 >
