@@ -1,6 +1,5 @@
 import React from "react";
 import { FlatList, StyleSheet, View } from "react-native";
-import PropTypes from "prop-types";
 import AppSafeAreaScreen from "../components/AppSafeAreaScreen";
 import ListItem from "../components/ListItem";
 import colors from "../utils/colors";
