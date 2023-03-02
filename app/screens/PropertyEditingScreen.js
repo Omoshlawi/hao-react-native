@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import AppSafeAreaScreen from "../components/AppSafeAreaScreen";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import {
   AppForm,
   AppFormField,
@@ -9,6 +9,7 @@ import {
   AppFormSubmitButton,
 } from "../components/forms";
 import * as Yup from "yup";
+import Picker from "../components/input/Picker";
 
 const initialDetails = {
   title: "Prop1",
@@ -34,6 +35,13 @@ const validationScheema = Yup.object().shape({
   //   image: Yup.string().required().label("PropertyPrice"),
 });
 
+// keyExtractor={(item) => item.url}
+//             renderItem={({ item }) => (
+//               <View>
+//                 <Text style={{fontSize:30, textAlign: "center"}}>{item.title}</Text>
+//               </View>
+//             )}
+
 function PropertyEditingScreen(props) {
   return (
     <AppSafeAreaScreen>
@@ -44,22 +52,24 @@ function PropertyEditingScreen(props) {
           onSubmit={(values) => console.log(values)}
         >
           <AppFormField name="title" placeholder="Title" />
-          <AppFormPicker
-            name="type"
-            placeholder="Property type"
-            icon="apps"
-            items={items}
-            itemLabelExtractor={(item) => item.title}
-            itemValueExtractor={(item) => item.url}
-          />
-          <AppFormPicker
-            name="status"
-            placeholder="Property status"
-            icon="apps"
-            items={items}
-            itemLabelExtractor={(item) => item.title}
-            itemValueExtractor={(item) => item.url}
-          />
+          <Picker placeHolder="Types" icon="apps" data={items}>
+            {({ item, onItemSelected }) => {
+              return (
+                <TouchableOpacity
+                  onPress={() => {
+                    onItemSelected(item);
+                  }}
+                  style={{ margin: 20 }}
+                >
+                  <View>
+                    <Text style={{ fontSize: 30, textAlign: "center" }}>
+                      {item.title}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              );
+            }}
+          </Picker>
           <AppFormField name="price" placeholder="Price" />
           <AppFormField name="area" placeholder="Area" />
           <AppFormSubmitButton title="Edit" />
