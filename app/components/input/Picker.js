@@ -67,7 +67,23 @@ function Picker({
                 ItemSeparatorComponent={ListItemSeparator}
               />
             ) : (
-              <></>
+              <>
+                <View style={styles.gridContainer}>
+                  {data.map((item) => (
+                    <View key={keyExtractor(item)}>
+                      {children({
+                        currentSelectedItem:
+                          currentIndex === -1 ? null : data[currentIndex],
+                        item: item,
+                        setSelectedItem: (item) => {
+                          setShowModal(false);
+                          setCurentIndex(data.indexOf(item));
+                        },
+                      })}
+                    </View>
+                  ))}
+                </View>
+              </>
             )}
           </>
         </Modal>
@@ -89,6 +105,13 @@ const styles = StyleSheet.create({
     textAlign: "left",
     fontSize: 20,
     paddingHorizontal: 10,
+  },
+  gridContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    alignItems: "center",
+    alignContent: "center",
   },
 });
 

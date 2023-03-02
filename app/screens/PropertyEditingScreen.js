@@ -10,6 +10,7 @@ import {
 } from "../components/forms";
 import * as Yup from "yup";
 import Picker from "../components/input/Picker";
+import colors from "../utils/colors";
 
 const initialDetails = {
   title: "Prop1",
@@ -24,6 +25,9 @@ const items = [
   { title: "On Rent", url: "on-rent" },
   { title: "On Sale", url: "on-sale" },
   { title: "On Book", url: "on-book" },
+  { title: "On Chill", url: "on-chiil" },
+  { title: "On Milk", url: "on-milk" },
+  { title: "On Ugali", url: "on-ugali" },
 ];
 
 const validationScheema = Yup.object().shape({
@@ -56,10 +60,11 @@ function PropertyEditingScreen(props) {
             placeHolder="Types"
             icon="apps"
             data={items}
+            layout="grid"
             displayExractor={(item) => item.title}
             keyExtractor={(item) => item.url}
           >
-            {({ item, setSelectedItem }) => {
+            {({ item, setSelectedItem, currentSelectedItem }) => {
               return (
                 <TouchableOpacity
                   onPress={() => {
@@ -67,7 +72,16 @@ function PropertyEditingScreen(props) {
                   }}
                   style={{ margin: 20 }}
                 >
-                  <View>
+                  <View
+                    style={{
+                      borderColor: "red",
+                      borderWidth: 1,
+                      borderRadius: 10,
+                      width: 80,
+                      height: 80,
+                      backgroundColor: colors.light,
+                    }}
+                  >
                     <Text style={{ fontSize: 30, textAlign: "center" }}>
                       {item.title}
                     </Text>
