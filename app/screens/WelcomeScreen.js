@@ -20,14 +20,20 @@ function WelcomeScreen(props) {
       style={styles.imageBackground}
       source={require("../assets/housebg.jpg")}
     >
-      <Image
-        style={styles.logo}
-        resizeMode="contain"
-        source={require("../assets/logoBlackbgless.png")}
-      />
+      <View style={styles.logoContainer}>
+        <Image
+          style={styles.logo}
+          resizeMode="contain"
+          source={require("../assets/logo-black-bg.png")}
+        />
+      </View>
       <View style={styles.buttonContainer}>
-        <AppButton title="Login" onPress={()=>console.log("Taped")} />
-        <AppButton title="Register" onPress={()=>console.log("Taped")} color="secondary"/>
+        <AppButton title="Login" onPress={() => console.log("Taped")} />
+        <AppButton
+          title="Register"
+          onPress={() => console.log("Taped")}
+          color="secondary"
+        />
       </View>
     </ImageBackground>
   );
@@ -50,8 +56,15 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   logo: {
-    top: 5,
+    height: "100%",
+    width: "100%"
   },
+  logoContainer:{
+    width: 300,
+    height: 300,
+    marginTop: 10,
+    flex: 1
+  }
 });
 
 export default WelcomeScreen;

@@ -119,7 +119,7 @@ function PropertyListScreen(props) {
         renderItem={({ item }) => (
           <View style={styles.list}>
             <AppCard
-              image={require("../assets/logoBlack.png")}
+              image={require("../assets/logo-red.png")}
               title={item.title}
               subTitle={item.price}
             />

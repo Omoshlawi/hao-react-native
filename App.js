@@ -7,6 +7,7 @@ import AppSafeAreaScreen from "./app/components/AppSafeAreaScreen";
 import AppTextInput from "./app/components/AppTextInput";
 import ListItem from "./app/components/ListItem";
 import AccountScreen from "./app/screens/AccountScreen";
+import LoginScreen from "./app/screens/LoginScreen";
 import MessagesScreen from "./app/screens/MessagesScreen";
 import PropertyDetailScreen from "./app/screens/PropertyDetailScreen";
 import PropertyListScreen from "./app/screens/PropertyListScreen";
@@ -23,18 +24,7 @@ const cats = [
 
 export default function App() {
   const [cartegory, setCategory] = useState();
-  return (
-    <AppSafeAreaScreen>
-      <AppTextInput placeholder="Enter Full name" icon="account" />
-      <AppPicker
-        selectedItem={cartegory}
-        onSelectItem={(item) => setCategory(item)}
-        icon="apps"
-        placeHolder="Categories"
-        items={cats}
-      />
-    </AppSafeAreaScreen>
-  );
+  return <WelcomeScreen />;
 }
 
 const styles = StyleSheet.create({

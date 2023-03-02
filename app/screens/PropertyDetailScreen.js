@@ -8,14 +8,14 @@ import ListItem from "../components/ListItem";
 function PropertyDetailScreen(props) {
   return (
     <View>
-      <Image style={styles.image} source={require("../assets/logoBlack.png")} />
+      <Image style={styles.image} source={require("../assets/logo-red.png")} />
       <View style={styles.detailsContainer}>
         <AppText style={styles.title}>Red Jacket for sale</AppText>
         <AppText style={styles.price}>$100</AppText>
         <View style={styles.userContainer}>
           
           <ListItem
-            image={require("../assets/logoBlack.png")}
+            image={require("../assets/logo-black.png")}
             title="Laurent Ouma"
             subTitle="5 Listings"
           />

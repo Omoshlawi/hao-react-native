@@ -25,7 +25,7 @@ function AccountScreen(props) {
         <ListItem
           title="Laurent Ouma"
           subTitle="lawiomosh3@gmail.com"
-          image={require("../assets/logoBlack.png")}
+          image={require("../assets/logo-red.png")}
         />
       </View>
       <View style={styles.container}>
