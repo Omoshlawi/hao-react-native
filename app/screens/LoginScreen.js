@@ -1,14 +1,11 @@
-import React, { useState } from "react";
+import { Formik } from "formik";
+import React from "react";
 import { View, StyleSheet, Image } from "react-native";
 import AppButton from "../components/AppButton";
 import AppSafeAreaScreen from "../components/AppSafeAreaScreen";
 import AppTextInput from "../components/AppTextInput";
 
 function LoginScreen() {
-  const [formState, setFormState] = useState({
-    username: "",
-    password: "",
-  });
   return (
     <AppSafeAreaScreen>
       <View style={styles.logo}>
@@ -19,25 +16,34 @@ function LoginScreen() {
         />
       </View>
       <View style={styles.formContainer}>
-        <AppTextInput
-          placeholder="Username or Email"
-          icon="account-circle-outline"
-          autoCapitalize={false}
-          autoCorrect={false}
-          keyboardType="email-address"
-          textContentType="emailAddress" //Only works on ios
-          onChangeText={username => setFormState({...formState, username})}
-          />
-        <AppTextInput
-          placeholder="Passsword"
-          icon="lock-outline"
-          autoCapitalize={false}
-          autoCorrect={false}
-          secureTextEntry={true}
-          textContentType="password" //Only works on ios
-          onChangeText={password => setFormState({...formState, password})}
-        />
-        <AppButton title="Login" onPress={()=>console.log(formState)}/>
+        <Formik
+          initialValues={{ username: "", password: "" }}
+          onSubmit={(values) => console.log(values)}
+        >
+          {({ handleChange, handleSubmit }) => (
+            <>
+              <AppTextInput
+                placeholder="Username or Email"
+                icon="account-circle-outline"
+                autoCapitalize="none"
+                autoCorrect={false}
+                keyboardType="email-address"
+                textContentType="emailAddress" //Only works on ios
+                onChangeText={handleChange("username")}
+              />
+              <AppTextInput
+                placeholder="Passsword"
+                icon="lock-outline"
+                autoCapitalize="none"
+                autoCorrect={false}
+                secureTextEntry={true}
+                textContentType="password" //Only works on ios
+                onChangeText={handleChange("password")}
+              />
+              <AppButton title="Login" onPress={handleSubmit} />
+            </>
+          )}
+        </Formik>
       </View>
     </AppSafeAreaScreen>
   );
@@ -56,7 +62,7 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     marginTop: 20,
-    padding: 10
+    padding: 10,
   },
 });
 
