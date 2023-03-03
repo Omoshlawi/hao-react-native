@@ -39,13 +39,6 @@ const validationScheema = Yup.object().shape({
   //   image: Yup.string().required().label("PropertyPrice"),
 });
 
-// keyExtractor={(item) => item.url}
-//             renderItem={({ item }) => (
-//               <View>
-//                 <Text style={{fontSize:30, textAlign: "center"}}>{item.title}</Text>
-//               </View>
-//             )}
-
 function PropertyEditingScreen(props) {
   return (
     <AppSafeAreaScreen>
@@ -56,14 +49,15 @@ function PropertyEditingScreen(props) {
           onSubmit={(values) => console.log(values)}
         >
           <AppFormField name="title" placeholder="Title" />
-          <Picker
+          <AppFormPicker
             placeHolder="Types"
             icon="apps"
             data={items}
             layout="grid"
             displayExractor={(item) => item.title}
             keyExtractor={(item) => item.url}
-            // defaultIndex={5}
+            defaultIndex={5}
+            onSelectedItemChange={(item) => console.log(item)}
           >
             {({ item, setSelectedItem, currentSelectedItem }) => {
               return (
@@ -84,7 +78,7 @@ function PropertyEditingScreen(props) {
                 </View>
               );
             }}
-          </Picker>
+          </AppFormPicker>
           <AppFormField name="price" placeholder="Price" />
           <AppFormField name="area" placeholder="Area" />
           <AppFormSubmitButton title="Edit" />

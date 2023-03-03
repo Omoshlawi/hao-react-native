@@ -4,47 +4,41 @@ import AppPicker from "../AppPicker";
 import { useFormikContext } from "formik";
 import { zip } from "../../utils/helpers";
 import AppErrorMessage from "./AppErrorMessage";
+import Picker from "../input/Picker";
 
 function AppFormPicker({
-  placeholder,
+  placeHolder,
   icon,
+  layout = "linear",
+  keyExtractor,
+  data,
+  children,
+  defaultIndex,
+  displayExractor,
   name,
-  selectedItem,
-  items,
-  itemLabelExtractor,
-  itemValueExtractor,
+  onSelectedItemChange,
 }) {
   const { setFieldValue, errors } = useFormikContext();
-  const labels = items.map(itemLabelExtractor);
-  const values = items.map(itemValueExtractor);
-  const data = zip(labels, values).map((el) => ({
-    label: el[0],
-    value: el[1],
-  }));
-  const [selected, setSelected] = useState(
-    selected ? data.find((d) => d.label === selectedItem.title) : ""
-  );
   return (
     <>
-      <AppPicker
-        placeHolder={placeholder}
+      <Picker
+        placeHolder={placeHolder}
         icon={icon}
-        selectedItem={selected}
-        onSelectItem={(item) => {
-          setSelected(item);
-          setFieldValue(name, item.value);
-        }}
-        items={data}
-      />
+        data={data}
+        layout={layout}
+        displayExractor={displayExractor}
+        keyExtractor={keyExtractor}
+        defaultIndex={defaultIndex}
+        onSelectedItemChange={onSelectedItemChange} //called and passed the item whwnever a new item is selected, gives you acces to inside
+      >
+        {/* child whick is a function with parametered is fed to the picker and internally it calls it and passes it item by item */}
+        {children}
+      </Picker>
       <AppErrorMessage error={errors[name]} />
     </>
   );
 }
 
-AppFormPicker.propTypes = {
-  itemLabelExtractor: PropTypes.func.isRequired,
-  itemValueExtractor: PropTypes.func.isRequired,
-  items: PropTypes.array.isRequired,
-};
+AppFormPicker.propTypes = {};
 
 export default AppFormPicker;

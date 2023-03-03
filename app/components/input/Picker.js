@@ -29,6 +29,7 @@ function Picker({
   children,
   defaultIndex,
   displayExractor,
+  onSelectedItemChange,
 }) {
   const [showModal, setShowModal] = useState(false);
   const [currentIndex, setCurentIndex] = useState(
@@ -36,6 +37,7 @@ function Picker({
   );
   const setSelectedItem = (item) => {
     setShowModal(false);
+    onSelectedItemChange(item);
     setCurentIndex(data.indexOf(item));
   };
   return (
