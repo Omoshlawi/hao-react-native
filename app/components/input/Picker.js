@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import {
   View,
@@ -35,9 +35,14 @@ function Picker({
   const [currentIndex, setCurentIndex] = useState(
     defaultIndex > -1 ? defaultIndex : -1
   );
+
+  useEffect(() => {
+    const item = currentIndex === -1 ? null : data[currentIndex];
+    onSelectedItemChange(item);
+  }, [currentIndex]);
+
   const setSelectedItem = (item) => {
     setShowModal(false);
-    onSelectedItemChange(item);
     setCurentIndex(data.indexOf(item));
   };
   return (

@@ -16,7 +16,6 @@ function AppFormPicker({
   defaultIndex,
   displayExractor,
   name,
-  onSelectedItemChange,
 }) {
   const { setFieldValue, errors } = useFormikContext();
   return (
@@ -29,7 +28,7 @@ function AppFormPicker({
         displayExractor={displayExractor}
         keyExtractor={keyExtractor}
         defaultIndex={defaultIndex}
-        onSelectedItemChange={onSelectedItemChange} //called and passed the item whwnever a new item is selected, gives you acces to inside
+        onSelectedItemChange={(item)=>{console.log(item);}} //called and passed the item whwnever a new item is selected, gives you acces to inside
       >
         {/* child whick is a function with parametered is fed to the picker and 
         internally it calls it and passes it item by item */}

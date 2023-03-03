@@ -13,11 +13,11 @@ import Picker from "../components/input/Picker";
 import colors from "../utils/colors";
 
 const initialDetails = {
-  title: "Prop1",
+  title: "",
   price: 0,
-  area: "20 by 20",
+  area: "",
   status: "",
-  type: "",
+  // type: "",
   //   image: "",
 };
 
@@ -31,11 +31,11 @@ const items = [
 ];
 
 const validationScheema = Yup.object().shape({
-  title: Yup.string().required().label("PropertyTitle"),
+  title: Yup.string().required().label("PropertyTitle").min(6),
   price: Yup.number().required().label("PropertyPrice"),
   area: Yup.string().required().label("PropertySize"),
   status: Yup.string().required().label("PropertyStatus"),
-  type: Yup.number().required().label("PropertyType"),
+  // type: Yup.number().required().label("PropertyType"),
   //   image: Yup.string().required().label("PropertyPrice"),
 });
 
@@ -50,14 +50,13 @@ function PropertyEditingScreen(props) {
         >
           <AppFormField name="title" placeholder="Title" />
           <AppFormPicker
-            placeHolder="Types"
+            placeHolder="Property Status"
             icon="apps"
             data={items}
             layout="grid"
             displayExractor={(item) => item.title}
             keyExtractor={(item) => item.url}
             defaultIndex={5}
-            onSelectedItemChange={(item) => console.log(item)}
           >
             {({ item, setSelectedItem, currentSelectedItem }) => {
               return (
