@@ -111,6 +111,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     padding: 15,
     flexDirection: "row",
+    marginVertical: 10,
   },
   text: {
     flex: 1,

@@ -16,7 +16,7 @@ const initialDetails = {
   title: "",
   price: 0,
   area: "",
-  // status: "",
+  status: "",
   type: "",
   //   image: "",
 };
@@ -35,7 +35,7 @@ const validationScheema = Yup.object().shape({
   price: Yup.number().required().label("PropertyPrice"),
   area: Yup.string().required().label("PropertySize"),
   type: Yup.string().required().label("PropertyType"),
-  // status: Yup.string().required().label("PropertyStatus"),
+  status: Yup.string().required().label("PropertyStatus"),
   //   image: Yup.string().required().label("PropertyPrice"),
 });
 
@@ -50,17 +50,17 @@ function PropertyEditingScreen(props) {
         >
           <AppFormField name="title" placeholder="Title" />
           <AppFormPicker
-            name="type"
+            name="status"
             placeHolder="Property Status"
             icon="apps"
             data={items}
             layout="grid"
             displayExractor={(item) => item.title}
             keyExtractor={(item) => item.url}
-            defaultIndex={5}
+            // defaultIndex={5}
             itemValueExtractor={(item) => item.url}
           >
-            {({ item, setSelectedItem, currentSelectedItem }) => {
+            {({ item }) => {
               return (
                 <View
                   style={{
@@ -80,7 +80,38 @@ function PropertyEditingScreen(props) {
               );
             }}
           </AppFormPicker>
-          <AppFormField name="price" placeholder="Price" />
+          <AppFormPicker
+            name="type"
+            placeHolder="Property Type"
+            icon="apps"
+            data={items}
+            layout="grid"
+            displayExractor={(item) => item.title}
+            keyExtractor={(item) => item.url}
+            // defaultIndex={5}
+            itemValueExtractor={(item) => item.url}
+          >
+            {({ item }) => {
+              return (
+                <View
+                  style={{
+                    borderColor: "red",
+                    borderWidth: 1,
+                    borderRadius: 10,
+                    width: 80,
+                    height: 80,
+                    backgroundColor: colors.light,
+                    margin: 10,
+                  }}
+                >
+                  <Text style={{ fontSize: 30, textAlign: "center" }}>
+                    {item.title}
+                  </Text>
+                </View>
+              );
+            }}
+          </AppFormPicker>
+          <AppFormField name="price" placeholder="Price" keyboardType="numeric" />
           <AppFormField name="area" placeholder="Area" />
           <AppFormSubmitButton title="Edit" />
         </AppForm>

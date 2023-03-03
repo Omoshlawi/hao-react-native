@@ -18,10 +18,11 @@ function AppFormPicker({
   itemValueExtractor,
   name,
 }) {
-  const { setFieldValue, errors, values } = useFormikContext();
+  const { setFieldValue, errors, values,touched } = useFormikContext();
   return (
     <>
       <Picker
+
         placeHolder={placeHolder}
         icon={icon}
         data={data}
@@ -40,7 +41,7 @@ function AppFormPicker({
         internally it calls it and passes it item by item */}
         {children}
       </Picker>
-      <AppErrorMessage error={errors[name]} visible={true} />
+      <AppErrorMessage error={errors[name]} visible={touched[name]} />
     </>
   );
 }
