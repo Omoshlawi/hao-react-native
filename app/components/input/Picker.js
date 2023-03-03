@@ -33,7 +33,7 @@ function Picker({
 }) {
   const [showModal, setShowModal] = useState(false);
   const [currentIndex, setCurentIndex] = useState(
-    defaultIndex > -1 ? defaultIndex : -1
+    defaultIndex > -1 && defaultIndex < data.length ? defaultIndex : -1
   );
 
   useEffect(() => {

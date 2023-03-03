@@ -57,7 +57,7 @@ function PropertyEditingScreen(props) {
             layout="grid"
             displayExractor={(item) => item.title}
             keyExtractor={(item) => item.url}
-            // defaultIndex={5}
+            defaultIndex={1}
             itemValueExtractor={(item) => item.url}
           >
             {({ item }) => {
@@ -88,7 +88,7 @@ function PropertyEditingScreen(props) {
             layout="grid"
             displayExractor={(item) => item.title}
             keyExtractor={(item) => item.url}
-            // defaultIndex={5}
+            defaultIndex={5}
             itemValueExtractor={(item) => item.url}
           >
             {({ item }) => {
@@ -111,7 +111,11 @@ function PropertyEditingScreen(props) {
               );
             }}
           </AppFormPicker>
-          <AppFormField name="price" placeholder="Price" keyboardType="numeric" />
+          <AppFormField
+            name="price"
+            placeholder="Price"
+            keyboardType="numeric"
+          />
           <AppFormField name="area" placeholder="Area" />
           <AppFormSubmitButton title="Edit" />
         </AppForm>
