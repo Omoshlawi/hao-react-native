@@ -34,15 +34,13 @@ function AppFormPicker({
           if (item) {
             setFieldValue(name, itemValueExtractor(item));
           }
-          console.log(item);
-          console.log(values);
         }} //called and passed the item whwnever a new item is selected, gives you acces to inside
       >
         {/* child whick is a function with parametered is fed to the picker and 
         internally it calls it and passes it item by item */}
         {children}
       </Picker>
-      <AppErrorMessage error={errors[name]} />
+      <AppErrorMessage error={errors[name]} visible={true} />
     </>
   );
 }

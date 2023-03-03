@@ -15,6 +15,8 @@ const styles = StyleSheet.create({
   },
 });
 
-AppErrorMessage.propTypes = {};
+AppErrorMessage.propTypes = {
+
+};
 
 export default AppErrorMessage;
