@@ -13,9 +13,9 @@ import Picker from "../components/input/Picker";
 import colors from "../utils/colors";
 
 const initialDetails = {
-  title: "",
-  price: 0,
-  area: "",
+  title: "Some Title",
+  price: 20,
+  area: "Trying out Aea",
   status: "",
   type: "",
   //   image: "",
