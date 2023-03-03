@@ -16,8 +16,8 @@ const initialDetails = {
   title: "",
   price: 0,
   area: "",
-  status: "",
-  // type: "",
+  // status: "",
+  type: "",
   //   image: "",
 };
 
@@ -34,8 +34,8 @@ const validationScheema = Yup.object().shape({
   title: Yup.string().required().label("PropertyTitle").min(6),
   price: Yup.number().required().label("PropertyPrice"),
   area: Yup.string().required().label("PropertySize"),
-  status: Yup.string().required().label("PropertyStatus"),
-  // type: Yup.number().required().label("PropertyType"),
+  type: Yup.number().required().label("PropertyType"),
+  // status: Yup.string().required().label("PropertyStatus"),
   //   image: Yup.string().required().label("PropertyPrice"),
 });
 
@@ -50,13 +50,15 @@ function PropertyEditingScreen(props) {
         >
           <AppFormField name="title" placeholder="Title" />
           <AppFormPicker
+            name="type"
             placeHolder="Property Status"
             icon="apps"
             data={items}
             layout="grid"
             displayExractor={(item) => item.title}
             keyExtractor={(item) => item.url}
-            defaultIndex={5}
+            // defaultIndex={5}
+            itemValueExtractor={(item) => item.url}
           >
             {({ item, setSelectedItem, currentSelectedItem }) => {
               return (
