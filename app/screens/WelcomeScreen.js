@@ -13,12 +13,12 @@ import colors from "../utils/colors";
 import AppButton from "../components/AppButton";
 
 /**
- * 
- * @param {*} param0 
- * @returns 
+ *
+ * @param {*} param0
+ * @returns
  */
 
-function WelcomeScreen({navigation}) {
+function WelcomeScreen({ navigation }) {
   return (
     <ImageBackground
       resizeMode="cover"
@@ -34,7 +34,7 @@ function WelcomeScreen({navigation}) {
         />
       </View>
       <View style={styles.buttonContainer}>
-        <AppButton title="Login" onPress={() => console.log("Taped")} />
+        <AppButton title="Login" onPress={() => navigation.navigate("Login")} />
         <AppButton
           title="Register"
           onPress={() => console.log("Taped")}
@@ -63,14 +63,14 @@ const styles = StyleSheet.create({
   },
   logo: {
     height: "100%",
-    width: "100%"
+    width: "100%",
   },
-  logoContainer:{
+  logoContainer: {
     width: 300,
     height: 300,
     marginTop: 10,
-    flex: 1
-  }
+    flex: 1,
+  },
 });
 
 export default WelcomeScreen;
