@@ -1,5 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "../screens/LoginScreen";
+import RegisterScreen from "../screens/RegisterScreen";
 import WelcomeScreen from "../screens/WelcomeScreen";
 import colors from "../utils/colors";
 
@@ -39,7 +40,8 @@ function StackNavigator(props) {
         options={{ headerShown: false }}
         scre
       />
-      <Screen name="Login" component={LoginScreen} scre />
+      <Screen name="Login" component={LoginScreen} />
+      <Screen name="Register" component={RegisterScreen}/>
     </Navigator>
   );
 }
