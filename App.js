@@ -17,20 +17,18 @@ import PropertyListScreen from "./app/screens/PropertyListScreen";
 import ViewImageScreen from "./app/screens/ViewImageScreen";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 import colors from "./app/utils/colors";
-import * as ImagePicker from "expo-image-picker"
+import * as ImagePicker from "expo-image-picker";
 
 export default function App() {
-  const askUserPermision = async ()=>{
-    const resullt = await ImagePicker.requestMediaLibraryPermissionsAsync()
-    const {granted} = await ImagePicker.requestCameraPermissionsAsync()
-    console.log(resullt, granted);
-  }
-  useEffect(()=>{
-    askUserPermision()
-  },[])
-  return <AppSafeAreaScreen>
-    
-  </AppSafeAreaScreen>;
+  const askUserPermision = async () => {
+    // const resullt = await ImagePicker.requestMediaLibraryPermissionsAsync()
+    const resullt = await ImagePicker.requestCameraPermissionsAsync();
+    if (!resullt.granted) alert("You need allow permision to images");
+  };
+  useEffect(() => {
+    askUserPermision();
+  }, []);
+  return <AppSafeAreaScreen></AppSafeAreaScreen>;
 }
 
 const styles = StyleSheet.create({
