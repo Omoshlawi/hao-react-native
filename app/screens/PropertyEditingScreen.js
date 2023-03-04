@@ -18,11 +18,8 @@ import * as Yup from "yup";
 import Picker from "../components/input/Picker";
 import colors from "../utils/colors";
 import AppFormImagePicker from "../components/forms/AppFormImagePicker";
-import {
-  useForegroundPermissions,
-  getLastKnownPositionAsync,
-  getCurrentPositionAsync,
-} from "expo-location";
+
+import useLocation from "../hooks/useLocation";
 
 const initialDetails = {
   title: "",
@@ -59,27 +56,8 @@ const validationScheema = Yup.object().shape({
 });
 
 function PropertyEditingScreen(props) {
-  const [status, requestPermission] = useForegroundPermissions();
-  const [location, setLocation] = useState();
-  useEffect(() => {
-    (async () => {
-      const { granted } = await requestPermission();
-      if (!granted) {
-        alert(
-          "Your need to grant app location permision to store your location info and allow client locate you"
-        );
-      } else {
-        // Very accurate bt takes some time to retrieve the
-        const {
-          coords: { latitude, longitude },
-        } = await getCurrentPositionAsync();
-        setLocation({ latitude, longitude });
-        // you could use altternative which is first but not much accurate since it uses the last know as name suggenst
-        // const {coords: { latitude, longitude }} = await getLastKnownPositionAsync();
-        // console.log(result);
-      }
-    })();
-  }, []);
+  const location = useLocation();
+  console.log(location);
   return (
     <AppSafeAreaScreen>
       <ScrollView>
