@@ -20,13 +20,13 @@ import WelcomeScreen from "./app/screens/WelcomeScreen";
 import colors from "./app/utils/colors";
 import ImageInputList from "./app/components/input/ImageInputList";
 import { NavigationContainer } from "@react-navigation/native";
-import StackNavigator from "./app/navigation/StackNavigator";
-import TabNavigator from "./app/navigation/TabNavigator";
+import AuthStackNavigator from "./app/navigation/AuthStackNavigator";
+import MainBottomTabNavigator from "./app/navigation/MainBottomTabNavigator";
 
 export default function App() {
   return (
     <NavigationContainer>
-      <TabNavigator />
+      <MainBottomTabNavigator />
     </NavigationContainer>
   );
 }
