@@ -1,5 +1,5 @@
 import { Image, StyleSheet, View, TouchableOpacity, Alert } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../../utils/colors";
@@ -54,7 +54,7 @@ const ImageInput = ({
   useEffect(() => {
     askImagePermisions();
   }, []);
-  
+
   return (
     <TouchableOpacity onPress={handleOnClick}>
       <View
@@ -93,5 +93,7 @@ const styles = StyleSheet.create({
 ImageInput.propTypes = {
   onImageChange: PropTypes.func.isRequired,
   radiusScaleFactor: PropTypes.number,
+  size: PropTypes.number,
+  localImage: PropTypes.object,
 };
 export default ImageInput;
