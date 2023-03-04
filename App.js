@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StyleSheet, Text, View, StatusBar } from "react-native";
 import AppCard from "./app/components/AppCard";
 import AppIcon from "./app/components/AppIcon";
 import AppPicker from "./app/components/AppPicker";
 import AppSafeAreaScreen from "./app/components/AppSafeAreaScreen";
 import AppTextInput from "./app/components/AppTextInput";
+import { AppErrorMessage } from "./app/components/forms";
 import ListItem from "./app/components/ListItem";
 import AccountScreen from "./app/screens/AccountScreen";
 import LoginScreen from "./app/screens/LoginScreen";
@@ -16,9 +17,20 @@ import PropertyListScreen from "./app/screens/PropertyListScreen";
 import ViewImageScreen from "./app/screens/ViewImageScreen";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 import colors from "./app/utils/colors";
+import * as ImagePicker from "expo-image-picker"
 
 export default function App() {
-  return <PropertyEditingScreen />;
+  const askUserPermision = async ()=>{
+    const resullt = await ImagePicker.requestMediaLibraryPermissionsAsync()
+    const {granted} = await ImagePicker.requestCameraPermissionsAsync()
+    console.log(resullt, granted);
+  }
+  useEffect(()=>{
+    askUserPermision()
+  },[])
+  return <AppSafeAreaScreen>
+    
+  </AppSafeAreaScreen>;
 }
 
 const styles = StyleSheet.create({
