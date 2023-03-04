@@ -3,6 +3,7 @@ import LoginScreen from "../screens/LoginScreen";
 import RegisterScreen from "../screens/RegisterScreen";
 import WelcomeScreen from "../screens/WelcomeScreen";
 import colors from "../utils/colors";
+import routes from "./routes";
 
 const Stack = createNativeStackNavigator();
 const Navigator = Stack.Navigator; //Contain children stack screens and only one how to do to navigate between the screens
@@ -35,13 +36,13 @@ function AuthStackNavigator(props) {
     // Screen options tales similar props like options of Screen children and are used by default and can be overidded when options of screen is used
     <Navigator screenOptions={{ headerTintColor: colors.primary }}>
       <Screen
-        name="WelcomeScreen"
+        name={routes.WELCOME_AUTH}
         component={WelcomeScreen}
         options={{ headerShown: false }}
         scre
       />
-      <Screen name="Login" component={LoginScreen} />
-      <Screen name="Register" component={RegisterScreen} />
+      <Screen name={routes.LOGIN_AUTH} component={LoginScreen} />
+      <Screen name={routes.REGISTER_AUTH} component={RegisterScreen} />
     </Navigator>
   );
 }

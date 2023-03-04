@@ -12,3 +12,5 @@ It contains all 3 types of navigations:
 [Full Documentation]("https://reactnavigation.org/docs/")
 
 You can use hooks `useRoute` and `useNavigation` in child components to screen component with no direct acces to the rouut instead of drilling it
+
+## Nb: Modal also surport pobs **mode** that assumes `modal` or `card `, for the mordal mode you can swipe downwars to move backward

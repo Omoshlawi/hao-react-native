@@ -6,6 +6,7 @@ import colors from "../utils/colors";
 import PropTypes from "prop-types";
 import React from "react";
 import AccountScreen from "../screens/AccountScreen";
+import routes from "./routes";
 
 const Stack = createNativeStackNavigator();
 const Navigator = Stack.Navigator; //Contain children stack screens and only one how to do to navigate between the screens
@@ -14,7 +15,7 @@ const Screen = Stack.Screen;
 function UserStackNavigation(props) {
   return (
     <Navigator screenOptions={{ headerTintColor: colors.primary }}>
-      <Screen name="UserCenter" component={AccountScreen} />
+      <Screen name={routes.USER_CENTER_ACCOUNT} component={AccountScreen} />
     </Navigator>
   );
 }

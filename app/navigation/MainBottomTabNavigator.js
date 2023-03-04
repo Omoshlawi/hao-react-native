@@ -1,15 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import AccountScreen from "../screens/AccountScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import PropertyListScreen from "../screens/PropertyListScreen";
 import colors from "../utils/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import PropertyEditingScreen from "../screens/PropertyEditingScreen";
 import PropertiesStackNavigator from "./PropertiesStackNavigator";
 import SearchScreen from "../screens/SearchScreen";
 import UserStackNavigation from "./UserStackNavigation";
-
+import routes from "./routes";
 const Tab = createBottomTabNavigator();
 
 const Navigator = Tab.Navigator;
@@ -26,7 +24,7 @@ function MainBottomTabNavigator(props) {
       }}
     >
       <Screen
-        name="Properties"
+        name={routes.PROPERTIES_MAIN}
         component={PropertiesStackNavigator}
         options={{
           tabBarIcon: ({ size, color }) => (
@@ -36,7 +34,7 @@ function MainBottomTabNavigator(props) {
         }}
       />
       <Screen
-        name="Search"
+        name={routes.SEARCH_MAIN}
         component={SearchScreen}
         options={{
           tabBarIcon: ({ size, color, focused }) => (
@@ -45,7 +43,7 @@ function MainBottomTabNavigator(props) {
         }}
       />
       <Screen
-        name="Add"
+        name={routes.PROPERTY_ADD_MAIN}
         component={PropertyEditingScreen}
         options={{
           headerTitle: "Add new Property",
@@ -64,7 +62,7 @@ function MainBottomTabNavigator(props) {
       />
 
       <Screen
-        name="Account"
+        name={routes.USER_CENTER_MAIN}
         component={UserStackNavigation}
         options={{
           tabBarIcon: ({ size, color, focused }) => (
