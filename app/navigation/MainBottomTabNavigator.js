@@ -6,6 +6,8 @@ import PropertyListScreen from "../screens/PropertyListScreen";
 import colors from "../utils/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import PropertyEditingScreen from "../screens/PropertyEditingScreen";
+import PropertiesStackNavigator from "./PropertiesStackNavigator";
+import SearchScreen from "../screens/SearchScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -23,15 +25,21 @@ function MainBottomTabNavigator(props) {
       }}
     >
       <Screen
-        name="Account"
-        component={AccountScreen}
+        name="Properties"
+        component={PropertiesStackNavigator}
+        options={{
+          tabBarIcon: ({ size, color }) => (
+            <MaterialCommunityIcons size={size} name="home" color={color} />
+          ),
+          headerShown: false,
+        }}
+      />
+      <Screen
+        name="Search"
+        component={SearchScreen}
         options={{
           tabBarIcon: ({ size, color, focused }) => (
-            <MaterialCommunityIcons
-              size={size}
-              name="account-circle-outline"
-              color={color}
-            />
+            <MaterialCommunityIcons size={size} name="magnify" color={color} />
           ),
         }}
       />
@@ -53,12 +61,17 @@ function MainBottomTabNavigator(props) {
           },
         }}
       />
+
       <Screen
-        name="Properties"
-        component={PropertyListScreen}
+        name="Account"
+        component={AccountScreen}
         options={{
-          tabBarIcon: ({ size, color }) => (
-            <MaterialCommunityIcons size={size} name="home" color={color} />
+          tabBarIcon: ({ size, color, focused }) => (
+            <MaterialCommunityIcons
+              size={size}
+              name="account-circle-outline"
+              color={color}
+            />
           ),
         }}
       />

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { FlatList, SafeAreaView } from "react-native";
+import { Button, FlatList, SafeAreaView } from "react-native";
 import { View, StyleSheet } from "react-native";
 import AppSafeAreaScreen from "../components/AppSafeAreaScreen";
 import AppCard from "../components/AppCard";
@@ -110,7 +110,7 @@ const properties = [
   },
 ];
 
-function PropertyListScreen(props) {
+function PropertyListScreen({ navigation }) {
   return (
     <AppSafeAreaScreen style={styles.screen}>
       <FlatList
@@ -122,6 +122,10 @@ function PropertyListScreen(props) {
               image={require("../assets/logo-red.png")}
               title={item.title}
               subTitle={item.price}
+            />
+            <Button
+              title="Details"
+              onPress={() => navigation.navigate("PropertyDetail")}
             />
           </View>
         )}
