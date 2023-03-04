@@ -19,15 +19,18 @@ import PropertyListScreen from "./app/screens/PropertyListScreen";
 import ViewImageScreen from "./app/screens/ViewImageScreen";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 import colors from "./app/utils/colors";
+import ImageInputList from "./app/components/input/ImageInputList";
 
 export default function App() {
-  const [localImage, setlocalImage] = useState();
+  const [localImages, setlocalImages] = useState([]);
   return (
     <AppSafeAreaScreen>
-      <ImageInput
-        onImageChange={(image) => setlocalImage(image)}
-        localImage={localImage}
-        radiusScaleFactor={0.2}
+      <ImageInputList
+        localImagesList={localImages}
+        onImagesListChange={(images) => {
+          setlocalImages(images);
+          // console.log(images.length);
+        }}
       />
     </AppSafeAreaScreen>
   );
