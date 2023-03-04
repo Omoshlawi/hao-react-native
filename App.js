@@ -6,6 +6,7 @@ import AppPicker from "./app/components/AppPicker";
 import AppSafeAreaScreen from "./app/components/AppSafeAreaScreen";
 import AppTextInput from "./app/components/AppTextInput";
 import { AppErrorMessage } from "./app/components/forms";
+import ImagePicker from "./app/components/imagePicker/ImagePicker";
 import ListItem from "./app/components/ListItem";
 import AccountScreen from "./app/screens/AccountScreen";
 import LoginScreen from "./app/screens/LoginScreen";
@@ -17,56 +18,12 @@ import PropertyListScreen from "./app/screens/PropertyListScreen";
 import ViewImageScreen from "./app/screens/ViewImageScreen";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 import colors from "./app/utils/colors";
-import * as ImagePicker from "expo-image-picker";
-import * as Permissions from "expo-permissions";
 
 export default function App() {
-  const [imgUri, setImgUri] = useState();
-  const askUserPermision = async () => {
-    // const resullt = await ImagePicker.requestMediaLibraryPermissionsAsync()
-    // const resullt = await ImagePicker.requestCameraPermissionsAsync();
-
-    // Can take multiple permisions or 1
-    const result = await Permissions.askAsync(
-      Permissions.MEDIA_LIBRARY
-    );
-    console.log(result);
-    if (!result.granted)
-      alert(
-        "Access to Camera permisions Denied, please Grant permision to Continue"
-      );
-  };
-  const selectImage = async () => {
-    const perm = await ImagePicker.getCameraPermissionsAsync();
-    if (perm.granted) {
-      try {
-        // const res = await ImagePicker.launchImageLibraryAsync();
-        const res = await ImagePicker.launchImageLibraryAsync();
-        if (!res.canceled) {
-          console.log(res);
-          // const uri = `data:image/jpeg;${res.assets[0].base64}`;
-          setImgUri(res.assets[0].uri);
-        }
-      } catch (error) {
-        alert(error);
-      }
-    } else {
-      await askUserPermision();
-    }
-  };
-  useEffect(() => {
-    // askUserPermision();
-  }, []);
   return (
     <AppSafeAreaScreen>
-      <Button title="Add Image" onPress={selectImage} />
-      <View style={{ flex: 1 }}>
-        <Image
-          source={{ uri: imgUri }}
-          resizeMode="contain"
-          style={{ width: "100%", height: "100%" }}
-        />
-      </View>
+
+      <ImagePicker onSelectedImageChange={(uri)=>console.log(uri)}/>
     </AppSafeAreaScreen>
   );
 }
