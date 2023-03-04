@@ -21,11 +21,12 @@ import colors from "./app/utils/colors";
 import ImageInputList from "./app/components/input/ImageInputList";
 import { NavigationContainer } from "@react-navigation/native";
 import StackNavigator from "./app/navigation/StackNavigator";
+import TabNavigator from "./app/navigation/TabNavigator";
 
 export default function App() {
   return (
     <NavigationContainer>
-      <StackNavigator/>
+      <TabNavigator />
     </NavigationContainer>
   );
 }
