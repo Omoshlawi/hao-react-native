@@ -3,6 +3,7 @@ import React, { useRef } from "react";
 import ImageInput from "./ImageInput";
 
 const ImageInputList = ({ localImagesList = [], onImagesListChange }) => {
+  // Gives us reference to scroll view object eneabling us call its methods in this case scroll toend
   const scrollViewRef = useRef();
   return (
     <View>

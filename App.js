@@ -7,7 +7,6 @@ import AppSafeAreaScreen from "./app/components/AppSafeAreaScreen";
 import AppTextInput from "./app/components/AppTextInput";
 import { AppErrorMessage } from "./app/components/forms";
 import ImageInput from "./app/components/input/ImageInput";
-import ImagePicker from "./app/components/imagePicker/ImagePicker";
 import ListItem from "./app/components/ListItem";
 import AccountScreen from "./app/screens/AccountScreen";
 import LoginScreen from "./app/screens/LoginScreen";
