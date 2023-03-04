@@ -18,12 +18,21 @@ import ViewImageScreen from "./app/screens/ViewImageScreen";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 import colors from "./app/utils/colors";
 import * as ImagePicker from "expo-image-picker";
+import * as Permissions from "expo-permissions";
 
 export default function App() {
   const askUserPermision = async () => {
     // const resullt = await ImagePicker.requestMediaLibraryPermissionsAsync()
-    const resullt = await ImagePicker.requestCameraPermissionsAsync();
-    if (!resullt.granted) alert("You need allow permision to images");
+    // const resullt = await ImagePicker.requestCameraPermissionsAsync();
+
+    // Can take multiple permisions or 1
+    const result = await Permissions.askAsync(
+      Permissions.MEDIA_LIBRARY,
+      Permissions.AUDIO_RECORDING,
+      Permissions.NOTIFICATIONS
+    );
+    console.log(result);
+    if (!result.granted) alert("You need allow permision to images");
   };
   useEffect(() => {
     askUserPermision();
