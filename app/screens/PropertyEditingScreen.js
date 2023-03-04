@@ -46,8 +46,11 @@ const validationScheema = Yup.object().shape({
   type: Yup.string().required().label("PropertyType"),
   status: Yup.string().required().label("PropertyStatus"),
   description: Yup.string().required().label("PropertyDescription").min(20),
-  images: Yup.array().required().label("PropertyImages"),
-  //   image: Yup.string().required().label("PropertyPrice"),
+  // Insted of using label that is used to set default error mesage you can supplier cumoe message beside the rull that is always violated
+  // And for the images itthe min number of element is arr
+  images: Yup.array()
+    .label("PropertyImages")
+    .min(1, "Please select atleast one image"),
 });
 
 function PropertyEditingScreen(props) {
