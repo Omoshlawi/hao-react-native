@@ -5,15 +5,15 @@ import AppText from "../components/AppText";
 import colors from "../utils/colors";
 import ListItem from "../components/ListItem";
 
-function PropertyDetailScreen(props) {
+function PropertyDetailScreen({ navigation, route }) {
+  item = route.params;
   return (
     <View>
-      <Image style={styles.image} source={require("../assets/logo-red.png")} />
+      <Image style={styles.image} source={{ uri: item.image }} />
       <View style={styles.detailsContainer}>
-        <AppText style={styles.title}>Red Jacket for sale</AppText>
-        <AppText style={styles.price}>$100</AppText>
+        <AppText style={styles.title}>{item.title}</AppText>
+        <AppText style={styles.price}>${item.price}</AppText>
         <View style={styles.userContainer}>
-          
           <ListItem
             image={require("../assets/logo-black.png")}
             title="Laurent Ouma"
@@ -43,9 +43,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginVertical: 10,
   },
-  userContainer:{
-    marginVertical:40
-  }
+  userContainer: {
+    marginVertical: 40,
+  },
 });
 
 PropertyDetailScreen.propTypes = {};
