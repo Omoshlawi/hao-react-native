@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { StyleSheet, Text, View, StatusBar } from "react-native";
+import { StyleSheet, Text, View, StatusBar, Button, Image } from "react-native";
 import AppCard from "./app/components/AppCard";
 import AppIcon from "./app/components/AppIcon";
 import AppPicker from "./app/components/AppPicker";
@@ -21,23 +21,54 @@ import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
 
 export default function App() {
+  const [imgUri, setImgUri] = useState();
   const askUserPermision = async () => {
     // const resullt = await ImagePicker.requestMediaLibraryPermissionsAsync()
     // const resullt = await ImagePicker.requestCameraPermissionsAsync();
 
     // Can take multiple permisions or 1
     const result = await Permissions.askAsync(
-      Permissions.MEDIA_LIBRARY,
-      Permissions.AUDIO_RECORDING,
-      Permissions.NOTIFICATIONS
+      Permissions.MEDIA_LIBRARY
     );
     console.log(result);
-    if (!result.granted) alert("You need allow permision to images");
+    if (!result.granted)
+      alert(
+        "Access to Camera permisions Denied, please Grant permision to Continue"
+      );
+  };
+  const selectImage = async () => {
+    const perm = await ImagePicker.getCameraPermissionsAsync();
+    if (perm.granted) {
+      try {
+        // const res = await ImagePicker.launchImageLibraryAsync();
+        const res = await ImagePicker.launchImageLibraryAsync();
+        if (!res.canceled) {
+          console.log(res);
+          // const uri = `data:image/jpeg;${res.assets[0].base64}`;
+          setImgUri(res.assets[0].uri);
+        }
+      } catch (error) {
+        alert(error);
+      }
+    } else {
+      await askUserPermision();
+    }
   };
   useEffect(() => {
-    askUserPermision();
+    // askUserPermision();
   }, []);
-  return <AppSafeAreaScreen></AppSafeAreaScreen>;
+  return (
+    <AppSafeAreaScreen>
+      <Button title="Add Image" onPress={selectImage} />
+      <View style={{ flex: 1 }}>
+        <Image
+          source={{ uri: imgUri }}
+          resizeMode="contain"
+          style={{ width: "100%", height: "100%" }}
+        />
+      </View>
+    </AppSafeAreaScreen>
+  );
 }
 
 const styles = StyleSheet.create({
