@@ -30,7 +30,7 @@ The navigation prop is available to all screen components (components defined as
   configuration and rendered by React Navigation as a route).
  */
 
-function StackNavigator(props) {
+function AuthStackNavigator(props) {
   return (
     // Screen options tales similar props like options of Screen children and are used by default and can be overidded when options of screen is used
     <Navigator screenOptions={{ headerTintColor: colors.primary }}>
@@ -41,11 +41,11 @@ function StackNavigator(props) {
         scre
       />
       <Screen name="Login" component={LoginScreen} />
-      <Screen name="Register" component={RegisterScreen}/>
+      <Screen name="Register" component={RegisterScreen} />
     </Navigator>
   );
 }
 
-StackNavigator.propTypes = {};
+AuthStackNavigator.propTypes = {};
 
-export default StackNavigator;
+export default AuthStackNavigator;

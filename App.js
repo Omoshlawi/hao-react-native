@@ -22,10 +22,11 @@ import ImageInputList from "./app/components/input/ImageInputList";
 import { NavigationContainer } from "@react-navigation/native";
 import AuthStackNavigator from "./app/navigation/AuthStackNavigator";
 import MainBottomTabNavigator from "./app/navigation/MainBottomTabNavigator";
+import navigationTheme from "./app/navigation/navigationTheme";
 
 export default function App() {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={navigationTheme}>
       <MainBottomTabNavigator />
     </NavigationContainer>
   );

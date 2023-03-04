@@ -5,13 +5,14 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import PropertyListScreen from "../screens/PropertyListScreen";
 import colors from "../utils/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import PropertyEditingScreen from "../screens/PropertyEditingScreen";
 
 const Tab = createBottomTabNavigator();
 
 const Navigator = Tab.Navigator;
 const Screen = Tab.Screen;
 
-function TabNavigator(props) {
+function MainBottomTabNavigator(props) {
   return (
     <Navigator
       screenOptions={{
@@ -35,6 +36,24 @@ function TabNavigator(props) {
         }}
       />
       <Screen
+        name="Add"
+        component={PropertyEditingScreen}
+        options={{
+          headerTitle: "Add new Property",
+          tabBarIcon: ({ size, color }) => (
+            <MaterialCommunityIcons
+              size={size}
+              name="plus-circle"
+              color={colors.secondary}
+            />
+          ),
+          headerTitleContainerStyle: {
+            justifyContent: "center",
+            alignItems: "center",
+          },
+        }}
+      />
+      <Screen
         name="Properties"
         component={PropertyListScreen}
         options={{
@@ -47,6 +66,6 @@ function TabNavigator(props) {
   );
 }
 
-TabNavigator.propTypes = {};
+MainBottomTabNavigator.propTypes = {};
 
-export default TabNavigator;
+export default MainBottomTabNavigator;
