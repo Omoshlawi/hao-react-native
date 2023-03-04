@@ -21,10 +21,14 @@ import WelcomeScreen from "./app/screens/WelcomeScreen";
 import colors from "./app/utils/colors";
 
 export default function App() {
-  const [localImage, setlocalImage] = useState()
+  const [localImage, setlocalImage] = useState();
   return (
     <AppSafeAreaScreen>
-      <ImageInput onImageChange={(image) => setlocalImage(image)  } localImage={localImage}/>
+      <ImageInput
+        onImageChange={(image) => setlocalImage(image)}
+        localImage={localImage}
+        radiusScaleFactor={0.2}
+      />
     </AppSafeAreaScreen>
   );
 }

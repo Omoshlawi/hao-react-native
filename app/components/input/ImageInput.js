@@ -5,6 +5,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../../utils/colors";
 import {
   launchImageLibraryAsync,
+  MediaTypeOptions,
   useMediaLibraryPermissions,
 } from "expo-image-picker";
 
@@ -35,7 +36,11 @@ const ImageInput = ({
   };
   const pickImage = async () => {
     try {
-      const { assets, canceled } = await launchImageLibraryAsync();
+      const { assets, canceled } = await launchImageLibraryAsync({
+        allowsEditing: true,
+        mediaTypes: MediaTypeOptions.Images,
+        quality: 0.5,//hold value between o and 1, 1 for highest quality and 1 best highest quality
+      });
       if (canceled) {
       } else {
         onImageChange(assets[0]);
