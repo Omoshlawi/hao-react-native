@@ -8,6 +8,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import PropertyEditingScreen from "../screens/PropertyEditingScreen";
 import PropertiesStackNavigator from "./PropertiesStackNavigator";
 import SearchScreen from "../screens/SearchScreen";
+import UserStackNavigation from "./UserStackNavigation";
 
 const Tab = createBottomTabNavigator();
 
@@ -64,7 +65,7 @@ function MainBottomTabNavigator(props) {
 
       <Screen
         name="Account"
-        component={AccountScreen}
+        component={UserStackNavigation}
         options={{
           tabBarIcon: ({ size, color, focused }) => (
             <MaterialCommunityIcons
@@ -73,6 +74,7 @@ function MainBottomTabNavigator(props) {
               color={color}
             />
           ),
+          headerShown: false,
         }}
       />
     </Navigator>
