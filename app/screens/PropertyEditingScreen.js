@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import AppSafeAreaScreen from "../components/AppSafeAreaScreen";
 import {
@@ -18,6 +18,7 @@ import * as Yup from "yup";
 import Picker from "../components/input/Picker";
 import colors from "../utils/colors";
 import AppFormImagePicker from "../components/forms/AppFormImagePicker";
+import { useForegroundPermissions } from "expo-location";
 
 const initialDetails = {
   title: "",
@@ -54,6 +55,17 @@ const validationScheema = Yup.object().shape({
 });
 
 function PropertyEditingScreen(props) {
+  const [status, requestPermission] = useForegroundPermissions();
+  useEffect(() => {
+    (async () => {
+      const { granted } = await requestPermission();
+      if (!granted) {
+        alert(
+          "Your need to grant app location permision to store your location info and allow client locate you"
+        );
+      }
+    })();
+  }, []);
   return (
     <AppSafeAreaScreen>
       <ScrollView>
