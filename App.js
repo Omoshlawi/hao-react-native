@@ -6,6 +6,7 @@ import AppPicker from "./app/components/AppPicker";
 import AppSafeAreaScreen from "./app/components/AppSafeAreaScreen";
 import AppTextInput from "./app/components/AppTextInput";
 import { AppErrorMessage } from "./app/components/forms";
+import ImageInput from "./app/components/input/ImageInput";
 import ImagePicker from "./app/components/imagePicker/ImagePicker";
 import ListItem from "./app/components/ListItem";
 import AccountScreen from "./app/screens/AccountScreen";
@@ -20,10 +21,10 @@ import WelcomeScreen from "./app/screens/WelcomeScreen";
 import colors from "./app/utils/colors";
 
 export default function App() {
+  const [localImage, setlocalImage] = useState()
   return (
     <AppSafeAreaScreen>
-
-      <ImagePicker onSelectedImageChange={(uri)=>console.log(uri)}/>
+      <ImageInput onImageChange={(image) => setlocalImage(image)  } localImage={localImage}/>
     </AppSafeAreaScreen>
   );
 }
