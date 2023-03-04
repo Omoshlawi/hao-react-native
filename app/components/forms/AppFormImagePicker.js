@@ -12,7 +12,12 @@ const AppFormImagePicker = ({ name }) => {
         //   Onvert uri to local state objet with property uri
         localImagesList={values[name].map((uri) => ({ uri }))}
         // extract uri from localImage obj
-        onImagesListChange={({ uri }) => setFieldValue(name, uri)}
+        onImagesListChange={(imageLists) =>
+          setFieldValue(
+            name,
+            imageLists.map(({ uri }) => uri)
+          )
+        }
       />
       <AppErrorMessage error={errors[name]} visible={touched[name]} />
     </>

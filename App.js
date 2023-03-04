@@ -21,18 +21,7 @@ import colors from "./app/utils/colors";
 import ImageInputList from "./app/components/input/ImageInputList";
 
 export default function App() {
-  const [localImages, setlocalImages] = useState([]);
-  return (
-    <AppSafeAreaScreen>
-      <ImageInputList
-        localImagesList={localImages}
-        onImagesListChange={(images) => {
-          setlocalImages(images);
-          // console.log(images.length);
-        }}
-      />
-    </AppSafeAreaScreen>
-  );
+  return <PropertyEditingScreen />;
 }
 
 const styles = StyleSheet.create({

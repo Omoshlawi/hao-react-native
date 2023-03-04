@@ -17,6 +17,7 @@ import {
 import * as Yup from "yup";
 import Picker from "../components/input/Picker";
 import colors from "../utils/colors";
+import AppFormImagePicker from "../components/forms/AppFormImagePicker";
 
 const initialDetails = {
   title: "",
@@ -25,6 +26,7 @@ const initialDetails = {
   status: "",
   type: "",
   description: "",
+  images: [],
   //   image: "",
 };
 
@@ -44,6 +46,7 @@ const validationScheema = Yup.object().shape({
   type: Yup.string().required().label("PropertyType"),
   status: Yup.string().required().label("PropertyStatus"),
   description: Yup.string().required().label("PropertyDescription").min(20),
+  images: Yup.array().required().label("PropertyImages"),
   //   image: Yup.string().required().label("PropertyPrice"),
 });
 
@@ -57,6 +60,7 @@ function PropertyEditingScreen(props) {
             validationSchema={validationScheema}
             onSubmit={(values) => console.log(values)}
           >
+            <AppFormImagePicker name="images" />
             <AppFormField name="title" placeholder="Title" />
             <AppFormPicker
               name="status"
