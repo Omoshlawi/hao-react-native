@@ -9,11 +9,11 @@ import {
   TouchableWithoutFeedback,
   FlatList,
   TouchableOpacity,
+  ScrollView
 } from "react-native";
 import colors from "../../utils/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import ListItemSeparator from "../ListItemSeparator";
-import { ScrollView } from "react-native-gesture-handler";
 
 /**
  *
