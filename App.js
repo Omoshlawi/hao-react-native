@@ -19,9 +19,15 @@ import ViewImageScreen from "./app/screens/ViewImageScreen";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 import colors from "./app/utils/colors";
 import ImageInputList from "./app/components/input/ImageInputList";
+import { NavigationContainer } from "@react-navigation/native";
+import StackNavigator from "./app/navigation/StackNavigator";
 
 export default function App() {
-  return <PropertyEditingScreen />;
+  return (
+    <NavigationContainer>
+      <StackNavigator/>
+    </NavigationContainer>
+  );
 }
 
 const styles = StyleSheet.create({

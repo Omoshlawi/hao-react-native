@@ -12,7 +12,13 @@ import {
 import colors from "../utils/colors";
 import AppButton from "../components/AppButton";
 
-function WelcomeScreen(props) {
+/**
+ * 
+ * @param {*} param0 
+ * @returns 
+ */
+
+function WelcomeScreen({navigation}) {
   return (
     <ImageBackground
       resizeMode="cover"
