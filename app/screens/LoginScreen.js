@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, StyleSheet, Image } from "react-native";
 
 import AppSafeAreaScreen from "../components/AppSafeAreaScreen";
@@ -9,13 +9,28 @@ import {
   AppFormField,
   AppFormSubmitButton,
 } from "../components/forms";
+import { useUser } from "../api/hooks";
+import UserContext from "../context/UserContext";
 
 const validationScheema = Yup.object().shape({
-  username: Yup.string().required().email().label("Email"),
-  password: Yup.string().required().min(8).label("Password"),
+  username: Yup.string().required().label("Username"),
+  password: Yup.string().required().min(4).label("Password"),
 });
 
-function LoginScreen() {
+function LoginScreen({ navigation }) {
+  const { login } = useUser();
+  const { user, setUser, token, setToken } = useContext(UserContext);
+
+  const handleLogin = async (data) => {
+    const result = await login(data);
+    if (!result.ok) return;
+
+    // console.log(result.data);
+    setToken(result.data.token);
+    delete result.data.token;
+    setUser(result.data);
+    console.log(user);
+  };
   return (
     <AppSafeAreaScreen>
       <View style={styles.logo}>
@@ -28,7 +43,7 @@ function LoginScreen() {
       <View style={styles.formContainer}>
         <AppForm
           initialValues={{ username: "", password: "" }}
-          onSubmit={(values) => console.log(values)}
+          onSubmit={handleLogin}
           validationSchema={validationScheema}
         >
           <AppFormField
