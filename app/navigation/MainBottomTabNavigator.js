@@ -24,7 +24,7 @@ function MainBottomTabNavigator(props) {
       }}
     >
       <Screen
-        name={routes.PROPERTIES_MAIN}
+        name={routes.HOME_MAIN}
         component={PropertiesStackNavigator}
         options={{
           tabBarIcon: ({ size, color }) => (
