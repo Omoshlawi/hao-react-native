@@ -20,6 +20,7 @@ import colors from "../utils/colors";
 import AppFormImagePicker from "../components/forms/AppFormImagePicker";
 
 import useLocation from "../hooks/useLocation";
+import AppIcon from "../components/AppIcon";
 
 const initialDetails = {
   title: "",
@@ -91,11 +92,15 @@ function PropertyEditingScreen(props) {
                       height: 80,
                       backgroundColor: colors.light,
                       margin: 10,
+                      justifyContent: "center",
+                      alignContent: "center",
+                      alignItems: "center",
                     }}
                   >
-                    <Text style={{ fontSize: 30, textAlign: "center" }}>
+                    {/* <Text style={{ fontSize: 30, textAlign: "center" }}>
                       {item.title}
-                    </Text>
+                    </Text> */}
+                    <AppIcon name="email" />
                   </View>
                 );
               }}

@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import AppSafeAreaScreen from "../components/AppSafeAreaScreen";
 import ListItem from "../components/ListItem";
 import colors from "../utils/colors";
 import AppIcon from "../components/AppIcon";
 import ListItemSeparator from "../components/ListItemSeparator";
+import UserContext from "../context/UserContext";
 
 const menuItems = [
   {
@@ -18,12 +19,13 @@ const menuItems = [
 ];
 
 function AccountScreen(props) {
+  const { user } = useContext(UserContext);
   return (
     <AppSafeAreaScreen style={styles.screen}>
       <View style={styles.container}>
         <ListItem
-          title="Laurent Ouma"
-          subTitle="lawiomosh3@gmail.com"
+          title={`${user.first_name} ${user.last_name}`}
+          subTitle={user.email}
           image={require("../assets/logo-red.png")}
         />
       </View>

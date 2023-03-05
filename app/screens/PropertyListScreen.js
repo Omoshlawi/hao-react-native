@@ -29,7 +29,7 @@ function PropertyListScreen({ navigation }) {
     loadProps();
   }, []);
   return (
-    <AppSafeAreaScreen style={styles.screen}>
+    <View style={styles.screen}>
       {error && (
         <>
           <AppText>
@@ -55,13 +55,14 @@ function PropertyListScreen({ navigation }) {
           </View>
         )}
       />
-    </AppSafeAreaScreen>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   screen: {
     backgroundColor: colors.light,
+    paddingTop: 10,
   },
   list: {
     paddingHorizontal: 20,

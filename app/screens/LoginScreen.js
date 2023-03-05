@@ -29,7 +29,6 @@ function LoginScreen({ navigation }) {
     setToken(result.data.token);
     delete result.data.token;
     setUser(result.data);
-    console.log(user);
   };
   return (
     <AppSafeAreaScreen>
