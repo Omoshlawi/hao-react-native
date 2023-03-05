@@ -8,7 +8,7 @@ import navigationTheme from "./app/navigation/navigationTheme";
 import { UserContextProvider } from "./app/context/UserContext";
 
 export default function App() {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState({});
   const [token, setToken] = useState();
   return (
     <UserContextProvider value={{ user, setUser, token, setToken }}>

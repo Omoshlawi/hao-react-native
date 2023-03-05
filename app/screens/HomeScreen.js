@@ -3,9 +3,10 @@ import React, { useState } from "react";
 import AppSafeAreaScreen from "../components/AppSafeAreaScreen";
 import colors from "../utils/colors";
 import AppSearch from "../components/AppSearch";
+import HouseCard from "../components/HouseCard";
 
 const HomeScreen = () => {
-    const [searchString, setSearchString] = useState('')
+  const [searchString, setSearchString] = useState("");
   return (
     <AppSafeAreaScreen style={styles.screen}>
       <Text style={styles.title}>{"Lets Find you an \n Apartment"}</Text>
@@ -17,6 +18,15 @@ const HomeScreen = () => {
           onPress={() => {
             console.log("Seaching....", searchString);
           }}
+        />
+      </View>
+      <View>
+        <Text>Available</Text>
+        <HouseCard
+          image={require("../assets/logo-black.png")}
+          title="Royale Malewane"
+          subTitle={"Are you seaching luxurious Hotel\nThis is only for you"}
+          price={2000}
         />
       </View>
     </AppSafeAreaScreen>
@@ -32,7 +42,7 @@ const styles = StyleSheet.create({
     padding: 30,
     fontWeight: "bold",
     color: colors.primary,
-    lineHeight: 50
+    lineHeight: 50,
   },
   searchContainer: {
     paddingHorizontal: 10,

@@ -7,7 +7,7 @@ const AppIcon = ({
   backgroundColor = "#fff",
   color = "#000",
   size = 40,
-  scale = 0.5
+  scale = 0.5,
 }) => {
   return (
     <View
