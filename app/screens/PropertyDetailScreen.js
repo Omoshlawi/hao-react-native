@@ -13,6 +13,7 @@ function PropertyDetailScreen({ navigation, route }) {
       <View style={styles.detailsContainer}>
         <AppText style={styles.title}>{item.title}</AppText>
         <AppText style={styles.price}>${item.price}</AppText>
+        <AppText>{item.description}</AppText>
         <View style={styles.userContainer}>
           <ListItem
             image={require("../assets/logo-black.png")}
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   userContainer: {
-    marginVertical: 40,
+    marginVertical: 20,
   },
 });
 

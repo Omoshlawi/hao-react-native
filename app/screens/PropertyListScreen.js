@@ -48,8 +48,9 @@ function PropertyListScreen({ navigation }) {
             <HouseCard
               image={{ uri: item.image }}
               title={item.title}
-              subTitle={item.price}
+              subTitle={item.description.slice(0,197)}
               price={item.price}
+              imgHeight={300}
               onPress={() => {
                 navigation.navigate(routes.PROPERTY_DETAIL_PROP, item);
               }}

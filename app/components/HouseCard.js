@@ -10,11 +10,18 @@ import React from "react";
 import colors from "../utils/colors";
 import AppIcon from "./AppIcon";
 
-const HouseCard = ({ onPress, image, title, subTitle, price }) => {
+const HouseCard = ({
+  onPress,
+  image,
+  title,
+  subTitle,
+  price,
+  imgHeight = 150,
+}) => {
   return (
     <TouchableWithoutFeedback onPress={onPress}>
       <View style={styles.card}>
-        <Image style={styles.image} source={image} />
+        <Image style={[styles.image, { height: imgHeight }]} source={image} />
         <View style={styles.detailsContainer}>
           {title && <Text style={styles.title}>{title}</Text>}
           {subTitle && <Text style={styles.subTitle}>{subTitle}</Text>}
@@ -41,7 +48,6 @@ const styles = StyleSheet.create({
   },
   image: {
     width: "100%",
-    height:150,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
   },
