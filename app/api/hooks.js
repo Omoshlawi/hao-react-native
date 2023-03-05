@@ -12,6 +12,11 @@ export const useProperty = () => {
 
 export const useUser = () => {
   const login = (data) => apiClient.post("users/login/", data);
-  return {login}
+  return { login };
 };
 
+export const useHouses = () => {
+  const endPoint = "houses/";
+  const getAllHouses = () => apiClient.get(endPoint);
+  return { getAllHouses };
+};

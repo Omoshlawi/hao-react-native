@@ -16,8 +16,8 @@ const HouseCard = ({ onPress, image, title, subTitle, price }) => {
       <View style={styles.card}>
         <Image style={styles.image} source={image} />
         <View style={styles.detailsContainer}>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.subTitle}>{subTitle}</Text>
+          {title && <Text style={styles.title}>{title}</Text>}
+          {subTitle && <Text style={styles.subTitle}>{subTitle}</Text>}
           <View style={styles.priceContainer}>
             <Text style={styles.price}>Ksh.{price}</Text>
             <TouchableOpacity>

@@ -8,6 +8,7 @@ import colors from "../utils/colors";
 import { useProperty } from "../api/hooks";
 import AppText from "../components/AppText";
 import routes from "../navigation/routes";
+import HouseCard from "../components/HouseCard";
 
 function PropertyListScreen({ navigation }) {
   const [properties, setProperties] = useState([]);
@@ -44,10 +45,11 @@ function PropertyListScreen({ navigation }) {
         onRefresh={loadProps}
         renderItem={({ item }) => (
           <View style={styles.list}>
-            <AppCard
+            <HouseCard
               image={{ uri: item.image }}
               title={item.title}
               subTitle={item.price}
+              price={item.price}
               onPress={() => {
                 navigation.navigate(routes.PROPERTY_DETAIL_PROP, item);
               }}
