@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: "100%",
-    height: 200,
+    height:150,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
   },
@@ -50,14 +50,14 @@ const styles = StyleSheet.create({
   },
   title: {
     marginBottom: 7,
-    fontSize: 30,
+    fontSize: 25,
     fontWeight: "bold",
   },
   subTitle: {
-    fontSize: 18,
+    fontSize: 15,
   },
   price: {
-    fontSize: 20,
+    fontSize: 18,
     textAlignVertical: "center",
     color: colors.secondary,
     fontWeight: "bold",
