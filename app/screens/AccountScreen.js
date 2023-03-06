@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Alert, FlatList, StyleSheet, View } from "react-native";
 import AppSafeAreaScreen from "../components/AppSafeAreaScreen";
 import ListItem from "../components/ListItem";
@@ -21,21 +21,19 @@ const menuItems = [
 ];
 
 function AccountScreen(props) {
-  const { logout } = useUser();
-  const { clearToken } = useContext(UserContext);
-  const user = {
-    first_name: "Laurent",
-    last_name: "Ouma",
-    email: "lawiomosh3@gmail.com",
-  };
+  const { user } = useContext(UserContext);
+  const { logout, getUser } = useUser();
+  useEffect(() => {
+    if (!user) getUser();
+  }, []);
   return (
     <AppSafeAreaScreen style={styles.screen}>
       <View style={styles.container}>
-        <ListItem
+       {user && <ListItem
           title={`${user.first_name} ${user.last_name}`}
           subTitle={user.email}
           image={require("../assets/logo-red.png")}
-        />
+        />}
       </View>
       <View style={styles.container}>
         <FlatList
@@ -62,7 +60,7 @@ function AccountScreen(props) {
             {
               text: "Logout",
               onPress: () => {
-                clearToken(true);
+                logout();
               },
             },
             { text: "Cancel" },

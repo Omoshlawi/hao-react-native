@@ -19,7 +19,7 @@ const validationScheema = Yup.object().shape({
 
 function LoginScreen({ navigation }) {
   const { login } = useUser();
-  const { token, setToken } = useContext(UserContext);
+  const { setToken, setUser } = useContext(UserContext);
 
   const handleLogin = async (data) => {
     const result = await login(data);
@@ -28,7 +28,7 @@ function LoginScreen({ navigation }) {
     // console.log(result.data);
     setToken(result.data.token);
     delete result.data.token;
-    // setUser(result.data);
+    setUser(result.data);
   };
   return (
     <AppSafeAreaScreen>

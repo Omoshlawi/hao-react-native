@@ -10,9 +10,10 @@ import useSecureStore from "./app/hooks/useSecureStore";
 
 export default function App() {
   const [token, setToken, clearToken] = useSecureStore("token", null);
+  const [user, setUser] = useState();
   const isLoggedIn = Boolean(token);
   return (
-    <UserContextProvider value={{ token, setToken, clearToken }}>
+    <UserContextProvider value={{ token, setToken, clearToken, user, setUser }}>
       <NavigationContainer theme={navigationTheme}>
         {isLoggedIn ? <MainBottomTabNavigator /> : <AuthStackNavigator />}
       </NavigationContainer>

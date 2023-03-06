@@ -1,5 +1,7 @@
-import useSecureStore from "../hooks/useSecureStore";
+import { useContext } from "react";
+import UserContext from "../context/UserContext";
 import apiClient from "./client";
+const getAuthHeader = (token) => ({ Authorization: `Token ${token}` });
 
 export const useProperty = () => {
   const endPoint = "properties/";
@@ -12,10 +14,24 @@ export const useProperty = () => {
 };
 
 export const useUser = () => {
-  const [, setToken] = useSecureStore("token", null);
+  const { clearToken, user, setUser, token } = useContext(UserContext);
   const login = (data) => apiClient.post("users/login/", data);
-  const logout = () => setToken(null);
-  return { login, logout };
+  const logout = () => clearToken(true);
+  const getUser = async () => {
+    if (user) {
+      return;
+    }
+    const resposnse = await apiClient.get(
+      "users/profile/",
+      {},
+      { headers: getAuthHeader(token) }
+    );
+    if (!resposnse.ok) {
+      console.log("apiHooks->useUser", resposnse.problem);
+    }
+    setUser(resposnse.data);
+  };
+  return { login, logout, getUser };
 };
 
 export const useHouses = () => {
