@@ -6,14 +6,15 @@ import AuthStackNavigator from "./app/navigation/AuthStackNavigator";
 import MainBottomTabNavigator from "./app/navigation/MainBottomTabNavigator";
 import navigationTheme from "./app/navigation/navigationTheme";
 import { UserContextProvider } from "./app/context/UserContext";
+import useSecureStore from "./app/hooks/useSecureStore";
 
 export default function App() {
-  const [user, setUser] = useState({});
-  const [token, setToken] = useState();
+  const [token, setToken, clearToken] = useSecureStore("token", null);
+  const isLoggedIn = Boolean(token);
   return (
-    <UserContextProvider value={{ user, setUser, token, setToken }}>
+    <UserContextProvider value={{ token, setToken, clearToken }}>
       <NavigationContainer theme={navigationTheme}>
-        {user ? <MainBottomTabNavigator /> : <AuthStackNavigator />}
+        {isLoggedIn ? <MainBottomTabNavigator /> : <AuthStackNavigator />}
       </NavigationContainer>
     </UserContextProvider>
   );

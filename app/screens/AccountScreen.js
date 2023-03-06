@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
-import { FlatList, StyleSheet, View } from "react-native";
+import { Alert, FlatList, StyleSheet, View } from "react-native";
 import AppSafeAreaScreen from "../components/AppSafeAreaScreen";
 import ListItem from "../components/ListItem";
 import colors from "../utils/colors";
 import AppIcon from "../components/AppIcon";
 import ListItemSeparator from "../components/ListItemSeparator";
 import UserContext from "../context/UserContext";
+import { useUser } from "../api/hooks";
+import useSecureStore from "../hooks/useSecureStore";
 
 const menuItems = [
   {
@@ -19,7 +21,13 @@ const menuItems = [
 ];
 
 function AccountScreen(props) {
-  const { user } = useContext(UserContext);
+  const { logout } = useUser();
+  const { clearToken } = useContext(UserContext);
+  const user = {
+    first_name: "Laurent",
+    last_name: "Ouma",
+    email: "lawiomosh3@gmail.com",
+  };
   return (
     <AppSafeAreaScreen style={styles.screen}>
       <View style={styles.container}>
@@ -49,6 +57,17 @@ function AccountScreen(props) {
       </View>
       <ListItem
         title="Logout"
+        onPress={() => {
+          Alert.alert("Logout", "Are you sure you want to logout?", [
+            {
+              text: "Logout",
+              onPress: () => {
+                clearToken(true);
+              },
+            },
+            { text: "Cancel" },
+          ]);
+        }}
         IconComponent={<AppIcon name="logout" backgroundColor="ffe66d" />}
       />
     </AppSafeAreaScreen>

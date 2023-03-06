@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AppSafeAreaScreen from "../components/AppSafeAreaScreen";
 import colors from "../utils/colors";
 import AppSearch from "../components/AppSearch";
@@ -14,7 +14,6 @@ import HouseCard from "../components/HouseCard";
 import { FlatList } from "react-native-gesture-handler";
 import { useHouses, useProperty } from "../api/hooks";
 import routes from "../navigation/routes";
-import useSecureStore from "../hooks/useSecureStore";
 
 const HomeScreen = ({ navigation }) => {
   const [searchString, setSearchString] = useState("");
@@ -24,8 +23,6 @@ const HomeScreen = ({ navigation }) => {
   const { getProperties } = useProperty();
   const { getAllHouses } = useHouses();
   const [refresh, setRefresh] = useState(false);
-  const [token, setToken] = useSecureStore("key", null);
-  console.log(token);
 
   const loadProps = async () => {
     setRefresh(true);

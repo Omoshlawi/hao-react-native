@@ -4,14 +4,17 @@ import { useEffect, useState } from "react";
 const useSecureStore = (key, initialValue) => {
   const prefix = "cache_secure_";
   const [valueStored, setValueToStore] = useState(initialValue);
-
-  //   only called once to update store valye to the one in secure store
+  const [clear, setClear] = useState(false);
+  // console.log(prefix + key, ": {initial: ", initialValue, ", actual: ", valueStored,"}");
+  //   only called once to update store value to the one in secure store
   useEffect(() => {
     (async () => {
       try {
         const val = await SecureStore.getItemAsync(prefix + key);
         const item = JSON.parse(val);
-        if (item !== undefined && item !== null) setValueToStore(item);
+        if (item) {
+          setValueToStore(item);
+        }
       } catch (error) {
         console.log("Error: " + "useSecureStore->Get", error);
       }
@@ -20,12 +23,18 @@ const useSecureStore = (key, initialValue) => {
 
   // excecuted every time value in secure store changes to update its value
   useEffect(() => {
-    if (valueStored !== undefined && valueStored !== null) {
+    if (valueStored) {
       asyncStore(valueStored);
-    } else {
-      asyncDelete();
     }
   }, [valueStored]);
+
+  useEffect(() => {
+    if (clear) {
+      setValueToStore(null);
+      asyncDelete();
+      setClear(false);
+    }
+  }, [clear]);
 
   const asyncStore = async (value) => {
     try {
@@ -43,7 +52,7 @@ const useSecureStore = (key, initialValue) => {
     }
   };
 
-  return [valueStored, setValueToStore];
+  return [valueStored, setValueToStore, setClear];
 };
 
 export default useSecureStore;

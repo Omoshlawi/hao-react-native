@@ -1,3 +1,4 @@
+import useSecureStore from "../hooks/useSecureStore";
 import apiClient from "./client";
 
 export const useProperty = () => {
@@ -11,8 +12,10 @@ export const useProperty = () => {
 };
 
 export const useUser = () => {
+  const [, setToken] = useSecureStore("token", null);
   const login = (data) => apiClient.post("users/login/", data);
-  return { login };
+  const logout = () => setToken(null);
+  return { login, logout };
 };
 
 export const useHouses = () => {
