@@ -11,12 +11,19 @@ import colors from "../utils/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import AppIcon from "./AppIcon";
 
-const AppSearch = ({ style, onTextChange, value, onPress }) => {
+const AppSearch = ({
+  style,
+  onTextChange,
+  value,
+  onPress,
+  placeholder = "Search ...",
+  iconStyle,
+}) => {
   return (
     <View style={[styles.container, style]}>
       <TextInput
         style={styles.text}
-        placeholder="Search..."
+        placeholder={placeholder}
         onChangeText={onTextChange}
         value={`${value}`}
       />
@@ -26,6 +33,7 @@ const AppSearch = ({ style, onTextChange, value, onPress }) => {
           scale={0.2}
           color={colors.white}
           backgroundColor={colors.primary}
+          {...iconStyle}
         />
       </TouchableOpacity>
     </View>

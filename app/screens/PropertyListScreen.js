@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { Button, FlatList, SafeAreaView } from "react-native";
-import { View, StyleSheet } from "react-native";
-import AppSafeAreaScreen from "../components/AppSafeAreaScreen";
-import AppCard from "../components/AppCard";
+import { View, StyleSheet, FlatList, Text } from "react-native";
 import colors from "../utils/colors";
 import { useProperty } from "../api/hooks";
-import AppText from "../components/AppText";
 import routes from "../navigation/routes";
 import HouseCard from "../components/HouseCard";
 
@@ -33,9 +29,9 @@ function PropertyListScreen({ navigation }) {
     <View style={styles.screen}>
       {error && (
         <>
-          <AppText>
+          <Text style={styles.error}>
             Coulnt retrive properties from server, pull to referesh
-          </AppText>
+          </Text>
         </>
       )}
       <FlatList
@@ -48,7 +44,7 @@ function PropertyListScreen({ navigation }) {
             <HouseCard
               image={{ uri: item.image }}
               title={item.title}
-              subTitle={item.description.slice(0,197)}
+              subTitle={item.description.slice(0, 197)}
               price={item.price}
               imgHeight={300}
               onPress={() => {
@@ -64,14 +60,22 @@ function PropertyListScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   screen: {
-    backgroundColor: colors.light,
+    backgroundColor: colors.background,
     paddingTop: 10,
+    flex: 1,
   },
   list: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 5,
+  },
+  error: {
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 20,
   },
 });
 
-PropertyListScreen.propTypes = {};
+PropertyListScreen.propTypes = {
+  navigation: PropTypes.object,
+};
 
 export default PropertyListScreen;

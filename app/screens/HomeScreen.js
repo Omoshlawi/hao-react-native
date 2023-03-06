@@ -1,4 +1,11 @@
-import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
+import {
+  KeyboardAvoidingView,
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import AppSafeAreaScreen from "../components/AppSafeAreaScreen";
 import colors from "../utils/colors";
@@ -7,6 +14,7 @@ import HouseCard from "../components/HouseCard";
 import { FlatList } from "react-native-gesture-handler";
 import { useHouses, useProperty } from "../api/hooks";
 import routes from "../navigation/routes";
+import useSecureStore from "../hooks/useSecureStore";
 
 const HomeScreen = ({ navigation }) => {
   const [searchString, setSearchString] = useState("");
@@ -16,16 +24,20 @@ const HomeScreen = ({ navigation }) => {
   const { getProperties } = useProperty();
   const { getAllHouses } = useHouses();
   const [refresh, setRefresh] = useState(false);
+  const [token, setToken] = useSecureStore("key", null);
+  console.log(token);
 
   const loadProps = async () => {
     setRefresh(true);
     const propertiesResponse = await getProperties();
     const houseResponse = await getAllHouses();
     setRefresh(false);
-    if (!propertiesResponse.ok) return setError(true);
-    const { data } = propertiesResponse;
-    setProperties(data.results);
-    if (!houseResponse.ok) return setError;
+
+    if (!propertiesResponse.ok || !houseResponse.ok) {
+      return setError(true);
+    }
+
+    setProperties(propertiesResponse.data.results);
     setHouses(houseResponse.data.results);
     setError(false);
   };
@@ -49,22 +61,24 @@ const HomeScreen = ({ navigation }) => {
       </View>
       <View>
         <View style={styles.propHeader}>
-          <Text style={{ flex: 1 }}>Available Properties</Text>
-          <TouchableHighlight
+          <Text style={[styles.headerText, { flex: 1 }]}>
+            Available Properties
+          </Text>
+          <TouchableOpacity
             onPress={() => {
               navigation.navigate(routes.PROPERTY_LIST_PROP);
             }}
           >
-            <Text>View All {">"} </Text>
-          </TouchableHighlight>
+            <Text style={[styles.headerText, { color: colors.primary }]}>
+              View All {">"}{" "}
+            </Text>
+          </TouchableOpacity>
         </View>
         <FlatList
           showsHorizontalScrollIndicator={false}
           data={properties}
           horizontal
           keyExtractor={(property) => property.url}
-          refreshing={refresh}
-          onRefresh={loadProps}
           renderItem={({ item }) => (
             <View style={styles.list}>
               <HouseCard
@@ -82,20 +96,21 @@ const HomeScreen = ({ navigation }) => {
       </View>
       <View>
         <View style={styles.propHeader}>
-          <Text style={{ flex: 1 }}>Available Houses</Text>
-          <TouchableHighlight
+          <Text style={[styles.headerText, { flex: 1 }]}>Available Houses</Text>
+          <TouchableOpacity
             onPress={() => {
               navigation.navigate(routes.PROPERTY_LIST_PROP);
             }}
           >
-            <Text>View All {">"} </Text>
-          </TouchableHighlight>
+            <Text style={[styles.headerText, { color: colors.primary }]}>
+              View All {">"}{" "}
+            </Text>
+          </TouchableOpacity>
         </View>
         <FlatList
+          contentContainerStyle={{ paddingBottom: 100 }}
           data={houses}
           keyExtractor={(property) => property.url}
-          refreshing={refresh}
-          onRefresh={loadProps}
           numColumns={2}
           renderItem={({ item }) => (
             <View style={styles.houses}>
@@ -118,6 +133,7 @@ const HomeScreen = ({ navigation }) => {
 export default HomeScreen;
 
 const styles = StyleSheet.create({
+  headerText: { fontWeight: "bold" },
   propHeader: {
     flexDirection: "row",
     padding: 10,
@@ -135,6 +151,7 @@ const styles = StyleSheet.create({
   },
   search: {
     borderRadius: 10,
+    backgroundColor: colors.white,
   },
   screen: {
     backgroundColor: colors.background,

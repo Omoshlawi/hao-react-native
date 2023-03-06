@@ -37,6 +37,7 @@ function MainBottomTabNavigator(props) {
         name={routes.SEARCH_MAIN}
         component={SearchScreen}
         options={{
+          headerShown:false,
           tabBarIcon: ({ size, color, focused }) => (
             <MaterialCommunityIcons size={size} name="magnify" color={color} />
           ),

@@ -8,5 +8,6 @@ export default {
   light: "#f8f4f4",
   danger: "#FF0202",
   dark: "#0c0c0c",
-  background: "#FF161626",
+  background: "#f8f4f4",
+  // background: "#FF161626",
 };

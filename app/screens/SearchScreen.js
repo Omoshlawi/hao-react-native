@@ -1,18 +1,31 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { TextInput } from "react-native-gesture-handler";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../utils/colors";
+import AppSearch from "../components/AppSearch";
+import AppSafeAreaScreen from "../components/AppSafeAreaScreen";
 
 const SearchScreen = () => {
+  const [searchString, setSearchString] = useState("");
   return (
-    <View>
-      <View style={styles.container}>
-        <TextInput style={styles.text} placeholder="Search..." />
-        <MaterialCommunityIcons name="magnify" size={30}/>
+    <AppSafeAreaScreen>
+      <Text style={styles.text}>
+        {"Lets Find you a property that meets your needs"}
+      </Text>
+      <View style={styles.searchContainer}>
+        <AppSearch
+          placeholder="Search our database"
+          style={styles.search}
+          onTextChange={(text) => setSearchString(text)}
+          value={searchString}
+          onPress={() => {
+            console.log("Seaching....", searchString);
+          }}
+        />
       </View>
       <ScrollView></ScrollView>
-    </View>
+    </AppSafeAreaScreen>
   );
 };
 
@@ -20,13 +33,20 @@ export default SearchScreen;
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
-    backgroundColor: colors.light,
     padding: 10,
-    margin:10,
-    borderRadius: 25
   },
   text: {
-    flex: 1,
+    fontSize: 30,
+    textAlign: "center",
+    fontWeight: "bold",
+    color: colors.primary,
+    padding: 20,
+    lineHeight: 50
+  },
+  searchContainer: {
+    paddingHorizontal: 10,
+  },
+  search: {
+    borderRadius: 10,
   },
 });
