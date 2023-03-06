@@ -8,6 +8,7 @@ import ListItemSeparator from "../components/ListItemSeparator";
 import UserContext from "../context/UserContext";
 import { useUser } from "../api/hooks";
 import useSecureStore from "../hooks/useSecureStore";
+import routes from "../navigation/routes";
 
 const menuItems = [
   {
@@ -20,7 +21,7 @@ const menuItems = [
   },
 ];
 
-function AccountScreen(props) {
+function AccountScreen({ navigation }) {
   const { user } = useContext(UserContext);
   const { logout, getUser } = useUser();
   useEffect(() => {
@@ -29,11 +30,17 @@ function AccountScreen(props) {
   return (
     <AppSafeAreaScreen style={styles.screen}>
       <View style={styles.container}>
-       {user && <ListItem
-          title={`${user.first_name} ${user.last_name}`}
-          subTitle={user.email}
-          image={require("../assets/logo-red.png")}
-        />}
+        {user && (
+          <ListItem
+            title={`${user.first_name} ${user.last_name}`}
+            subTitle={user.email}
+            image={require("../assets/logo-red.png")}
+            onPress={() => {
+              console.log("Pressed");
+              navigation.navigate(routes.USER_PROFILE_EDIT_ACCOUNT);
+            }}
+          />
+        )}
       </View>
       <View style={styles.container}>
         <FlatList

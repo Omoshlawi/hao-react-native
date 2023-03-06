@@ -52,7 +52,7 @@ function MainBottomTabNavigator(props) {
             <MaterialCommunityIcons
               size={size}
               name="plus-circle"
-              color={colors.secondary}
+              color={color}
             />
           ),
           headerTitleContainerStyle: {

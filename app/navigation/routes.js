@@ -12,4 +12,5 @@ export default Object.freeze({
   PROPERTY_LIST_PROP: "PropertyList",
   PROPERTY_DETAIL_PROP: "PropertyDetail",
   USER_CENTER_ACCOUNT: "UserCenter",
+  USER_PROFILE_EDIT_ACCOUNT :"ProfileEdit"
 });
