@@ -13,13 +13,15 @@ export const useProperty = () => {
 
   const getPropertyTypes = () => apiClient.get(endPoint + "types/");
   const getPropertyStatus = () => apiClient.get(endPoint + "status/");
+  const getPropertyLocations = () => apiClient.get(endPoint + "location/");
   return {
     getProperties,
     postProperties,
     putProperties,
     deleteProperties,
     getPropertyTypes,
-    getPropertyStatus
+    getPropertyStatus,
+    getPropertyLocations,
   };
 };
 
