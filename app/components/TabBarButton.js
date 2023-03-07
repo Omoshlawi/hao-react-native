@@ -5,7 +5,10 @@ import colors from "../utils/colors";
 
 const TabBarButton = ({ name, size, color, backgroundColor, onPress }) => {
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity
+      onPress={onPress}
+      style={{ backgroundColor: colors.tabBackground }}
+    >
       <View
         style={[
           styles.container,
@@ -35,7 +38,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     bottom: 15,
     alignItems: "center",
-    borderWidth:10,
-    borderColor: colors.tabBackground
+    borderWidth: 10,
+    borderColor: colors.tabBackground,
   },
 });

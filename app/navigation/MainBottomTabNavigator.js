@@ -23,8 +23,9 @@ function MainBottomTabNavigator(props) {
         tabBarActiveBackgroundColor: colors.white,
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: colors.primary,
-        // tabBarInactiveBackgroundColor: colors.tabBackground,
+        tabBarInactiveBackgroundColor: colors.tabBackground,
         // tabBarStyle: { backgroundColor: colors.tabBackground },
+        tabBarLabelStyle: { fontWeight: "bold" },
       }}
     >
       <Screen
