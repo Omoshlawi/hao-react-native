@@ -1,14 +1,23 @@
-import { Image, StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  FlatList,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import MapView, { Marker } from "react-native-maps";
 import useLocation from "../hooks/useLocation";
 import { useProperty } from "../api/hooks";
 
 import BottomExpandable from "../components/BottomExpandable";
+import colors from "../utils/colors";
 
 const PropertyLocationsScreen = () => {
   const [propertyLocations, setPropertyLocations] = useState([]);
-  const { getPropertyLocations } = useProperty();
+  const [properties, setPropertes] = useState([]);
+  const { getPropertyLocations, getProperties } = useProperty();
   const location = useLocation();
   const [expanded, setExpanded] = useState(false);
   // console.log(location);
@@ -16,8 +25,12 @@ const PropertyLocationsScreen = () => {
   useEffect(() => {
     (async () => {
       const response = await getPropertyLocations();
-      if (!response.ok) return console.log(response.problem);
+      const propsResponse = await getProperties();
+      if (!response.ok || !propsResponse.ok)
+        return console.log("Error: Property Location Screen", response.problem);
+
       setPropertyLocations(response.data.results);
+      setPropertes(propsResponse.data.results);
     })();
   }, []);
 
@@ -53,7 +66,23 @@ const PropertyLocationsScreen = () => {
         expanded={expanded}
         onToggleExpand={(exp) => setExpanded(exp)}
       >
-        <Text>Hellow there</Text>
+        <FlatList
+          data={properties}
+          horizontal
+          style={{ height: "100%" }}
+          showsHorizontalScrollIndicator={false}
+          keyExtractor={({ url }) => url}
+          renderItem={({ item: { title, image } }) => (
+            <View style={styles.listItem}>
+              <Text style={{ fontWeight: "bold" }}>{title}</Text>
+              <Image
+                source={{ uri: image }}
+                style={{ height: 100, width: 100 }}
+                resizeMode="contain"
+              />
+            </View>
+          )}
+        />
       </BottomExpandable>
     </>
   );
@@ -72,5 +101,14 @@ const styles = StyleSheet.create({
   map: {
     width: "100%",
     height: "100%",
+  },
+  listItem: {
+    width: 200,
+    backgroundColor: colors.tabBackground,
+    padding: 10,
+    marginHorizontal: 10,
+    marginBottom: 10,
+    borderRadius: 10,
+    overflow: "hidden",
   },
 });
