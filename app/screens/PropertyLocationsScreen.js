@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   FlatList,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import MapView, { Marker } from "react-native-maps";
 import useLocation from "../hooks/useLocation";
 import { useProperty } from "../api/hooks";
@@ -19,7 +19,7 @@ import PropertyStatus from "../components/search/PropertyStatus";
 
 const PropertyLocationsScreen = () => {
   const [propertyLocations, setPropertyLocations] = useState([]);
-  const [propertiesType, setPropertesType] = useState([]);
+  const [propertiesType, setPropertiesType] = useState([]);
   const [propertiesStatus, setPropertiesStatus] = useState([]);
   const [keyWord, setKeyWord] = useState("");
   const { getPropertyLocations, getPropertyTypes, getPropertyStatus } =
@@ -36,11 +36,13 @@ const PropertyLocationsScreen = () => {
       if (!locationResponse.ok || !propsResponse.ok || !statusResponse.ok)
         return console.log(
           "Error: Property Location Screen",
-          locationResponse.problem
+          locationResponse.problem,
+          statusResponse.problem,
+          propsResponse.problem
         );
 
       setPropertyLocations(locationResponse.data.results);
-      setPropertesType(propsResponse.data.results);
+      setPropertiesType(propsResponse.data.results);
       setPropertiesStatus(statusResponse.data.results);
     })();
   }, []);
@@ -48,7 +50,7 @@ const PropertyLocationsScreen = () => {
   return (
     <>
       <View style={styles.container}>
-        {/* {location && (
+        {location && (
           <MapView
             style={styles.map}
             initialRegion={{
@@ -71,7 +73,7 @@ const PropertyLocationsScreen = () => {
               );
             })}
           </MapView>
-        )} */}
+        )}
       </View>
       <BottomExpandable
         expanded={expanded}
@@ -91,7 +93,7 @@ const PropertyLocationsScreen = () => {
               />
             </View>
             <PropertyStatus
-            title="Filter by property status"
+              title="Filter by property status"
               statuses={propertiesStatus}
               onItemClicked={(item) => console.log(item)}
             />
@@ -112,7 +114,15 @@ export default PropertyLocationsScreen;
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
+  map: {
+    width: "100%",
+    height: "100%",
   },
   searchContainer: {
     paddingHorizontal: 10,
