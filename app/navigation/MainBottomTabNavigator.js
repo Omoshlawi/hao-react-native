@@ -8,6 +8,9 @@ import PropertiesStackNavigator from "./PropertiesStackNavigator";
 import SearchScreen from "../screens/SearchScreen";
 import UserStackNavigation from "./UserStackNavigation";
 import routes from "./routes";
+import PropertyLocationsScreen from "../screens/PropertyLocationsScreen";
+import TabBarButton from "../components/TabBarButton";
+import { View } from "react-native";
 const Tab = createBottomTabNavigator();
 
 const Navigator = Tab.Navigator;
@@ -19,8 +22,9 @@ function MainBottomTabNavigator(props) {
       screenOptions={{
         tabBarActiveBackgroundColor: colors.white,
         tabBarActiveTintColor: colors.primary,
-        tabBarInactiveBackgroundColor: colors.light,
-        tabBarIconStyle: {},
+        tabBarInactiveTintColor: colors.primary,
+        // tabBarInactiveBackgroundColor: colors.tabBackground,
+        // tabBarStyle: { backgroundColor: colors.tabBackground },
       }}
     >
       <Screen
@@ -33,16 +37,39 @@ function MainBottomTabNavigator(props) {
           headerShown: false,
         }}
       />
+
+      <Screen
+        name={routes.PROPERTIES_LOCATION}
+        component={PropertyLocationsScreen}
+        options={{
+          title: "NearBy",
+          headerShown: false,
+          tabBarIcon: ({ size, color, focused }) => (
+            <MaterialCommunityIcons
+              size={size}
+              name="home-map-marker"
+              color={color}
+            />
+          ),
+        }}
+      />
       <Screen
         name={routes.SEARCH_MAIN}
         component={SearchScreen}
         options={{
           headerShown: false,
-          tabBarIcon: ({ size, color, focused }) => (
-            <MaterialCommunityIcons size={size} name="magnify" color={color} />
+          tabBarButton: ({ onPress }) => (
+            <TabBarButton
+              name="magnify"
+              size={60}
+              backgroundColor={colors.primary}
+              color={colors.white}
+              onPress={onPress}
+            />
           ),
         }}
       />
+
       <Screen
         name={routes.PROPERTY_ADD_MAIN}
         component={PropertyEditingScreen}

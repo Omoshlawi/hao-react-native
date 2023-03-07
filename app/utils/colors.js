@@ -9,5 +9,6 @@ export default {
   danger: "#FF0202",
   dark: "#0c0c0c",
   background: "#f8f4f4",
+  tabBackground: "#FF161640",
   // background: "#FF161626",
 };
