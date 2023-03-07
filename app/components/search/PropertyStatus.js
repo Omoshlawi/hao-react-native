@@ -13,10 +13,11 @@ const PropertyStatus = ({
   statuses = [],
   onItemClicked,
   contentContainerStyle,
+  title = "Property Status",
 }) => {
   return (
     <View style={[styles.container, contentContainerStyle]}>
-      <Text style={styles.title}>Property Status</Text>
+      <Text style={styles.title}>{title}</Text>
       <FlatList
         data={statuses}
         horizontal

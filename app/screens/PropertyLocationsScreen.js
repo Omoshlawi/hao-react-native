@@ -91,12 +91,14 @@ const PropertyLocationsScreen = () => {
               />
             </View>
             <PropertyStatus
+            title="Filter by property status"
               statuses={propertiesStatus}
               onItemClicked={(item) => console.log(item)}
             />
           </>
         )}
         <PropertyTypes
+          title="Filter by property type"
           contentContainerStyle={{ paddingTop: 0 }}
           types={propertiesType}
           onItemClicked={(item) => console.log(item)}
@@ -117,7 +119,7 @@ const styles = StyleSheet.create({
   },
   search: {
     borderRadius: 10,
-    backgroundColor: colors.white,
+    backgroundColor: colors.tabBackground,
   },
   screen: {
     backgroundColor: colors.background,

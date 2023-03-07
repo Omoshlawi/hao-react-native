@@ -5,10 +5,10 @@ import TypeItem from "./TypeItem";
 
 import colors from "../../utils/colors";
 
-const PropertyTypes = ({ types=[], onItemClicked ,contentContainerStyle}) => {
+const PropertyTypes = ({ types=[], onItemClicked ,contentContainerStyle, title="Property Types"}) => {
   return (
     <View style={[styles.container,contentContainerStyle]}>
-      <Text style={styles.title}>Property Types</Text>
+      <Text style={styles.title}>{title}</Text>
       <FlatList
         data={types}
         horizontal
