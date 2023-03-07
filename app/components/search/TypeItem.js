@@ -22,7 +22,11 @@ const TypeItem = ({ title, image, onPress, style }) => {
 export default TypeItem;
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    borderRadius: 10,
+    padding: 2,
+    overflow: "hidden",
+  },
   image: {
     width: 80,
     height: 80,

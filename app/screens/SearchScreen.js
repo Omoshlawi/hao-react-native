@@ -43,7 +43,7 @@ const SearchScreen = () => {
           }}
         />
       </View>
-      <PropertyStatus statuses={statuses} onItemClicked={hadleTypeItemClick} />
+      <PropertyStatus statuses={statuses} onItemClicked={hadleStatusItemClick} />
       <PropertyTypes types={types} onItemClicked={hadleTypeItemClick} />
       <ScrollView></ScrollView>
     </AppSafeAreaScreen>

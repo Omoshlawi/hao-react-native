@@ -14,7 +14,7 @@ import AppIcon from "./AppIcon";
 const AppSearch = ({
   style,
   onTextChange,
-  value,
+  value="",
   onPress,
   placeholder = "Search ...",
   iconStyle,

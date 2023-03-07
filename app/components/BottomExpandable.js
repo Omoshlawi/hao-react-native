@@ -10,7 +10,7 @@ const BottomExpandable = ({
   contentContainStyle,
 }) => {
   return (
-    <View style={[styles.overlay, { height: expanded ? "60%" : "20%" }]}>
+    <View style={[styles.overlay, { height: expanded ? "60%" : "25%" }]}>
       <View style={styles.button}>
         <TouchableOpacity onPress={() => onToggleExpand(!expanded)}>
           <MaterialCommunityIcons

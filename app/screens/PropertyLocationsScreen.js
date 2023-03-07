@@ -13,31 +13,42 @@ import { useProperty } from "../api/hooks";
 
 import BottomExpandable from "../components/BottomExpandable";
 import colors from "../utils/colors";
+import AppSearch from "../components/AppSearch";
+import PropertyTypes from "../components/search/PropertyTypes";
+import PropertyStatus from "../components/search/PropertyStatus";
 
 const PropertyLocationsScreen = () => {
   const [propertyLocations, setPropertyLocations] = useState([]);
-  const [properties, setPropertes] = useState([]);
-  const { getPropertyLocations, getProperties } = useProperty();
+  const [propertiesType, setPropertesType] = useState([]);
+  const [propertiesStatus, setPropertiesStatus] = useState([]);
+  const [keyWord, setKeyWord] = useState("");
+  const { getPropertyLocations, getPropertyTypes, getPropertyStatus } =
+    useProperty();
   const location = useLocation();
   const [expanded, setExpanded] = useState(false);
   // console.log(location);
 
   useEffect(() => {
     (async () => {
-      const response = await getPropertyLocations();
-      const propsResponse = await getProperties();
-      if (!response.ok || !propsResponse.ok)
-        return console.log("Error: Property Location Screen", response.problem);
+      const locationResponse = await getPropertyLocations();
+      const propsResponse = await getPropertyTypes();
+      const statusResponse = await getPropertyStatus();
+      if (!locationResponse.ok || !propsResponse.ok || !statusResponse.ok)
+        return console.log(
+          "Error: Property Location Screen",
+          locationResponse.problem
+        );
 
-      setPropertyLocations(response.data.results);
-      setPropertes(propsResponse.data.results);
+      setPropertyLocations(locationResponse.data.results);
+      setPropertesType(propsResponse.data.results);
+      setPropertiesStatus(statusResponse.data.results);
     })();
   }, []);
 
   return (
     <>
       <View style={styles.container}>
-        {location && (
+        {/* {location && (
           <MapView
             style={styles.map}
             initialRegion={{
@@ -60,28 +71,35 @@ const PropertyLocationsScreen = () => {
               );
             })}
           </MapView>
-        )}
+        )} */}
       </View>
       <BottomExpandable
         expanded={expanded}
         onToggleExpand={(exp) => setExpanded(exp)}
       >
-        <FlatList
-          data={properties}
-          horizontal
-          style={{ height: "100%" }}
-          showsHorizontalScrollIndicator={false}
-          keyExtractor={({ url }) => url}
-          renderItem={({ item: { title, image } }) => (
-            <View style={styles.listItem}>
-              <Text style={{ fontWeight: "bold" }}>{title}</Text>
-              <Image
-                source={{ uri: image }}
-                style={{ height: 100, width: 100 }}
-                resizeMode="contain"
+        {expanded && (
+          <>
+            <View style={styles.searchContainer}>
+              <AppSearch
+                placeholder="Search our database"
+                style={styles.search}
+                onTextChange={(text) => setKeyWord(text)}
+                value={keyWord}
+                onPress={() => {
+                  console.log("Seaching....", searchString);
+                }}
               />
             </View>
-          )}
+            <PropertyStatus
+              statuses={propertiesStatus}
+              onItemClicked={(item) => console.log(item)}
+            />
+          </>
+        )}
+        <PropertyTypes
+          contentContainerStyle={{ paddingTop: 0 }}
+          types={propertiesType}
+          onItemClicked={(item) => console.log(item)}
         />
       </BottomExpandable>
     </>
@@ -92,23 +110,16 @@ export default PropertyLocationsScreen;
 
 const styles = StyleSheet.create({
   container: {
-    position: "absolute",
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-  },
-  map: {
-    width: "100%",
-    height: "100%",
-  },
-  listItem: {
-    width: 200,
-    backgroundColor: colors.tabBackground,
     padding: 10,
-    marginHorizontal: 10,
-    marginBottom: 10,
+  },
+  searchContainer: {
+    paddingHorizontal: 10,
+  },
+  search: {
     borderRadius: 10,
-    overflow: "hidden",
+    backgroundColor: colors.white,
+  },
+  screen: {
+    backgroundColor: colors.background,
   },
 });

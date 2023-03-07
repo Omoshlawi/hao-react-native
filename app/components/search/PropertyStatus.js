@@ -9,9 +9,13 @@ import {
 import React from "react";
 import colors from "../../utils/colors";
 
-const PropertyStatus = ({ statuses = [], onItemClicked }) => {
+const PropertyStatus = ({
+  statuses = [],
+  onItemClicked,
+  contentContainerStyle,
+}) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, contentContainerStyle]}>
       <Text style={styles.title}>Property Status</Text>
       <FlatList
         data={statuses}
