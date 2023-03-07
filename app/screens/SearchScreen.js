@@ -7,22 +7,27 @@ import AppSearch from "../components/AppSearch";
 import AppSafeAreaScreen from "../components/AppSafeAreaScreen";
 import PropertyTypes from "../components/search/PropertyTypes";
 import { useProperty } from "../api/hooks";
+import PropertyStatus from "../components/search/PropertyStatus";
 
 const SearchScreen = () => {
   const [searchString, setSearchString] = useState("");
   const [types, setTypes] = useState([]);
-  const { getPropertyTypes } = useProperty();
+  const [statuses, setStatuses] = useState([]);
+  const { getPropertyTypes, getPropertyStatus } = useProperty();
 
   useEffect(() => {
     (async () => {
-      const response = await getPropertyTypes();
-      if (!response.ok)
-        return console.log("Error: PropertyType", response.problem);
-      setTypes(response.data.results);
+      const statusResponse = await getPropertyStatus();
+      const typesResponse = await getPropertyTypes();
+      if (!typesResponse.ok || !statusResponse.ok)
+        return console.log("Error: Search Screen", typesResponse.problem);
+      setTypes(typesResponse.data.results);
+      setStatuses(statusResponse.data.results);
     })();
   }, []);
 
-  const hadleItemClick = (item) => console.log(item);
+  const hadleTypeItemClick = (item) => console.log(item);
+  const hadleStatusItemClick = (item) => console.log(item);
 
   return (
     <AppSafeAreaScreen style={styles.screen}>
@@ -38,7 +43,8 @@ const SearchScreen = () => {
           }}
         />
       </View>
-      <PropertyTypes types={types} onItemClicked={hadleItemClick} />
+      <PropertyStatus statuses={statuses} onItemClicked={hadleTypeItemClick} />
+      <PropertyTypes types={types} onItemClicked={hadleTypeItemClick} />
       <ScrollView></ScrollView>
     </AppSafeAreaScreen>
   );

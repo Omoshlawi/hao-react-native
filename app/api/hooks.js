@@ -12,12 +12,14 @@ export const useProperty = () => {
   const deleteProperties = async () => {};
 
   const getPropertyTypes = () => apiClient.get(endPoint + "types/");
+  const getPropertyStatus = () => apiClient.get(endPoint + "status/");
   return {
     getProperties,
     postProperties,
     putProperties,
     deleteProperties,
     getPropertyTypes,
+    getPropertyStatus
   };
 };
 
