@@ -8,9 +8,17 @@ export const useProperty = () => {
   const getProperties = () => apiClient.get(endPoint);
   const postProperties = async (data, token) =>
     apiClient.post(endPoint, data, { headers: { Token: token } });
-  const putProperties = async () => {};
+  const putProperties = async () => apiClient.put(endPoint);
   const deleteProperties = async () => {};
-  return { getProperties, postProperties, putProperties, deleteProperties };
+
+  const getPropertyTypes = () => apiClient.get(endPoint + "types/");
+  return {
+    getProperties,
+    postProperties,
+    putProperties,
+    deleteProperties,
+    getPropertyTypes,
+  };
 };
 
 export const useUser = () => {

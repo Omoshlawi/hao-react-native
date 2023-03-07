@@ -1,18 +1,32 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TextInput } from "react-native-gesture-handler";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../utils/colors";
 import AppSearch from "../components/AppSearch";
 import AppSafeAreaScreen from "../components/AppSafeAreaScreen";
+import PropertyTypes from "../components/search/PropertyTypes";
+import { useProperty } from "../api/hooks";
 
 const SearchScreen = () => {
   const [searchString, setSearchString] = useState("");
+  const [types, setTypes] = useState([]);
+  const { getPropertyTypes } = useProperty();
+
+  useEffect(() => {
+    (async () => {
+      const response = await getPropertyTypes();
+      if (!response.ok)
+        return console.log("Error: PropertyType", response.problem);
+      setTypes(response.data.results);
+    })();
+  }, []);
+
+  const hadleItemClick = (item) => console.log(item);
+
   return (
-    <AppSafeAreaScreen>
-      <Text style={styles.text}>
-        {"Lets Find you a property that meets your needs"}
-      </Text>
+    <AppSafeAreaScreen style={styles.screen}>
+      <Text style={styles.text}>{"Lets Find your desired residence"}</Text>
       <View style={styles.searchContainer}>
         <AppSearch
           placeholder="Search our database"
@@ -24,6 +38,7 @@ const SearchScreen = () => {
           }}
         />
       </View>
+      <PropertyTypes types={types} onItemClicked={hadleItemClick} />
       <ScrollView></ScrollView>
     </AppSafeAreaScreen>
   );
@@ -41,12 +56,16 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: colors.primary,
     padding: 20,
-    lineHeight: 50
+    lineHeight: 50,
   },
   searchContainer: {
     paddingHorizontal: 10,
   },
   search: {
     borderRadius: 10,
+    backgroundColor: colors.white,
+  },
+  screen: {
+    backgroundColor: colors.background,
   },
 });
