@@ -17,12 +17,15 @@ function AppFormPicker({
   displayExractor,
   itemValueExtractor,
   name,
+  itemStyle,
+  contentContainerStyle,
 }) {
-  const { setFieldValue, errors, values,touched } = useFormikContext();
+  const { setFieldValue, errors, values, touched } = useFormikContext();
   return (
     <>
       <Picker
-
+        itemStyle={itemStyle}
+        contentContainerStyle={contentContainerStyle}
         placeHolder={placeHolder}
         icon={icon}
         data={data}

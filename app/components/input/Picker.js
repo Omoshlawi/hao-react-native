@@ -9,7 +9,7 @@ import {
   TouchableWithoutFeedback,
   FlatList,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
 } from "react-native";
 import colors from "../../utils/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -31,6 +31,8 @@ function Picker({
   defaultIndex,
   displayExractor,
   onSelectedItemChange,
+  itemStyle,
+  contentContainerStyle,
 }) {
   const [showModal, setShowModal] = useState(false);
   const [currentIndex, setCurentIndex] = useState(
@@ -60,13 +62,17 @@ function Picker({
           color={colors.dark}
           size={30}
         />
-        <Modal animationType="slide" visible={showModal}>
+        <Modal animationType="slide" visible={showModal} >
           <>
             {layout === "linear" ? (
               <FlatList
+                contentContainerStyle={contentContainerStyle}
                 renderItem={({ item, ...otherProps }) => {
                   return (
-                    <TouchableOpacity onPress={() => setSelectedItem(item)}>
+                    <TouchableOpacity
+                      onPress={() => setSelectedItem(item)}
+                      style={itemStyle}
+                    >
                       {children({
                         currentSelectedItem:
                           currentIndex === -1 ? null : data[currentIndex],
@@ -82,11 +88,12 @@ function Picker({
               />
             ) : (
               <ScrollView>
-                <View style={styles.gridContainer}>
+                <View style={[styles.gridContainer, contentContainerStyle]}>
                   {data.map((item) => (
                     <TouchableOpacity
                       key={keyExtractor(item)}
                       onPress={() => setSelectedItem(item)}
+                      style={itemStyle}
                     >
                       {children({
                         currentSelectedItem:

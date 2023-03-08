@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import AppSafeAreaScreen from "../components/AppSafeAreaScreen";
-import {
-  View,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
+import { View, StyleSheet, Text, ScrollView } from "react-native";
 import {
   AppForm,
   AppFormField,
@@ -15,12 +9,11 @@ import {
   AppFormSubmitButton,
 } from "../components/forms";
 import * as Yup from "yup";
-import Picker from "../components/input/Picker";
 import colors from "../utils/colors";
 import AppFormImagePicker from "../components/forms/AppFormImagePicker";
-
-import useLocation from "../hooks/useLocation";
+import { useProperty } from "../api/hooks";
 import AppIcon from "../components/AppIcon";
+import TypeItem from "../components/search/TypeItem";
 
 const initialDetails = {
   title: "",
@@ -30,17 +23,7 @@ const initialDetails = {
   type: "",
   description: "",
   images: [],
-  //   image: "",
 };
-
-const items = [
-  { title: "On Rent", url: "on-rent" },
-  { title: "On Sale", url: "on-sale" },
-  { title: "On Book", url: "on-book" },
-  { title: "On Chill", url: "on-chiil" },
-  { title: "On Milk", url: "on-milk" },
-  { title: "On Ugali", url: "on-ugali" },
-];
 
 const validationScheema = Yup.object().shape({
   title: Yup.string().required().label("PropertyTitle").min(6),
@@ -57,8 +40,22 @@ const validationScheema = Yup.object().shape({
 });
 
 function PropertyEditingScreen(props) {
-  const location = useLocation();
-  console.log(location);
+  const items = [];
+  const [types, setTypes] = useState([]);
+  const [statuses, setStatuses] = useState([]);
+  const { getPropertyTypes, getPropertyStatus } = useProperty();
+
+  useEffect(() => {
+    (async () => {
+      const statusResponse = await getPropertyStatus();
+      const typesResponse = await getPropertyTypes();
+      if (!typesResponse.ok || !statusResponse.ok)
+        return console.log("Error: Search Screen", typesResponse.problem);
+      setTypes(typesResponse.data.results);
+      setStatuses(statusResponse.data.results);
+    })();
+  }, []);
+
   return (
     <AppSafeAreaScreen>
       <ScrollView>
@@ -73,64 +70,50 @@ function PropertyEditingScreen(props) {
             <AppFormPicker
               name="status"
               placeHolder="Property Status"
+              itemStyle={styles.statusPicker}
               // icon="apps"
-              data={items}
-              layout="grid"
-              displayExractor={(item) => item.title}
+              data={statuses}
+              displayExractor={(item) => item.status}
               keyExtractor={(item) => item.url}
-              defaultIndex={1}
+              // defaultIndex={1}
               itemValueExtractor={(item) => item.url}
             >
-              {({ item }) => {
+              {({ item: { status } }) => {
                 return (
-                  <View
-                    style={{
-                      borderColor: "red",
-                      borderWidth: 1,
-                      borderRadius: 10,
-                      width: 80,
-                      height: 80,
-                      backgroundColor: colors.light,
-                      margin: 10,
-                      justifyContent: "center",
-                      alignContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    {/* <Text style={{ fontSize: 30, textAlign: "center" }}>
-                      {item.title}
-                    </Text> */}
-                    <AppIcon name="email" />
+                  <View>
+                    <Text
+                      style={{
+                        fontWeight: "bold",
+                        fontSize: 25,
+                        textAlign: "center",
+                      }}
+                    >
+                      {status}
+                    </Text>
                   </View>
                 );
               }}
             </AppFormPicker>
             <AppFormPicker
+              itemStyle={styles.typePicker}
               name="type"
               placeHolder="Property Type"
+              layout="grid"
               // icon="apps"
-              data={items}
+              data={types}
               displayExractor={(item) => item.title}
               keyExtractor={(item) => item.url}
-              defaultIndex={5}
+              // defaultIndex={5}
               itemValueExtractor={(item) => item.url}
             >
-              {({ item }) => {
+              {({ item: { image, url, title } }) => {
                 return (
-                  <View
-                    style={{
-                      borderColor: "red",
-                      borderWidth: 1,
-                      borderRadius: 10,
-                      backgroundColor: colors.light,
-                      margin: 10,
-                      paddingVertical: 10,
-                    }}
-                  >
-                    <Text style={{ fontSize: 30, textAlign: "center" }}>
-                      {item.title}
-                    </Text>
-                  </View>
+                  <TypeItem
+                    image={{ uri: image }}
+                    title={title}
+                    disable
+                    style={{ backgroundColor: colors.light, padding: 15 }}
+                  />
                 );
               }}
             </AppFormPicker>
@@ -156,6 +139,12 @@ function PropertyEditingScreen(props) {
 
 const styles = StyleSheet.create({
   formContainer: {
+    padding: 20,
+  },
+  statusPicker: {
+    padding: 20,
+  },
+  typePicker: {
     padding: 20,
   },
 });

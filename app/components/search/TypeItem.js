@@ -8,9 +8,13 @@ import {
 import React from "react";
 import colors from "../../utils/colors";
 
-const TypeItem = ({ title, image, onPress, style }) => {
+const TypeItem = ({ title, image, onPress, style, disable = false }) => {
   return (
-    <TouchableHighlight onPress={onPress} underlayColor={colors.light}>
+    <TouchableHighlight
+      onPress={onPress}
+      underlayColor={colors.light}
+      disabled={disable}
+    >
       <View style={[styles.container, style]}>
         <Image style={styles.image} source={image} resizeMode="contain" />
         <Text style={styles.text}>{title}</Text>
