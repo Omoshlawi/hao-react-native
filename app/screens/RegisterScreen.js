@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import AppSafeAreaScreen from "../components/AppSafeAreaScreen";
 import {
   AppForm,
@@ -9,6 +9,8 @@ import {
 import * as Yup from "yup";
 import AppButton from "../components/AppButton";
 import colors from "../utils/colors";
+import { useUser } from "../api/hooks";
+import UserContext from "../context/UserContext";
 
 const validationSchemer = Yup.object().shape({
   username: Yup.string().required().label("Username"),
@@ -20,6 +22,30 @@ const validationSchemer = Yup.object().shape({
 });
 
 const RegisterScreen = ({ navigation }) => {
+  const { register } = useUser();
+  const { setToken, setUser } = useContext(UserContext);
+
+  const handleRegister = async (values, { setFieldError }) => {
+    if (values.password === values.confirm_password) {
+      const response = await register(values);
+      if (!response.ok) {
+        if (response.problem == "CLIENT_ERROR") {
+          for (const key in response.data) {
+            setFieldError(key, response.data[key].join(";"));
+          }
+        } else {
+          console.log("Error: RegisterScreen", response.data);
+        }
+        return;
+      }
+      setToken(response.data.token);
+      delete response.data.token;
+      setUser(response.data);
+    } else {
+      setFieldError("confirm_password", "Provided passwords must match");
+      console.log("Provided passwords must match");
+    }
+  };
   return (
     <ScrollView>
       <View style={styles.logo}>
@@ -39,7 +65,7 @@ const RegisterScreen = ({ navigation }) => {
             password: "",
             confirm_password: "",
           }}
-          onSubmit={(values) => console.log(values)}
+          onSubmit={handleRegister}
         >
           <AppFormField
             name="username"

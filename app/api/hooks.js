@@ -28,6 +28,7 @@ export const useProperty = () => {
 export const useUser = () => {
   const { clearToken, user, setUser, token } = useContext(UserContext);
   const login = (data) => apiClient.post("users/login/", data);
+  const register = (data) => apiClient.post("users/register/", data);
   const logout = () => clearToken(true);
   const getUser = async () => {
     if (user) {
@@ -43,7 +44,7 @@ export const useUser = () => {
     }
     setUser(resposnse.data);
   };
-  return { login, logout, getUser };
+  return { login, logout, getUser, register };
 };
 
 export const useHouses = () => {

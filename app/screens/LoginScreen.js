@@ -29,7 +29,8 @@ function LoginScreen({ navigation }) {
         for (const key in result.data) {
           setFieldError(key, result.data[key].join(";"));
         }
-      } else return console.log(result.problem);
+        return;
+      } else return console.log("Error: LoginScreen: ", result.data);
     }
 
     // console.log(result.data);
