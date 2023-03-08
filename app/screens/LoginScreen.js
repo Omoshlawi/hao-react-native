@@ -21,9 +21,16 @@ function LoginScreen({ navigation }) {
   const { login } = useUser();
   const { setToken, setUser } = useContext(UserContext);
 
-  const handleLogin = async (data) => {
+  const handleLogin = async (data, { setFieldError }) => {
     const result = await login(data);
-    if (!result.ok) return;
+    if (!result.ok) {
+      const prob = result.problem;
+      if (prob === "CLIENT_ERROR") {
+        for (const key in result.data) {
+          setFieldError(key, result.data[key].join(";"));
+        }
+      } else return console.log(result.problem);
+    }
 
     // console.log(result.data);
     setToken(result.data.token);
