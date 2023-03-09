@@ -10,6 +10,8 @@ import AppButton from "../../components/AppButton";
 import colors from "../../utils/colors";
 import { useUser } from "../../api/hooks";
 import UserContext from "../../context/UserContext";
+import AppFormImagePicker from "../forms/AppFormImagePicker";
+import AppTextInput from "../AppTextInput";
 
 const validationSchemer = Yup.object().shape({
   username: Yup.string().required().label("Username"),
@@ -38,13 +40,22 @@ const UserProfileForm = () => {
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <AppForm
         validationSchema={validationSchemer}
         initialValues={initialData}
         onSubmit={handleSubmit}
       >
-        
+        <View style={styles.image}>
+          <AppFormImagePicker name="image" />
+        </View>
+        <AppFormField name="username" placeholder="Username" />
+        <AppFormField name="first_name" placeholder="First name" />
+        <AppFormField name="last_name" placeholder="Last name" />
+        <AppFormField name="email" placeholder="Email" />
+        <AppFormField name="gender" placeholder="Gender" />
+        <AppFormField name="phone_number" placeholder="Phone number" />
+        <AppFormSubmitButton title="Update" />
       </AppForm>
     </View>
   );
@@ -52,4 +63,11 @@ const UserProfileForm = () => {
 
 export default UserProfileForm;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    padding: 20,
+  },
+  image:{
+    alignItems: "center"
+  }
+});
