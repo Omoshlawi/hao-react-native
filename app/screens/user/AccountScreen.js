@@ -1,14 +1,14 @@
 import React, { useContext, useEffect } from "react";
 import { Alert, FlatList, StyleSheet, View } from "react-native";
-import AppSafeAreaScreen from "../components/AppSafeAreaScreen";
-import ListItem from "../components/ListItem";
-import colors from "../utils/colors";
-import AppIcon from "../components/AppIcon";
-import ListItemSeparator from "../components/ListItemSeparator";
-import UserContext from "../context/UserContext";
-import { useUser } from "../api/hooks";
-import useSecureStore from "../hooks/useSecureStore";
-import routes from "../navigation/routes";
+import AppSafeAreaScreen from "../../components/AppSafeAreaScreen";
+import ListItem from "../../components/ListItem";
+import colors from "../../utils/colors";
+import AppIcon from "../../components/AppIcon";
+import ListItemSeparator from "../../components/ListItemSeparator";
+import UserContext from "../../context/UserContext";
+import { useUser } from "../../api/hooks";
+import useSecureStore from "../../hooks/useSecureStore";
+import routes from "../../navigation/routes";
 
 const menuItems = [
   {
@@ -34,10 +34,18 @@ function AccountScreen({ navigation }) {
           <ListItem
             title={`${user.first_name} ${user.last_name}`}
             subTitle={user.email}
-            image={require("../assets/logo-red.png")}
+            image={user.profile.image ? { uri: user.profile.image } : null}
+            IconComponent={
+              user.profile.image ? null : (
+                <AppIcon
+                  name="account"
+                  color={colors.white}
+                  backgroundColor={colors.primary}
+                />
+              )
+            }
             onPress={() => {
-              console.log("Pressed");
-              navigation.navigate(routes.USER_PROFILE_EDIT_ACCOUNT);
+              navigation.navigate(routes.USER_PROFILE_EDIT_ACCOUNT, user);
             }}
           />
         )}

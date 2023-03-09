@@ -5,9 +5,9 @@ import WelcomeScreen from "../screens/WelcomeScreen";
 import colors from "../utils/colors";
 import PropTypes from "prop-types";
 import React from "react";
-import AccountScreen from "../screens/AccountScreen";
 import routes from "./routes";
-import UserProfileScreen from "../screens/UserProfileScreen";
+import UserProfileScreen from "../screens/user/UserProfileScreen";
+import AccountScreen from "../screens/user/AccountScreen";
 
 const Stack = createNativeStackNavigator();
 const Navigator = Stack.Navigator; //Contain children stack screens and only one how to do to navigate between the screens

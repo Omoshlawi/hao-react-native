@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import AppSafeAreaScreen from "../components/AppSafeAreaScreen";
+import AppSafeAreaScreen from "../../components/AppSafeAreaScreen";
 import { FlatList } from "react-native";
-import ListItemSwepableDeleteAction from "../components/ListItemSwepableDeleteAction";
-import ListItemSwipable from "../components/ListItemSwipable";
+import ListItemSwepableDeleteAction from "../../components/ListItemSwepableDeleteAction";
+import ListItemSwipable from "../../components/ListItemSwipable";
 
 const nortifications = [
   { id: 1, message: "N1" },
