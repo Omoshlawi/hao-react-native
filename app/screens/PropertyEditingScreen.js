@@ -10,7 +10,7 @@ import {
 } from "../components/forms";
 import * as Yup from "yup";
 import colors from "../utils/colors";
-import AppFormImagePicker from "../components/forms/AppFormImagePicker";
+import AppFormImagesPicker from "../components/forms/AppFormImagesPicker";
 import { useProperty } from "../api/hooks";
 import AppIcon from "../components/AppIcon";
 import TypeItem from "../components/search/TypeItem";
@@ -65,7 +65,7 @@ function PropertyEditingScreen(props) {
             validationSchema={validationScheema}
             onSubmit={(values) => console.log(values)}
           >
-            <AppFormImagePicker name="images" />
+            <AppFormImagesPicker name="images" />
             <AppFormField name="title" placeholder="Title" />
             <AppFormPicker
               name="status"

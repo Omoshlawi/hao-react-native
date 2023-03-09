@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import React, {useContext} from "react";
+import React, { useContext, useState } from "react";
 import {
   AppForm,
   AppFormField,
@@ -16,8 +16,9 @@ const validationSchemer = Yup.object().shape({
   email: Yup.string().email().required().label("Email"),
   first_name: Yup.string().label("First Name"),
   last_name: Yup.string().label("Last Name"),
-  password: Yup.string().min(8).label("Password").required(),
-  confirm_password: Yup.string().min(8).label("Confirm Password").required(),
+  image: Yup.string().label("Image").required(),
+  gender: Yup.string().label("Gender").required(),
+  phone_number: Yup.string().label("Phone number").required(),
 });
 
 const UserProfileForm = () => {
@@ -28,10 +29,23 @@ const UserProfileForm = () => {
     last_name: "",
     email: "",
     image: "",
+    gender: "",
+    phone_number: "",
   });
+
+  const handleSubmit = (values) => {
+    console.log(values);
+  };
+
   return (
     <View>
-      <AppForm validationSchema={validationSchemer}></AppForm>
+      <AppForm
+        validationSchema={validationSchemer}
+        initialValues={initialData}
+        onSubmit={handleSubmit}
+      >
+        
+      </AppForm>
     </View>
   );
 };

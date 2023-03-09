@@ -1,4 +1,11 @@
-import { StyleSheet, Text, View, Image, ImageComponent } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  ImageComponent,
+  TouchableOpacity,
+} from "react-native";
 import React, { useContext, useState } from "react";
 import {
   AppForm,
@@ -12,6 +19,7 @@ import { useUser } from "../../api/hooks";
 import UserContext from "../../context/UserContext";
 import AppIcon from "../../components/AppIcon";
 import ListItem from "../../components/ListItem";
+import UserProfileForm from "../../components/user/UserProfileForm";
 
 const UserProfileScreen = ({ navigation, route }) => {
   const {
@@ -22,46 +30,57 @@ const UserProfileScreen = ({ navigation, route }) => {
     profile: { image, gender, phone_number },
   } = route.params;
 
-  const [edit, setEdit] = useState(false);
+  const [edit, setEdit] = useState(true);
   return (
-    <View style>
-      <>
-        <View style={styles.card}>
-          {image && <Image style={styles.image} source={{ uri: image }} />}
-          {!image && (
-            <View style={styles.icon}>
-              <AppIcon
-                name="account"
-                color={colors.white}
-                backgroundColor={colors.primary}
-                size={120}
+    <View>
+      {edit ? (
+        <>
+          <View style={styles.card}>
+            {image && <Image style={styles.image} source={{ uri: image }} />}
+            {!image && (
+              <View style={styles.icon}>
+                <AppIcon
+                  name="account"
+                  color={colors.white}
+                  backgroundColor={colors.primary}
+                  size={120}
+                />
+              </View>
+            )}
+            <View>
+              <ListItem
+                title={username}
+                IconComponent={<AppIcon name="account-outline" />}
+              />
+              <ListItem
+                title={`${first_name} ${last_name}`}
+                IconComponent={<AppIcon name="account-edit-outline" />}
+              />
+              <ListItem
+                title={email}
+                IconComponent={<AppIcon name="email-outline" />}
+              />
+              <ListItem
+                title={phone_number}
+                IconComponent={<AppIcon name="phone" />}
+              />
+              <ListItem
+                title={gender}
+                IconComponent={<AppIcon name="human-edit" />}
               />
             </View>
-          )}
-          <View>
-            <ListItem
-              title={username}
-              IconComponent={<AppIcon name="account-outline" />}
-            />
-            <ListItem
-              title={`${first_name} ${last_name}`}
-              IconComponent={<AppIcon name="account-edit-outline" />}
-            />
-            <ListItem
-              title={email}
-              IconComponent={<AppIcon name="email-outline" />}
-            />
-            <ListItem
-              title={phone_number}
-              IconComponent={<AppIcon name="phone" />}
-            />
-            <ListItem
-              title={gender}
-              IconComponent={<AppIcon name="human-edit" />}
-            />
+            <TouchableOpacity
+              onPress={() => {
+                setEdit(!edit);
+              }}
+            >
+              <Text style={styles.button}>Edit profile</Text>
+            </TouchableOpacity>
           </View>
-        </View>
-      </>
+        </>
+      ) : (
+        <UserProfileForm />
+      )}
     </View>
   );
 };
@@ -80,5 +99,9 @@ const styles = StyleSheet.create({
   },
   card: {
     padding: 20,
+  },
+  button: {
+    textAlign: "center",
+    color: colors.primary,
   },
 });

@@ -4,7 +4,7 @@ import ImageInputList from "../input/ImageInputList";
 import AppErrorMessage from "./AppErrorMessage";
 import { useFormikContext } from "formik";
 
-const AppFormImagePicker = ({ name }) => {
+const AppFormImagesPicker = ({ name }) => {
   const { values, setFieldValue, errors, touched } = useFormikContext();
   return (
     <>
@@ -24,6 +24,6 @@ const AppFormImagePicker = ({ name }) => {
   );
 };
 
-export default AppFormImagePicker;
+export default AppFormImagesPicker;
 
 const styles = StyleSheet.create({});
