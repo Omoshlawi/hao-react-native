@@ -79,7 +79,17 @@ const UserProfileScreen = ({ navigation, route }) => {
           </View>
         </>
       ) : (
-        <UserProfileForm />
+        <UserProfileForm
+          initial={{
+            first_name,
+            last_name,
+            gender,
+            image,
+            phone_number,
+            email,
+          }}
+          goBack={setEdit}
+        />
       )}
     </View>
   );

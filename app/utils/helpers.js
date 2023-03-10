@@ -16,3 +16,26 @@ export const dict = (arr) => {
   });
   return dict;
 };
+
+export const getFormFileFromMediaFile = (mediaFile) => {
+  const filename = mediaFile.uri.split("/").pop();
+  let fileExt = filename.split(".").pop();
+  const mimeType = mediaFile.type + "/" + fileExt;
+  return {
+    uri: mediaFile.uri,
+    name: filename,
+    type: mimeType,
+  };
+};
+
+export const getFormFileFromUri = (uri) => {
+  const filename = uri.split("/").pop();
+  let fileExt = filename.split(".").pop();
+  const mimeType = `image/${fileExt}`;
+  // const mimeType = Platform.OS === "ios" ? `image/jpg` : "image/jpeg";
+  return {
+    uri: uri,
+    name: filename,
+    type: mimeType,
+  };
+};

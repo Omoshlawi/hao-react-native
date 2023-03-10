@@ -37,14 +37,23 @@ export const useUser = () => {
     const resposnse = await apiClient.get(
       "users/profile/",
       {},
-      { headers: getAuthHeader(token) }
+      {
+        headers: getAuthHeader(token),
+      }
     );
     if (!resposnse.ok) {
       console.log("apiHooks->useUser", resposnse.problem);
     }
     setUser(resposnse.data);
   };
-  return { login, logout, getUser, register };
+  const putUser = async (userData) =>
+    await apiClient.put("users/profile/", userData, {
+      headers: {
+        ...getAuthHeader(token),
+        "Content-Type": "multipart/form-data",
+      },
+    });
+  return { login, logout, getUser, register, putUser };
 };
 
 export const useHouses = () => {
