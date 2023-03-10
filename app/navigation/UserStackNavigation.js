@@ -1,7 +1,4 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import LoginScreen from "../screens/LoginScreen";
-import RegisterScreen from "../screens/RegisterScreen";
-import WelcomeScreen from "../screens/WelcomeScreen";
 import colors from "../utils/colors";
 import PropTypes from "prop-types";
 import React from "react";

@@ -1,16 +1,16 @@
 import React, { useContext } from "react";
 import { View, StyleSheet, Image } from "react-native";
 
-import AppSafeAreaScreen from "../components/AppSafeAreaScreen";
+import AppSafeAreaScreen from "../../components/AppSafeAreaScreen";
 import * as Yup from "yup";
 
 import {
   AppForm,
   AppFormField,
   AppFormSubmitButton,
-} from "../components/forms";
-import { useUser } from "../api/hooks";
-import UserContext from "../context/UserContext";
+} from "../../components/forms";
+import { useUser } from "../../api/hooks";
+import UserContext from "../../context/UserContext";
 
 const validationScheema = Yup.object().shape({
   username: Yup.string().required().label("Username"),
@@ -44,7 +44,7 @@ function LoginScreen({ navigation }) {
         <Image
           style={styles.image}
           resizeMode="contain"
-          source={require("../assets/logo-red-captioned-1-bg.png")}
+          source={require("../../assets/logo-red-captioned-1-bg.png")}
         />
       </View>
       <View style={styles.formContainer}>

@@ -9,9 +9,9 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import colors from "../utils/colors";
-import AppButton from "../components/AppButton";
-import routes from "../navigation/routes";
+import colors from "../../utils/colors";
+import AppButton from "../../components/AppButton";
+import routes from "../../navigation/routes";
 
 /**
  *
@@ -25,13 +25,13 @@ function WelcomeScreen({ navigation }) {
       resizeMode="cover"
       blurRadius={5}
       style={styles.imageBackground}
-      source={require("../assets/housebg.jpg")}
+      source={require("../../assets/housebg.jpg")}
     >
       <View style={styles.logoContainer}>
         <Image
           style={styles.logo}
           resizeMode="contain"
-          source={require("../assets/logo-black-bg.png")}
+          source={require("../../assets/logo-black-bg.png")}
         />
       </View>
       <View style={styles.buttonContainer}>

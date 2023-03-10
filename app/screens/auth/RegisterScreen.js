@@ -1,16 +1,16 @@
 import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
 import React, { useContext } from "react";
-import AppSafeAreaScreen from "../components/AppSafeAreaScreen";
+import AppSafeAreaScreen from "../../components/AppSafeAreaScreen";
 import {
   AppForm,
   AppFormField,
   AppFormSubmitButton,
-} from "../components/forms";
+} from "../../components/forms";
 import * as Yup from "yup";
-import AppButton from "../components/AppButton";
-import colors from "../utils/colors";
-import { useUser } from "../api/hooks";
-import UserContext from "../context/UserContext";
+import AppButton from "../../components/AppButton";
+import colors from "../../utils/colors";
+import { useUser } from "../../api/hooks";
+import UserContext from "../../context/UserContext";
 
 const validationSchemer = Yup.object().shape({
   username: Yup.string().required().label("Username"),
@@ -51,7 +51,7 @@ const RegisterScreen = ({ navigation }) => {
       <View style={styles.logo}>
         <Image
           style={styles.image}
-          source={require("../assets/logo-red-captioned-1-bg.png")}
+          source={require("../../assets/logo-red-captioned-1-bg.png")}
         />
       </View>
       <View style={styles.formContainer}>

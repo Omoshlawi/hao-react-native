@@ -59,6 +59,7 @@ const UserProfileForm = ({ initial, goBack }) => {
       return console.log(resp.problem);
     }
     setUser(resp.data);
+    goBack(true)
   };
 
   return (
