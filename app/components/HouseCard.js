@@ -17,11 +17,15 @@ const HouseCard = ({
   subTitle,
   price,
   imgHeight = 150,
+  imgWidth = "100%",
 }) => {
   return (
     <TouchableWithoutFeedback onPress={onPress}>
       <View style={styles.card}>
-        <Image style={[styles.image, { height: imgHeight }]} source={image} />
+        <Image
+          style={[styles.image, { height: imgHeight, width: imgWidth }]}
+          source={image}
+        />
         <View style={styles.detailsContainer}>
           {title && <Text style={styles.title}>{title}</Text>}
           {subTitle && <Text style={styles.subTitle}>{subTitle}</Text>}
@@ -47,7 +51,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   image: {
-    width: "100%",
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
   },

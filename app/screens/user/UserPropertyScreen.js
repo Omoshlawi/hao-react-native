@@ -50,7 +50,8 @@ const UserPropertyScreen = ({ navigation }) => {
               title={item.title}
               subTitle={item.description.slice(0, 197)}
               price={item.price}
-              imgHeight={300}
+              //   imgHeight={100}
+              //   imgWidth={100}
               onPress={() => {
                 navigation.navigate(routes.PROPERTY_DETAIL_PROP, item);
               }}
