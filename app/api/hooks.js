@@ -14,6 +14,7 @@ export const useProperty = () => {
   const getPropertyTypes = () => apiClient.get(endPoint + "types/");
   const getPropertyStatus = () => apiClient.get(endPoint + "status/");
   const getPropertyLocations = () => apiClient.get(endPoint + "location/");
+  const getUserProperties = (token) => apiClient.get(endPoint + "user/", {}, {headers: getAuthHeader(token)});
   return {
     getProperties,
     postProperties,
@@ -22,6 +23,7 @@ export const useProperty = () => {
     getPropertyTypes,
     getPropertyStatus,
     getPropertyLocations,
+    getUserProperties
   };
 };
 

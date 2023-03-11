@@ -14,10 +14,12 @@ const menuItems = [
   {
     title: "My Properties",
     icon: { name: "format-list-bulleted", backgroundColor: colors.primary },
+    route: routes.USER_PROPERTIES,
   },
   {
     title: "My Messages",
     icon: { name: "email", backgroundColor: colors.secondary },
+    routes: routes.USER_PROPERTIES,
   },
 ];
 
@@ -58,6 +60,7 @@ function AccountScreen({ navigation }) {
           renderItem={({ item }) => (
             <ListItem
               title={item.title}
+              onPress={() => navigation.navigate(item.route)}
               IconComponent={
                 <AppIcon
                   name={item.icon.name}

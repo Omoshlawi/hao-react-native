@@ -23,6 +23,9 @@ function PropertiesStackNavigator(props) {
       <Screen
         name={routes.PROPERTY_DETAIL_PROP}
         component={PropertyDetailScreen}
+        options={({ route }) => ({
+          headerTitle: route.params.title,
+        })}
       />
     </Navigator>
   );

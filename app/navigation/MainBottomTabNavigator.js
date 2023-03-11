@@ -16,17 +16,34 @@ const Tab = createBottomTabNavigator();
 const Navigator = Tab.Navigator;
 const Screen = Tab.Screen;
 
+const getTabBarVisibility = (route) => {
+  const routeName = route.state
+    ? route.state.routes[route.state.index].name
+    : route.params?.screen || routes.HOME_MAIN;
+
+  if (
+    routeName === routes.USER_CENTER_ACCOUNT ||
+    routeName === routes.USER_PROFILE_EDIT_ACCOUNT ||
+    routeName === routes.USER_PROPERTIES
+  ) {
+    return false;
+  }
+
+  return true;
+};
+
 function MainBottomTabNavigator(props) {
   return (
     <Navigator
-      screenOptions={{
+      screenOptions={({ route }) => ({
+        tabBarVisible: getTabBarVisibility(route),
         tabBarActiveBackgroundColor: colors.white,
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: colors.primary,
         tabBarInactiveBackgroundColor: colors.tabBackground,
         // tabBarStyle: { backgroundColor: colors.tabBackground },
         tabBarLabelStyle: { fontWeight: "bold" },
-      }}
+      })}
     >
       <Screen
         name={routes.HOME_MAIN}
