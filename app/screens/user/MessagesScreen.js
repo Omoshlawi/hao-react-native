@@ -9,12 +9,12 @@ import {
   Text,
   View,
 } from "react-native";
-import ListItem from "../components/ListItem";
-import AppSafeAreaScreen from "../components/AppSafeAreaScreen";
-import ListItemSeparator from "../components/ListItemSeparator";
-import ListItemDeletionAction from "../components/ListItemDeletionAction";
+import ListItem from "../../components/ListItem";
+import AppSafeAreaScreen from "../../components/AppSafeAreaScreen";
+import ListItemSeparator from "../../components/ListItemSeparator";
+import ListItemDeletionAction from "../../components/ListItemDeletionAction";
 import { SwipeListView } from "react-native-swipe-list-view";
-import colors from "../utils/colors";
+import colors from "../../utils/colors";
 
 const initialMessages = [
   {

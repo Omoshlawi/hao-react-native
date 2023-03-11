@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import AppSafeAreaScreen from "../components/AppSafeAreaScreen";
+import AppSafeAreaScreen from "../../components/AppSafeAreaScreen";
 import { View, StyleSheet, Text, ScrollView } from "react-native";
 import {
   AppForm,
   AppFormField,
   AppFormPicker,
   AppFormSubmitButton,
-} from "../components/forms";
+} from "../../components/forms";
 import * as Yup from "yup";
-import colors from "../utils/colors";
-import AppFormImagesPicker from "../components/forms/AppFormImagesPicker";
-import { useProperty } from "../api/hooks";
-import AppIcon from "../components/AppIcon";
-import TypeItem from "../components/search/TypeItem";
+import colors from "../../utils/colors";
+import AppFormImagesPicker from "../../components/forms/AppFormImagesPicker";
+import { useProperty } from "../../api/hooks";
+import AppIcon from "../../components/AppIcon";
+import TypeItem from "../../components/search/TypeItem";
 
 const initialDetails = {
   title: "",

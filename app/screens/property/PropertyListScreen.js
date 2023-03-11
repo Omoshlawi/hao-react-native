@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { View, StyleSheet, FlatList, Text } from "react-native";
-import colors from "../utils/colors";
-import { useProperty } from "../api/hooks";
-import routes from "../navigation/routes";
-import HouseCard from "../components/HouseCard";
+import colors from "../../utils/colors";
+import { useProperty } from "../../api/hooks";
+import routes from "../../navigation/routes";
+import HouseCard from "../../components/HouseCard";
 
 function PropertyListScreen({ navigation }) {
   const [properties, setProperties] = useState([]);

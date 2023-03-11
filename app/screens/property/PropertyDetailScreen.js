@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { View, Image, StyleSheet } from "react-native";
-import AppText from "../components/AppText";
-import colors from "../utils/colors";
-import ListItem from "../components/ListItem";
+import AppText from "../../components/AppText";
+import colors from "../../utils/colors";
+import ListItem from "../../components/ListItem";
 
 function PropertyDetailScreen({ navigation, route }) {
   item = route.params;
@@ -16,7 +16,7 @@ function PropertyDetailScreen({ navigation, route }) {
         <AppText>{item.description}</AppText>
         <View style={styles.userContainer}>
           <ListItem
-            image={require("../assets/logo-black.png")}
+            image={require("../../assets/logo-black.png")}
             title="Laurent Ouma"
             subTitle="5 Listings"
           />

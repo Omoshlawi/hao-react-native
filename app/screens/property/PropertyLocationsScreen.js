@@ -8,14 +8,14 @@ import {
 } from "react-native";
 import React, { useCallback, useEffect, useState } from "react";
 import MapView, { Marker } from "react-native-maps";
-import useLocation from "../hooks/useLocation";
-import { useProperty } from "../api/hooks";
+import useLocation from "../../hooks/useLocation";
+import { useProperty } from "../../api/hooks";
 
-import BottomExpandable from "../components/BottomExpandable";
-import colors from "../utils/colors";
-import AppSearch from "../components/AppSearch";
-import PropertyTypes from "../components/search/PropertyTypes";
-import PropertyStatus from "../components/search/PropertyStatus";
+import BottomExpandable from "../../components/BottomExpandable";
+import colors from "../../utils/colors";
+import AppSearch from "../../components/AppSearch";
+import PropertyTypes from "../../components/search/PropertyTypes";
+import PropertyStatus from "../../components/search/PropertyStatus";
 
 const PropertyLocationsScreen = () => {
   const [propertyLocations, setPropertyLocations] = useState([]);
