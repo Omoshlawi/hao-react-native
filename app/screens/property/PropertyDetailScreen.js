@@ -6,24 +6,28 @@ import colors from "../../utils/colors";
 import ListItem from "../../components/ListItem";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FlatList } from "react-native";
+import routes from "../../navigation/routes";
 
 function PropertyDetailScreen({ navigation, route }) {
   item = route.params;
   return (
     <View>
       <Image style={styles.image} source={{ uri: item.image }} />
-      <TouchableOpacity
-        style={styles.back}
-        onPress={() => {
-          navigation.pop();
-        }}
-      >
-        <MaterialCommunityIcons
-          name="chevron-left"
-          color={colors.white}
-          size={50}
-        />
-      </TouchableOpacity>
+      <View style={styles.header}>
+        <TouchableOpacity
+          style={styles.back}
+          onPress={() => {
+            navigation.pop();
+          }}
+        >
+          <MaterialCommunityIcons
+            name="chevron-left"
+            color={colors.white}
+            size={50}
+          />
+        </TouchableOpacity>
+        <Text style={styles.headerTitle}>{item.title}</Text>
+      </View>
       {item.images && (
         <View style={styles.thumbnailsContainer}>
           <Text>Images</Text>
@@ -31,7 +35,15 @@ function PropertyDetailScreen({ navigation, route }) {
             data={item.images}
             horizontal
             renderItem={({ item }) => (
-              <Image source={{ uri: item.image }} style={styles.thumbnail} />
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate(routes.IMAGE_VIEW, {
+                    image: { uri: item.image },
+                  });
+                }}
+              >
+                <Image source={{ uri: item.image }} style={styles.thumbnail} />
+              </TouchableOpacity>
             )}
             keyExtractor={(item) => item.image}
           />
@@ -78,12 +90,25 @@ const styles = StyleSheet.create({
     bottom: 100,
   },
   back: {
-    position: "absolute",
+    backgroundColor: colors.black,
+    borderRadius: 10,
+  },
+  header: {
     top: 5,
     marginLeft: 10,
     marginTop: 30,
-    backgroundColor: colors.black,
-    borderRadius: 10,
+    position: "absolute",
+    flexDirection: "row",
+  },
+  headerTitle: {
+    fontSize: 30,
+    verticalAlign: "middle",
+    marginHorizontal: 20,
+    fontWeight: "bold",
+    color: colors.white,
+    // backgroundColor: colors.dark,
+    flex: 1,
+    // borderRadius: 10,
   },
   thumbnailsContainer: {
     padding: 10,

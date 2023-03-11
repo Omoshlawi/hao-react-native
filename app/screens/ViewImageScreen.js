@@ -10,24 +10,19 @@ import {
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../utils/colors";
 
-function ViewImageScreen(props) {
+function ViewImageScreen({ route, navigation }) {
+  const { image } = route.params;
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.deleteIcon}>
-        <MaterialCommunityIcons
-          color="white"
-          name="trash-can-outline"
-          size={35}
-        />
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.closeIcon}>
+      <TouchableOpacity
+        style={styles.closeIcon}
+        onPress={() => {
+          navigation.pop();
+        }}
+      >
         <MaterialCommunityIcons name="close" color="white" size={35} />
       </TouchableOpacity>
-      <Image
-        style={styles.image}
-        resizeMode="contain"
-        source={require("../assets/housebg.jpg")}
-      />
+      <Image style={styles.image} resizeMode="contain" source={image} />
     </View>
   );
 }
@@ -37,11 +32,7 @@ const styles = StyleSheet.create({
     top: StatusBar.currentHeight,
     right: 30,
     position: "absolute",
-  },
-  deleteIcon: {
-    top: StatusBar.currentHeight,
-    left: 30,
-    position: "absolute",
+    zIndex: 1,
   },
   container: {
     flex: 1,

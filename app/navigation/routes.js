@@ -15,4 +15,5 @@ export default Object.freeze({
   USER_PROFILE_EDIT_ACCOUNT: "ProfileEdit",
   PROPERTIES_LOCATION: "PropertyLocations",
   USER_PROPERTIES: "UserProps",
+  IMAGE_VIEW: "ImageView",
 });
