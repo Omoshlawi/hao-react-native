@@ -30,7 +30,7 @@ function PropertyDetailScreen({ navigation, route }) {
       </View>
       {item.images && (
         <View style={styles.thumbnailsContainer}>
-          <Text>Images</Text>
+          <Text style={{ fontWeight: "bold" }}>{item.title} Images</Text>
           <FlatList
             data={item.images}
             horizontal
@@ -50,16 +50,8 @@ function PropertyDetailScreen({ navigation, route }) {
         </View>
       )}
       <View style={styles.detailsContainer}>
-        <AppText style={styles.title}>{item.title}</AppText>
-        <AppText style={styles.price}>${item.price}</AppText>
+        <AppText style={styles.price}>Ksh.{item.price}</AppText>
         <AppText>{item.description}</AppText>
-        <View style={styles.userContainer}>
-          <ListItem
-            image={require("../../assets/logo-black.png")}
-            title="Laurent Ouma"
-            subTitle="5 Listings"
-          />
-        </View>
       </View>
     </View>
   );
