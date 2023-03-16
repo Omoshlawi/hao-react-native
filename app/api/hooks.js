@@ -6,24 +6,30 @@ const getAuthHeader = (token) => ({ Authorization: `Token ${token}` });
 export const useProperty = () => {
   const endPoint = "properties/";
   const getProperties = () => apiClient.get(endPoint);
-  const postProperties = async (data, token) =>
-    apiClient.post(endPoint, data, { headers: { Token: token } });
   const putProperties = async () => apiClient.put(endPoint);
   const deleteProperties = async () => {};
 
   const getPropertyTypes = () => apiClient.get(endPoint + "types/");
   const getPropertyStatus = () => apiClient.get(endPoint + "status/");
   const getPropertyLocations = () => apiClient.get(endPoint + "location/");
-  const getUserProperties = (token) => apiClient.get(endPoint + "user/", {}, {headers: getAuthHeader(token)});
+  const getUserProperties = (token) =>
+    apiClient.get(endPoint + "user/", {}, { headers: getAuthHeader(token) });
+  const postProperty = (token, data) =>
+    apiClient.post(endPoint, data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        ...getAuthHeader(token),
+      },
+    });
   return {
     getProperties,
-    postProperties,
     putProperties,
     deleteProperties,
     getPropertyTypes,
     getPropertyStatus,
     getPropertyLocations,
-    getUserProperties
+    getUserProperties,
+    postProperty,
   };
 };
 

@@ -24,9 +24,6 @@ const initialDetails = {
 const Step1 = ({ currStep, onFinish }) => {
   if (currStep !== 1) return null;
 
-  const handleSubmit = async (values) => {
-    console.log(values);
-  };
   return (
     <View>
       <AppForm
