@@ -1,29 +1,23 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, FlatList } from "react-native";
 import React, { useEffect, useState } from "react";
-import { FlatList } from "react-native-gesture-handler";
 import TypeItem from "./TypeItem";
 
 import colors from "../../utils/colors";
+import ScrollableIconButtons from "../button/ScrollableIconButtons";
 
-const PropertyTypes = ({ types=[], onItemClicked ,contentContainerStyle, title="Property Types"}) => {
+const PropertyTypes = ({
+  types = [],
+  onItemClicked,
+  contentContainerStyle,
+  title = "Property Types",
+}) => {
   return (
-    <View style={[styles.container,contentContainerStyle]}>
-      <Text style={styles.title}>{title}</Text>
-      <FlatList
-        data={types}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        keyExtractor={(type) => type.url}
-        renderItem={({ item: type }) => (
-          <TypeItem
-            style={styles.listItem}
-            title={type.title}
-            image={{ uri: type.image }}
-            onPress={() => onItemClicked(type)}
-          />
-        )}
-      />
-    </View>
+    <ScrollableIconButtons
+      data={types}
+      contentContainerStyle={contentContainerStyle}
+      title={title}
+      onItemClicked={onItemClicked}
+    />
   );
 };
 
