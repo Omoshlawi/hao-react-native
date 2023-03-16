@@ -69,5 +69,6 @@ export const useHouses = () => {
   const getAllHouses = () => apiClient.get(endPoint);
   const getHousTypes = () => apiClient.get(endPoint + "types/");
   const getHouseStatus = () => apiClient.get(endPoint + "status/");
-  return { getAllHouses, getHousTypes, getHouseStatus };
+  const filterHouses = (params) => apiClient.get(endPoint, params);
+  return { getAllHouses, getHousTypes, getHouseStatus, filterHouses };
 };
