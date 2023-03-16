@@ -5,6 +5,7 @@ import {
   ScrollView,
   FlatList,
   Image,
+  TouchableOpacity,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import colors from "../../utils/colors";
@@ -12,13 +13,17 @@ import { useHouses, useProperty } from "../../api/hooks";
 import AppSearch from "../AppSearch";
 import ScrollableIconButtons from "../button/ScrollableIconButtons";
 import SelectableBadge from "../SelectableBadge";
+import { useNavigation } from "@react-navigation/native";
+import routes from "../../navigation/routes";
+import ScrollableBadgeButtons from "../button/ScrollableBagdeButtons";
 
 const HouseSearch = () => {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState({});
   const [types, setTypes] = useState([]);
   const [statuses, setStatuses] = useState([]);
   const { getHousTypes, getHouseStatus, filterHouses } = useHouses();
   const [searchResults, setSearchResults] = useState([]);
+  const navigation = useNavigation();
 
   useEffect(() => {
     (async () => {
@@ -35,10 +40,12 @@ const HouseSearch = () => {
     handleSearch();
   }, [search]);
 
-  const hadleTypeItemClick = (item) => console.log(item);
-  const hadleStatusItemClick = (item) => console.log(item);
+  const hadleTypeItemClick = (item) =>
+    setSearch({ ...search, type: item.type });
+  const hadleStatusItemClick = (item) =>
+    setSearch({ ...search, status: item.status });
   const handleSearch = async () => {
-    const response = await filterHouses({ search });
+    const response = await filterHouses(search);
     if (!response.ok) {
       return console.log(response.problem);
     }
@@ -54,14 +61,12 @@ const HouseSearch = () => {
         <AppSearch
           placeholder="Search our database"
           style={styles.search}
-          onTextChange={(text) => setSearch(text)}
-          value={search}
-          onPress={() => {
-            console.log("Seaching....", search);
-          }}
+          onTextChange={(text) => setSearch({ ...search, search: text })}
+          value={search.search}
+          onPress={handleSearch}
         />
       </View>
-      <SelectableBadge
+      <ScrollableBadgeButtons
         data={statuses}
         onBadgeItemClicked={hadleStatusItemClick}
         keyExtractor={(status) => status.url}
@@ -79,13 +84,23 @@ const HouseSearch = () => {
       <FlatList
         data={searchResults}
         keyExtractor={(item) => item.url}
+        numColumns={3}
+        contentContainerStyle={{
+          alignItems: "center",
+        }}
         renderItem={({ item }) => (
           <View style={styles.card}>
-            <Text>{item.house_number}</Text>
-            <Image
-              style={{ width: 100, height: 100 }}
-              source={{ uri: item.image }}
-            />
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate(routes.PROPERTY_DETAIL_PROP, item);
+              }}
+            >
+              <Text>{item.house_number}</Text>
+              <Image
+                style={{ width: 130, height: 130, borderRadius: 20 }}
+                source={{ uri: item.image }}
+              />
+            </TouchableOpacity>
           </View>
         )}
       />
@@ -97,7 +112,7 @@ export default HouseSearch;
 
 const styles = StyleSheet.create({
   card: {
-    padding: 10,
+    padding: 2,
   },
   container: {
     padding: 10,
