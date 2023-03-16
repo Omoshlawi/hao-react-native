@@ -1,6 +1,5 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import React, { useState, useEffect } from "react";
-import { TextInput } from "react-native-gesture-handler";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../utils/colors";
 import AppSearch from "../components/AppSearch";
@@ -8,30 +7,13 @@ import AppSafeAreaScreen from "../components/AppSafeAreaScreen";
 import PropertyTypes from "../components/search/PropertyTypes";
 import { useProperty } from "../api/hooks";
 import PropertyStatus from "../components/search/PropertyStatus";
-import HousePropertyTabs from "../components/search/HousePropertyTabs";
 import TabBar from "../components/tab/TabBar";
-import AppIcon from "../components/AppIcon";
+import HouseSearch from "../components/search/HouseSearch";
+import PropertySearch from "../components/search/PropertySearch";
 
 const SearchScreen = () => {
-  const [searchString, setSearchString] = useState("");
-  const [types, setTypes] = useState([]);
-  const [statuses, setStatuses] = useState([]);
-  const { getPropertyTypes, getPropertyStatus } = useProperty();
-
-  useEffect(() => {
-    (async () => {
-      const statusResponse = await getPropertyStatus();
-      const typesResponse = await getPropertyTypes();
-      if (!typesResponse.ok || !statusResponse.ok)
-        return console.log("Error: Search Screen", typesResponse.problem);
-      setTypes(typesResponse.data.results);
-      setStatuses(statusResponse.data.results);
-    })();
-  }, []);
-
-  const hadleTypeItemClick = (item) => console.log(item);
-  const hadleStatusItemClick = (item) => console.log(item);
-
+  const tabScreens = [<HouseSearch />, <PropertySearch />];
+  const [currTab, setCurTab] = useState(0);
   return (
     <AppSafeAreaScreen style={styles.screen}>
       <Text style={styles.text}>{"Lets Find your desired residence"}</Text>
@@ -46,26 +28,12 @@ const SearchScreen = () => {
             icon: <MaterialCommunityIcons name="account" size={20} />,
           },
         ]}
-        onTabItemClicked={(item, index) => console.log(index)}
+        onTabItemClicked={(item, index) => {
+          setCurTab(index)
+        }}
         activeIndex={0}
       />
-      <View style={styles.searchContainer}>
-        <AppSearch
-          placeholder="Search our database"
-          style={styles.search}
-          onTextChange={(text) => setSearchString(text)}
-          value={searchString}
-          onPress={() => {
-            console.log("Seaching....", searchString);
-          }}
-        />
-      </View>
-      <PropertyStatus
-        statuses={statuses}
-        onItemClicked={hadleStatusItemClick}
-      />
-      <PropertyTypes types={types} onItemClicked={hadleTypeItemClick} />
-      <ScrollView></ScrollView>
+      {tabScreens[currTab]}
     </AppSafeAreaScreen>
   );
 };
