@@ -3,7 +3,6 @@ import {
   Text,
   View,
   FlatList,
-  TouchableHighlight,
   TouchableOpacity,
 } from "react-native";
 import React, { useEffect, useState } from "react";
@@ -15,7 +14,7 @@ const SelectableBadge = ({
   contentContainerStyle,
   title,
   currentActiveBadgeItemIndex,
-  badgeValueExtractor,
+  keyExtractor,
   badgeLabelExtractor,
 }) => {
   const [currIndex, setCurrIndex] = useState(
@@ -39,7 +38,7 @@ const SelectableBadge = ({
         data={data}
         horizontal
         showsHorizontalScrollIndicator={false}
-        keyExtractor={badgeValueExtractor}
+        keyExtractor={keyExtractor}
         renderItem={({ item }) => (
           <TouchableOpacity
             onPress={() => {

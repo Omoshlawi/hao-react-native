@@ -8,6 +8,9 @@ import AppSafeAreaScreen from "../components/AppSafeAreaScreen";
 import PropertyTypes from "../components/search/PropertyTypes";
 import { useProperty } from "../api/hooks";
 import PropertyStatus from "../components/search/PropertyStatus";
+import HousePropertyTabs from "../components/search/HousePropertyTabs";
+import TabBar from "../components/tab/TabBar";
+import AppIcon from "../components/AppIcon";
 
 const SearchScreen = () => {
   const [searchString, setSearchString] = useState("");
@@ -32,6 +35,20 @@ const SearchScreen = () => {
   return (
     <AppSafeAreaScreen style={styles.screen}>
       <Text style={styles.text}>{"Lets Find your desired residence"}</Text>
+      <TabBar
+        tabItems={[
+          {
+            title: "House",
+            icon: <MaterialCommunityIcons name="home" size={20} />,
+          },
+          {
+            title: "Properties",
+            icon: <MaterialCommunityIcons name="account" size={20} />,
+          },
+        ]}
+        onTabItemClicked={(item, index) => console.log(index)}
+        activeIndex={0}
+      />
       <View style={styles.searchContainer}>
         <AppSearch
           placeholder="Search our database"
@@ -43,7 +60,10 @@ const SearchScreen = () => {
           }}
         />
       </View>
-      <PropertyStatus statuses={statuses} onItemClicked={hadleStatusItemClick} />
+      <PropertyStatus
+        statuses={statuses}
+        onItemClicked={hadleStatusItemClick}
+      />
       <PropertyTypes types={types} onItemClicked={hadleTypeItemClick} />
       <ScrollView></ScrollView>
     </AppSafeAreaScreen>

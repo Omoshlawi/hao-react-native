@@ -23,7 +23,7 @@ const PropertyStatus = ({
       contentContainerStyle={contentContainerStyle}
       title={title}
       badgeLabelExtractor={(status) => status.status}
-      badgeValueExtractor={(status) => status.url}
+      keyExtractor={(status) => status.url}
       currentActiveBadgeItemIndex={0}
     />
   );
