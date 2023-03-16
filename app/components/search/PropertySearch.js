@@ -2,9 +2,9 @@ import { StyleSheet, Text, View, ScrollView } from "react-native";
 import React, { useEffect, useState } from "react";
 import colors from "../../utils/colors";
 import { useProperty } from "../../api/hooks";
-import PropertyStatus from "./PropertyStatus";
-import PropertyTypes from "./PropertyTypes";
 import AppSearch from "../AppSearch";
+import SelectableBadge from "../SelectableBadge";
+import ScrollableIconButtons from "../button/ScrollableIconButtons";
 
 const PropertySearch = () => {
   const [searchString, setSearchString] = useState("");
@@ -39,11 +39,21 @@ const PropertySearch = () => {
           }}
         />
       </View>
-      <PropertyStatus
-        statuses={statuses}
-        onItemClicked={hadleStatusItemClick}
+      <SelectableBadge
+        data={statuses}
+        onBadgeItemClicked={hadleStatusItemClick}
+        keyExtractor={(status) => status.url}
+        title="Property Status"
+        badgeLabelExtractor={(status) => status.status}
       />
-      <PropertyTypes types={types} onItemClicked={hadleTypeItemClick} />
+      <ScrollableIconButtons
+        title="Property Types"
+        data={types}
+        onItemClicked={hadleTypeItemClick}
+        titleExtractor={(item) => item.title}
+        imageExtractor={(item) => item.image}
+        keyExtractor={(type) => type.url}
+      />
       <ScrollView></ScrollView>
     </>
   );

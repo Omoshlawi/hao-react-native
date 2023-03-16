@@ -1,21 +1,23 @@
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import React, { useEffect, useState } from "react";
 import colors from "../../utils/colors";
-import { useProperty } from "../../api/hooks";
+import { useHouses, useProperty } from "../../api/hooks";
 import PropertyStatus from "./PropertyStatus";
 import PropertyTypes from "./PropertyTypes";
 import AppSearch from "../AppSearch";
+import ScrollableIconButtons from "../button/ScrollableIconButtons";
+import SelectableBadge from "../SelectableBadge";
 
 const HouseSearch = () => {
   const [searchString, setSearchString] = useState("");
   const [types, setTypes] = useState([]);
   const [statuses, setStatuses] = useState([]);
-  const { getPropertyTypes, getPropertyStatus } = useProperty();
+  const { getHousTypes, getHouseStatus } = useHouses();
 
   useEffect(() => {
     (async () => {
-      const statusResponse = await getPropertyStatus();
-      const typesResponse = await getPropertyTypes();
+      const statusResponse = await getHouseStatus();
+      const typesResponse = await getHousTypes();
       if (!typesResponse.ok || !statusResponse.ok)
         return console.log("Error: Search Screen", typesResponse.problem);
       setTypes(typesResponse.data.results);
@@ -39,11 +41,21 @@ const HouseSearch = () => {
           }}
         />
       </View>
-      <PropertyStatus
-        statuses={statuses}
-        onItemClicked={hadleStatusItemClick}
+      <SelectableBadge
+        data={statuses}
+        onBadgeItemClicked={hadleStatusItemClick}
+        keyExtractor={(status) => status.url}
+        title="House Status"
+        badgeLabelExtractor={(status) => status.status}
       />
-      <PropertyTypes types={types} onItemClicked={hadleTypeItemClick} />
+      <ScrollableIconButtons
+        title="House Types"
+        data={types}
+        onItemClicked={hadleTypeItemClick}
+        titleExtractor={(item) => item.type}
+        imageExtractor={(item) => item.image}
+        keyExtractor={(type) => type.url}
+      />
       <ScrollView></ScrollView>
     </>
   );

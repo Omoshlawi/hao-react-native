@@ -17,6 +17,9 @@ const PropertyTypes = ({
       contentContainerStyle={contentContainerStyle}
       title={title}
       onItemClicked={onItemClicked}
+      titleExtractor={(item) => item.title}
+      imageExtractor={(item) => item.image}
+      keyExtractor={(item) => item.url}
     />
   );
 };

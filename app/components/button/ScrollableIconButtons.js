@@ -8,6 +8,9 @@ const ScrollableIconButtons = ({
   onItemClicked,
   contentContainerStyle,
   title,
+  titleExtractor,
+  imageExtractor,
+  keyExtractor
 }) => {
   return (
     <View style={[styles.container, contentContainerStyle]}>
@@ -16,12 +19,12 @@ const ScrollableIconButtons = ({
         data={data}
         horizontal
         showsHorizontalScrollIndicator={false}
-        keyExtractor={(type) => type.url}
+        keyExtractor={keyExtractor}
         renderItem={({ item: type }) => (
           <IconButton
             style={styles.listItem}
-            title={type.title}
-            image={{ uri: type.image }}
+            title={titleExtractor(type)}
+            image={{ uri: imageExtractor(type) }}
             onPress={() => onItemClicked(type)}
           />
         )}
