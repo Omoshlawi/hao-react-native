@@ -14,8 +14,8 @@ import { useProperty } from "../../api/hooks";
 import BottomExpandable from "../../components/BottomExpandable";
 import colors from "../../utils/colors";
 import AppSearch from "../../components/AppSearch";
-import PropertyTypes from "../../components/search/PropertyTypes";
-import PropertyStatus from "../../components/search/PropertyStatus";
+import SelectableBadge from "../../components/SelectableBadge";
+import ScrollableIconButtons from "../../components/button/ScrollableIconButtons";
 
 const PropertyLocationsScreen = () => {
   const [propertyLocations, setPropertyLocations] = useState([]);
@@ -92,18 +92,22 @@ const PropertyLocationsScreen = () => {
                 }}
               />
             </View>
-            <PropertyStatus
-              title="Filter by property status"
-              statuses={propertiesStatus}
-              onItemClicked={(item) => console.log(item)}
+            <SelectableBadge
+              data={propertiesStatus}
+              onBadgeItemClicked={(status) => console.log(status)}
+              keyExtractor={(status) => status.url}
+              title="Property Status"
+              badgeLabelExtractor={(status) => status.status}
             />
           </>
         )}
-        <PropertyTypes
-          title="Filter by property type"
-          contentContainerStyle={{ paddingTop: 0 }}
-          types={propertiesType}
-          onItemClicked={(item) => console.log(item)}
+        <ScrollableIconButtons
+          title="Property Types"
+          data={propertiesType}
+          onItemClicked={(type) => console.log(type)}
+          titleExtractor={(item) => item.title}
+          imageExtractor={(item) => item.image}
+          keyExtractor={(type) => type.url}
         />
       </BottomExpandable>
     </>

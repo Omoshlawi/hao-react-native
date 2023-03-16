@@ -4,9 +4,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../utils/colors";
 import AppSearch from "../components/AppSearch";
 import AppSafeAreaScreen from "../components/AppSafeAreaScreen";
-import PropertyTypes from "../components/search/PropertyTypes";
 import { useProperty } from "../api/hooks";
-import PropertyStatus from "../components/search/PropertyStatus";
 import TabBar from "../components/tab/TabBar";
 import HouseSearch from "../components/search/HouseSearch";
 import PropertySearch from "../components/search/PropertySearch";
@@ -29,7 +27,7 @@ const SearchScreen = () => {
           },
         ]}
         onTabItemClicked={(item, index) => {
-          setCurTab(index)
+          setCurTab(index);
         }}
         activeIndex={0}
       />

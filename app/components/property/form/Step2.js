@@ -3,9 +3,9 @@ import React, { useState, useEffect } from "react";
 import { AppForm, AppFormField, AppFormPicker, AppFormSubmitButton } from "../../forms";
 import { useProperty } from "../../../api/hooks";
 import AppFormImagesPicker from "../../forms/AppFormImagesPicker";
-import TypeItem from "../../search/TypeItem";
 import colors from "../../../utils/colors";
 import * as Yup from "yup";
+import IconButton from "../../button/IconButton";
 
 const validationScheema = Yup.object().shape({
   type: Yup.string().required().label("PropertyType"),
@@ -86,7 +86,7 @@ const Step2 = ({ currStep, onFinish }) => {
         >
           {({ item: { image, url, title } }) => {
             return (
-              <TypeItem
+              <IconButton
                 image={{ uri: image }}
                 title={title}
                 disable

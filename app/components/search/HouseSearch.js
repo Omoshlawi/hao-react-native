@@ -2,8 +2,6 @@ import { StyleSheet, Text, View, ScrollView } from "react-native";
 import React, { useEffect, useState } from "react";
 import colors from "../../utils/colors";
 import { useHouses, useProperty } from "../../api/hooks";
-import PropertyStatus from "./PropertyStatus";
-import PropertyTypes from "./PropertyTypes";
 import AppSearch from "../AppSearch";
 import ScrollableIconButtons from "../button/ScrollableIconButtons";
 import SelectableBadge from "../SelectableBadge";
