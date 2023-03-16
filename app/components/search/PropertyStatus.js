@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import React from "react";
 import colors from "../../utils/colors";
+import SelectableBadge from "../SelectableBadge";
 
 const PropertyStatus = ({
   statuses = [],
@@ -16,22 +17,15 @@ const PropertyStatus = ({
   title = "Property Status",
 }) => {
   return (
-    <View style={[styles.container, contentContainerStyle]}>
-      <Text style={styles.title}>{title}</Text>
-      <FlatList
-        data={statuses}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        keyExtractor={(status) => status.url}
-        renderItem={({ item: status }) => (
-          <TouchableOpacity onPress={() => onItemClicked(status)}>
-            <View style={styles.listItem}>
-              <Text style={styles.title}>{status.status}</Text>
-            </View>
-          </TouchableOpacity>
-        )}
-      />
-    </View>
+    <SelectableBadge
+      data={statuses}
+      onBadgeItemClicked={onItemClicked}
+      contentContainerStyle={contentContainerStyle}
+      title={title}
+      badgeLabelExtractor={(status) => status.status}
+      badgeValueExtractor={(status) => status.url}
+      currentActiveBadgeItemIndex={0}
+    />
   );
 };
 
