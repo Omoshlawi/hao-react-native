@@ -76,13 +76,13 @@ const PropertySearch = () => {
           data={statuses}
           onItemChange={handleStatusChange}
           keyExtractor={(status) => status.url}
-          title="House Status"
+          title="Property Status"
           labelExtractor={(status) => status.status}
         />
       )}
       {types.length > 0 && (
         <ScrollableIconButtons
-          title="House Types"
+          title="Property Types"
           data={types}
           onItemClicked={hadleTypeItemClick}
           titleExtractor={(item) => item.type}

@@ -8,7 +8,8 @@ const TabBar = ({
   containerStyle,
   onTabItemClicked,
   activeIndex,
-  activeBackgroundColor = colors.primary,
+  activeBackgroundColor = colors.tabBackground,
+  activeTintColor = colors.white,
 }) => {
   const [active, setActive] = useState(activeIndex);
   return (
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
   },
   tabItem: {
     flex: 1,
-    backgroundColor: colors.tabBackground,
+    backgroundColor: colors.white,
     marginHorizontal: 5,
     borderRadius: 20,
     padding: 10,
