@@ -14,6 +14,8 @@ import HouseCard from "../components/HouseCard";
 import { FlatList } from "react-native-gesture-handler";
 import { useHouses, useProperty } from "../api/hooks";
 import routes from "../navigation/routes";
+import SmallHouseCard from "../components/house/SmallHouseCard";
+import IconText from "../components/display/IconText";
 
 const HomeScreen = ({ navigation }) => {
   const [searchString, setSearchString] = useState("");
@@ -45,7 +47,6 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <AppSafeAreaScreen style={styles.screen}>
-      {/* <Text style={styles.title}>{"Lets Find you an \n Apartment"}</Text> */}
       <View style={styles.searchContainer}>
         <AppSearch
           style={styles.search}
@@ -57,19 +58,16 @@ const HomeScreen = ({ navigation }) => {
         />
       </View>
       <View>
-        <View style={styles.propHeader}>
-          <Text style={[styles.headerText, { flex: 1 }]}>
-            Available Properties
-          </Text>
-          <TouchableOpacity
+        <View style={styles.header}>
+          <IconText text="Properties" fontWeight="bold" color={colors.black}/>
+          <IconText
+            left={false}
+            text="View all"
+            icon="chevron-right"
             onPress={() => {
               navigation.navigate(routes.PROPERTY_LIST_PROP);
             }}
-          >
-            <Text style={[styles.headerText, { color: colors.primary }]}>
-              View All {">"}{" "}
-            </Text>
-          </TouchableOpacity>
+          />
         </View>
         <FlatList
           showsHorizontalScrollIndicator={false}
@@ -91,38 +89,24 @@ const HomeScreen = ({ navigation }) => {
           )}
         />
       </View>
-      <View>
-        <View style={styles.propHeader}>
-          <Text style={[styles.headerText, { flex: 1 }]}>Available Houses</Text>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate(routes.PROPERTY_LIST_PROP);
-            }}
-          >
-            <Text style={[styles.headerText, { color: colors.primary }]}>
-              View All {">"}{" "}
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <FlatList
-          contentContainerStyle={{ paddingBottom: 100 }}
-          data={houses}
-          keyExtractor={(property) => property.url}
-          numColumns={2}
-          renderItem={({ item }) => (
-            <View style={styles.houses}>
-              <HouseCard
-                image={{ uri: item.image }}
-                // title={item.house_number}
-                price={item.price}
-                onPress={() => {
-                  navigation.navigate(routes.PROPERTY_DETAIL_PROP, item);
-                }}
-              />
-            </View>
-          )}
+      <View style={styles.header}>
+        <IconText text="Houses" fontWeight="bold" color={colors.black}/>
+        <IconText
+          left={false}
+          text="View all"
+          icon="chevron-right"
+          onPress={() => {
+            navigation.navigate(routes.PROPERTY_LIST_PROP);
+          }}
         />
       </View>
+      <FlatList
+        contentContainerStyle={{ paddingBottom: 100 }}
+        data={houses}
+        keyExtractor={(property) => property.url}
+        numColumns={2}
+        renderItem={({ item }) => <SmallHouseCard item={item} />}
+      />
     </AppSafeAreaScreen>
   );
 };
@@ -131,9 +115,10 @@ export default HomeScreen;
 
 const styles = StyleSheet.create({
   headerText: { fontWeight: "bold" },
-  propHeader: {
+  header: {
     flexDirection: "row",
     padding: 10,
+    justifyContent: "space-between"
   },
   title: {
     fontSize: 30,

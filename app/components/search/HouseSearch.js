@@ -17,6 +17,8 @@ import { useNavigation } from "@react-navigation/native";
 import routes from "../../navigation/routes";
 import ScrollableBadgeButtons from "../button/ScrollableBagdeButtons";
 import IconText from "../display/IconText";
+import HouseCard from "../HouseCard";
+import SmallHouseCard from "../house/SmallHouseCard";
 
 const HouseSearch = () => {
   const [search, setSearch] = useState({});
@@ -107,47 +109,7 @@ const HouseSearch = () => {
         contentContainerStyle={{
           alignItems: "center",
         }}
-        renderItem={({ item }) => (
-          <View style={styles.card}>
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate(routes.PROPERTY_DETAIL_PROP, item);
-              }}
-            >
-              <Image
-                style={{ width: 200, height: 100, borderRadius: 10 }}
-                source={{ uri: item.image }}
-              />
-              <View>
-                <IconText
-                  text={item.house_number}
-                  icon="home"
-                  size={15}
-                  fontWeight="bold"
-                />
-                <IconText
-                  text={item.property.title}
-                  icon="home-modern"
-                  color={colors.medium}
-                  size={15}
-                  fontWeight="bold"
-                />
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    paddingRight: 10,
-                  }}
-                >
-                  <IconText icon="star-outline" text={4.5} />
-                  <IconText icon="cards-heart-outline" text="1000" />
-                </View>
-                <IconText text={item.type.type} color={colors.medium} />
-                <IconText text={item.status.status} color={colors.medium} />
-              </View>
-            </TouchableOpacity>
-          </View>
-        )}
+        renderItem={({ item }) => <SmallHouseCard item={item} />}
       />
     </>
   );
