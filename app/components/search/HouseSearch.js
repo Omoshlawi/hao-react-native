@@ -16,6 +16,7 @@ import SelectableBadge from "../SelectableBadge";
 import { useNavigation } from "@react-navigation/native";
 import routes from "../../navigation/routes";
 import ScrollableBadgeButtons from "../button/ScrollableBagdeButtons";
+import SelectableScrollableBadgeButton from "../button/SelectableScrollableBadgeButton";
 
 const HouseSearch = () => {
   const [search, setSearch] = useState({});
@@ -42,8 +43,15 @@ const HouseSearch = () => {
 
   const hadleTypeItemClick = (item) =>
     setSearch({ ...search, type: item.type });
-  const hadleStatusItemClick = (item) =>
-    setSearch({ ...search, status: item.status });
+  const handleStatusChange = (item) => {
+    if (item) {
+      setSearch({ ...search, status: item.status });
+    } else {
+      const _search = search;
+      delete _search.status;
+      setSearch({ ..._search });
+    }
+  };
   const handleSearch = async () => {
     const response = await filterHouses(search);
     if (!response.ok) {
@@ -54,7 +62,6 @@ const HouseSearch = () => {
     } = response;
     setSearchResults(results);
   };
-
   return (
     <>
       <View style={styles.searchContainer}>
@@ -66,21 +73,26 @@ const HouseSearch = () => {
           onPress={handleSearch}
         />
       </View>
-      <ScrollableBadgeButtons
-        data={statuses}
-        onBadgeItemClicked={hadleStatusItemClick}
-        keyExtractor={(status) => status.url}
-        title="House Status"
-        badgeLabelExtractor={(status) => status.status}
-      />
-      <ScrollableIconButtons
-        title="House Types"
-        data={types}
-        onItemClicked={hadleTypeItemClick}
-        titleExtractor={(item) => item.type}
-        imageExtractor={(item) => item.image}
-        keyExtractor={(type) => type.url}
-      />
+      {statuses.length > 0 && (
+        <SelectableScrollableBadgeButton
+          data={statuses}
+          onItemChange={handleStatusChange}
+          keyExtractor={(status) => status.url}
+          title="House Status"
+          labelExtractor={(status) => status.status}
+          defaultItemIndex={0}
+        />
+      )}
+      {types.length > 0 && (
+        <ScrollableIconButtons
+          title="House Types"
+          data={types}
+          onItemClicked={hadleTypeItemClick}
+          titleExtractor={(item) => item.type}
+          imageExtractor={(item) => item.image}
+          keyExtractor={(type) => type.url}
+        />
+      )}
       <FlatList
         data={searchResults}
         keyExtractor={(item) => item.url}
