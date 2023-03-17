@@ -18,6 +18,7 @@ const ScrollableBadgeButtons = ({
   onItemChange = (item) => {},
   selectable = true,
   activeBackgroundColor = colors.tabBackground,
+  activeTintColor = colors.black,
 }) => {
   const [currentIndex, setCurentIndex] = useState(
     defaultItemIndex > -1 && defaultItemIndex < data.length
@@ -60,9 +61,9 @@ const ScrollableBadgeButtons = ({
               <Text
                 style={[
                   styles.title,
-                  //   item === data[currentIndex] && selectable
-                  //     ? { color: colors.white }
-                  //     : {},
+                  item === data[currentIndex] && selectable
+                    ? { color: activeTintColor }
+                    : {},
                 ]}
               >
                 {labelExtractor(item)}

@@ -16,6 +16,7 @@ const IconButton = ({
   disable = false,
   active = false,
   activeBackgroundColor = colors.tabBackground,
+  activeTintColor = colors.black,
 }) => {
   return (
     <TouchableHighlight
@@ -31,7 +32,9 @@ const IconButton = ({
         ]}
       >
         <Image style={styles.image} source={image} resizeMode="contain" />
-        <Text style={styles.text}>{title}</Text>
+        <Text style={[styles.text, active ? { color: activeTintColor } : {}]}>
+          {title}
+        </Text>
       </View>
     </TouchableHighlight>
   );
