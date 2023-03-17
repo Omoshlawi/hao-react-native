@@ -1,16 +1,19 @@
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { StyleSheet, Text, View, ScrollView, FlatList } from "react-native";
 import React, { useEffect, useState } from "react";
 import colors from "../../utils/colors";
 import { useProperty } from "../../api/hooks";
 import AppSearch from "../AppSearch";
 import SelectableBadge from "../SelectableBadge";
 import ScrollableIconButtons from "../button/ScrollableIconButtons";
+import ScrollableBadgeButtons from "../button/ScrollableBagdeButtons";
+import SmallPropertyCard from "../property/SmallPropertyCard";
 
 const PropertySearch = () => {
-  const [searchString, setSearchString] = useState("");
+  const [search, setSearch] = useState({});
   const [types, setTypes] = useState([]);
   const [statuses, setStatuses] = useState([]);
-  const { getPropertyTypes, getPropertyStatus } = useProperty();
+  const { getPropertyTypes, getPropertyStatus, filterProperty } = useProperty();
+  const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -23,8 +26,39 @@ const PropertySearch = () => {
     })();
   }, []);
 
-  const hadleTypeItemClick = (item) => console.log(item);
-  const hadleStatusItemClick = (item) => console.log(item);
+  useEffect(() => {
+    handleSearch();
+  }, [search]);
+
+  const handleSearch = async () => {
+    const response = await filterProperty(search);
+    if (!response.ok) {
+      return console.log(response.problem);
+    }
+    const {
+      data: { results },
+    } = response;
+    setSearchResults(results);
+  };
+
+  const hadleTypeItemClick = (item) => {
+    if (item) {
+      setSearch({ ...search, type: item.type });
+    } else {
+      const _search = { ...search };
+      delete _search.type;
+      setSearch(_search);
+    }
+  };
+  const handleStatusChange = (item) => {
+    if (item) {
+      setSearch({ ...search, status: item.status });
+    } else {
+      const _search = { ...search };
+      delete _search.status;
+      setSearch(_search);
+    }
+  };
 
   return (
     <>
@@ -32,29 +66,40 @@ const PropertySearch = () => {
         <AppSearch
           placeholder="Search our database"
           style={styles.search}
-          onTextChange={(text) => setSearchString(text)}
-          value={searchString}
-          onPress={() => {
-            console.log("Seaching....", searchString);
-          }}
+          onTextChange={(text) => setSearch({ ...search, search: text })}
+          value={search.search}
+          onPress={handleSearch}
         />
       </View>
-      <SelectableBadge
-        data={statuses}
-        onBadgeItemClicked={hadleStatusItemClick}
-        keyExtractor={(status) => status.url}
-        title="Property Status"
-        badgeLabelExtractor={(status) => status.status}
+      {statuses.length > 0 && (
+        <ScrollableBadgeButtons
+          data={statuses}
+          onItemChange={handleStatusChange}
+          keyExtractor={(status) => status.url}
+          title="House Status"
+          labelExtractor={(status) => status.status}
+        />
+      )}
+      {types.length > 0 && (
+        <ScrollableIconButtons
+          title="House Types"
+          data={types}
+          onItemClicked={hadleTypeItemClick}
+          titleExtractor={(item) => item.type}
+          imageExtractor={(item) => item.image}
+          keyExtractor={(type) => type.url}
+          selectable
+        />
+      )}
+      <FlatList
+        data={searchResults}
+        keyExtractor={(item) => item.url}
+        numColumns={2}
+        contentContainerStyle={{
+          alignItems: "center",
+        }}
+        renderItem={({ item }) => <SmallPropertyCard item={item} />}
       />
-      <ScrollableIconButtons
-        title="Property Types"
-        data={types}
-        onItemClicked={hadleTypeItemClick}
-        titleExtractor={(item) => item.title}
-        imageExtractor={(item) => item.image}
-        keyExtractor={(type) => type.url}
-      />
-      <ScrollView></ScrollView>
     </>
   );
 };

@@ -1,12 +1,11 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import React from "react";
-import IconText from "../display/IconText";
 import colors from "../../utils/colors";
+import IconText from "../display/IconText";
+import { useNavigation } from "@react-navigation/native";
 import routes from "../../navigation/routes";
 
-import { useNavigation } from "@react-navigation/native";
-
-const SmallHouseCard = ({ item }) => {
+const SmallPropertyCard = ({ item }) => {
   const navigation = useNavigation();
   return (
     <View style={styles.card}>
@@ -21,15 +20,8 @@ const SmallHouseCard = ({ item }) => {
         />
         <View>
           <IconText
-            text={item.house_number}
-            icon="home"
-            size={15}
-            fontWeight="bold"
-          />
-          <IconText
-            text={item.property.title}
+            text={item.title}
             icon="home-modern"
-            color={colors.medium}
             size={15}
             fontWeight="bold"
           />
@@ -55,7 +47,7 @@ const SmallHouseCard = ({ item }) => {
   );
 };
 
-export default SmallHouseCard;
+export default SmallPropertyCard;
 
 const styles = StyleSheet.create({
   card: {

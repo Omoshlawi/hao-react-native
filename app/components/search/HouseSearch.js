@@ -13,7 +13,6 @@ import { useHouses, useProperty } from "../../api/hooks";
 import AppSearch from "../AppSearch";
 import ScrollableIconButtons from "../button/ScrollableIconButtons";
 import SelectableBadge from "../SelectableBadge";
-import { useNavigation } from "@react-navigation/native";
 import routes from "../../navigation/routes";
 import ScrollableBadgeButtons from "../button/ScrollableBagdeButtons";
 import IconText from "../display/IconText";
@@ -26,7 +25,7 @@ const HouseSearch = () => {
   const [statuses, setStatuses] = useState([]);
   const { getHousTypes, getHouseStatus, filterHouses } = useHouses();
   const [searchResults, setSearchResults] = useState([]);
-  const navigation = useNavigation();
+  
 
   useEffect(() => {
     (async () => {
