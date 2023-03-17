@@ -16,6 +16,7 @@ import SelectableBadge from "../SelectableBadge";
 import { useNavigation } from "@react-navigation/native";
 import routes from "../../navigation/routes";
 import ScrollableBadgeButtons from "../button/ScrollableBagdeButtons";
+import IconText from "../display/IconText";
 
 const HouseSearch = () => {
   const [search, setSearch] = useState({});
@@ -102,7 +103,7 @@ const HouseSearch = () => {
       <FlatList
         data={searchResults}
         keyExtractor={(item) => item.url}
-        numColumns={3}
+        numColumns={2}
         contentContainerStyle={{
           alignItems: "center",
         }}
@@ -113,11 +114,37 @@ const HouseSearch = () => {
                 navigation.navigate(routes.PROPERTY_DETAIL_PROP, item);
               }}
             >
-              <Text>{item.house_number}</Text>
               <Image
-                style={{ width: 130, height: 130, borderRadius: 20 }}
+                style={{ width: 200, height: 100, borderRadius: 10 }}
                 source={{ uri: item.image }}
               />
+              <View>
+                <IconText
+                  text={item.house_number}
+                  icon="home"
+                  size={15}
+                  fontWeight="bold"
+                />
+                <IconText
+                  text={item.property.title}
+                  icon="home-modern"
+                  color={colors.medium}
+                  size={15}
+                  fontWeight="bold"
+                />
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    paddingRight: 10,
+                  }}
+                >
+                  <IconText icon="star-outline" text={4.5} />
+                  <IconText icon="cards-heart-outline" text="1000" />
+                </View>
+                <IconText text={item.type.type} color={colors.medium} />
+                <IconText text={item.status.status} color={colors.medium} />
+              </View>
             </TouchableOpacity>
           </View>
         )}
@@ -130,7 +157,8 @@ export default HouseSearch;
 
 const styles = StyleSheet.create({
   card: {
-    padding: 2,
+    margin: 5,
+    backgroundColorL: colors.primary,
   },
   container: {
     padding: 10,
