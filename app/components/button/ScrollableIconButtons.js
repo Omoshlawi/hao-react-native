@@ -10,8 +10,23 @@ const ScrollableIconButtons = ({
   title,
   titleExtractor,
   imageExtractor,
-  keyExtractor
+  keyExtractor,
+  selectable = false,
+  defaultItemIndex,
 }) => {
+  const [currentIndex, setCurentIndex] = useState(
+    defaultItemIndex > -1 && defaultItemIndex < data.length
+      ? defaultItemIndex
+      : -1
+  );
+  useEffect(() => {
+    if (currentIndex === -1) {
+      onItemClicked(null);
+    } else {
+      const item = data[currentIndex];
+      onItemClicked(item);
+    }
+  }, [currentIndex]);
   return (
     <View style={[styles.container, contentContainerStyle]}>
       <Text style={styles.title}>{title}</Text>
@@ -25,7 +40,13 @@ const ScrollableIconButtons = ({
             style={styles.listItem}
             title={titleExtractor(type)}
             image={{ uri: imageExtractor(type) }}
-            onPress={() => onItemClicked(type)}
+            onPress={() => {
+              const index = data.indexOf(type);
+              index === currentIndex && selectable
+                ? setCurentIndex(-1)
+                : setCurentIndex(index);
+            }}
+            active={type === data[currentIndex] && selectable}
           />
         )}
       />

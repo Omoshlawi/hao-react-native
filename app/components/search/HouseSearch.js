@@ -16,7 +16,6 @@ import SelectableBadge from "../SelectableBadge";
 import { useNavigation } from "@react-navigation/native";
 import routes from "../../navigation/routes";
 import ScrollableBadgeButtons from "../button/ScrollableBagdeButtons";
-import SelectableScrollableBadgeButton from "../button/SelectableScrollableBadgeButton";
 
 const HouseSearch = () => {
   const [search, setSearch] = useState({});
@@ -41,15 +40,22 @@ const HouseSearch = () => {
     handleSearch();
   }, [search]);
 
-  const hadleTypeItemClick = (item) =>
-    setSearch({ ...search, type: item.type });
+  const hadleTypeItemClick = (item) => {
+    if (item) {
+      setSearch({ ...search, type: item.type });
+    } else {
+      const _search = { ...search };
+      delete _search.type;
+      setSearch(_search);
+    }
+  };
   const handleStatusChange = (item) => {
     if (item) {
       setSearch({ ...search, status: item.status });
     } else {
-      const _search = search;
+      const _search = { ...search };
       delete _search.status;
-      setSearch({ ..._search });
+      setSearch(_search);
     }
   };
   const handleSearch = async () => {
@@ -74,13 +80,12 @@ const HouseSearch = () => {
         />
       </View>
       {statuses.length > 0 && (
-        <SelectableScrollableBadgeButton
+        <ScrollableBadgeButtons
           data={statuses}
           onItemChange={handleStatusChange}
           keyExtractor={(status) => status.url}
           title="House Status"
           labelExtractor={(status) => status.status}
-          defaultItemIndex={0}
         />
       )}
       {types.length > 0 && (
@@ -91,6 +96,7 @@ const HouseSearch = () => {
           titleExtractor={(item) => item.type}
           imageExtractor={(item) => item.image}
           keyExtractor={(type) => type.url}
+          selectable
         />
       )}
       <FlatList

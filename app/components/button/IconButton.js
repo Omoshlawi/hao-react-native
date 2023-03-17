@@ -8,14 +8,28 @@ import {
 import React from "react";
 import colors from "../../utils/colors";
 
-const IconButton = ({ title, image, onPress, style, disable = false }) => {
+const IconButton = ({
+  title,
+  image,
+  onPress,
+  style,
+  disable = false,
+  active = false,
+  activeBackgroundColor = colors.tabBackground,
+}) => {
   return (
     <TouchableHighlight
       onPress={onPress}
       underlayColor={colors.light}
       disabled={disable}
     >
-      <View style={[styles.container, style]}>
+      <View
+        style={[
+          styles.container,
+          style,
+          active ? { backgroundColor: activeBackgroundColor } : {},
+        ]}
+      >
         <Image style={styles.image} source={image} resizeMode="contain" />
         <Text style={styles.text}>{title}</Text>
       </View>
@@ -30,11 +44,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 2,
     overflow: "hidden",
+    // backgroundColor: "red",
   },
   image: {
     width: 80,
     height: 80,
-    // backgroundColor: "red",
     borderRadius: 10,
   },
   text: {

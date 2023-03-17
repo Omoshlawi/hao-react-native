@@ -10,12 +10,28 @@ import colors from "../../utils/colors";
 
 const ScrollableBadgeButtons = ({
   data = [],
-  onBadgeItemClicked,
   contentContainerStyle,
   title,
+  defaultItemIndex,
   keyExtractor,
-  badgeLabelExtractor,
+  labelExtractor,
+  onItemChange = (item) => {},
+  selectable = true,
+  activeBackgroundColor = colors.tabBackground,
 }) => {
+  const [currentIndex, setCurentIndex] = useState(
+    defaultItemIndex > -1 && defaultItemIndex < data.length
+      ? defaultItemIndex
+      : -1
+  );
+  useEffect(() => {
+    if (currentIndex === -1) {
+      onItemChange(null);
+    } else {
+      const item = data[currentIndex];
+      onItemChange(item);
+    }
+  }, [currentIndex]);
   return (
     <View style={[styles.container, contentContainerStyle]}>
       <Text style={styles.title}>{title}</Text>
@@ -25,9 +41,32 @@ const ScrollableBadgeButtons = ({
         showsHorizontalScrollIndicator={false}
         keyExtractor={keyExtractor}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => onBadgeItemClicked(item)}>
-            <View style={styles.listItem}>
-              <Text style={styles.title}>{badgeLabelExtractor(item)}</Text>
+          <TouchableOpacity
+            onPress={() => {
+              const index = data.indexOf(item);
+              index === currentIndex && selectable
+                ? setCurentIndex(-1)
+                : setCurentIndex(index);
+            }}
+          >
+            <View
+              style={[
+                styles.listItem,
+                item === data[currentIndex] && selectable
+                  ? { backgroundColor: activeBackgroundColor }
+                  : {},
+              ]}
+            >
+              <Text
+                style={[
+                  styles.title,
+                  //   item === data[currentIndex] && selectable
+                  //     ? { color: colors.white }
+                  //     : {},
+                ]}
+              >
+                {labelExtractor(item)}
+              </Text>
             </View>
           </TouchableOpacity>
         )}
