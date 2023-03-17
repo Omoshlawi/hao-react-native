@@ -25,9 +25,16 @@ const SmallPropertyCard = ({ item }) => {
             size={15}
             fontWeight="bold"
           />
+          <IconText
+            text={"Ksh. " + item.price}
+            icon="currency-usd"
+            color={colors.medium}
+            size={15}
+            fontWeight="bold"
+          />
           <View style={styles.row}>
-            <IconText icon="star-outline" text={4.5} />
-            <IconText icon="cards-heart-outline" text="1000" />
+            <IconText icon="star-outline" text={4.5} color={colors.medium} />
+            <IconText icon="cards-heart-outline" text="1000" color={colors.medium} />
           </View>
           <View style={styles.row}>
             <IconText

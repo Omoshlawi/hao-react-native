@@ -17,7 +17,7 @@ function PropertyDetailScreen({ navigation, route }) {
         <TouchableOpacity
           style={styles.back}
           onPress={() => {
-            navigation.pop();
+            navigation.goBack();
           }}
         >
           <MaterialCommunityIcons

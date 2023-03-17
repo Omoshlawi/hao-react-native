@@ -1,32 +1,34 @@
-import {
-  KeyboardAvoidingView,
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import AppSafeAreaScreen from "../components/AppSafeAreaScreen";
 import colors from "../utils/colors";
-import AppSearch from "../components/AppSearch";
 import HouseCard from "../components/HouseCard";
 import { FlatList } from "react-native-gesture-handler";
-import { useHouses, useProperty } from "../api/hooks";
+import { useHouses, useProperty, useUser } from "../api/hooks";
 import routes from "../navigation/routes";
 import SmallHouseCard from "../components/house/SmallHouseCard";
 import IconText from "../components/display/IconText";
+import AppIcon from "../components/AppIcon";
+import UserContext from "../context/UserContext";
+import { Image } from "react-native";
 
 const HomeScreen = ({ navigation }) => {
-  const [searchString, setSearchString] = useState("");
   const [properties, setProperties] = useState([]);
   const [houses, setHouses] = useState([]);
   const [error, setError] = useState(false);
   const { getProperties } = useProperty();
   const { getAllHouses } = useHouses();
   const [refresh, setRefresh] = useState(false);
+  
+
+  const { user } = useContext(UserContext);
+  const { getUser } = useUser();
 
   const loadProps = async () => {
+    if (!user) {
+      await getUser();
+    }
+
     setRefresh(true);
     const propertiesResponse = await getProperties();
     const houseResponse = await getAllHouses();
@@ -48,18 +50,41 @@ const HomeScreen = ({ navigation }) => {
   return (
     <AppSafeAreaScreen style={styles.screen}>
       <View style={styles.searchContainer}>
-        <AppSearch
-          style={styles.search}
-          onTextChange={(text) => setSearchString(text)}
-          value={searchString}
-          onPress={() => {
-            console.log("Seaching....", searchString);
-          }}
-        />
+        <TouchableOpacity
+          onPress={() => navigation.navigate(routes.SEARCH_MAIN)}
+        >
+          <AppIcon
+            name="magnify"
+            scale={0.25}
+            backgroundColor={colors.primary}
+            color={colors.white}
+          />
+        </TouchableOpacity>
+        <View>
+          {user && (
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate(routes.USER_CENTER_MAIN, {
+                  user,
+                  // screen: routes.USER_PROFILE_EDIT_ACCOUNT,
+                })
+              }
+            >
+              {user.profile.image ? (
+                <Image
+                  style={{ width: 50, height: 50, borderRadius: 25 }}
+                  source={{ uri: user.profile.image }}
+                />
+              ) : (
+                <AppIcon name="account" />
+              )}
+            </TouchableOpacity>
+          )}
+        </View>
       </View>
       <View>
         <View style={styles.header}>
-          <IconText text="Properties" fontWeight="bold" color={colors.black}/>
+          <IconText text="Properties" fontWeight="bold" color={colors.black} />
           <IconText
             left={false}
             text="View all"
@@ -90,7 +115,7 @@ const HomeScreen = ({ navigation }) => {
         />
       </View>
       <View style={styles.header}>
-        <IconText text="Houses" fontWeight="bold" color={colors.black}/>
+        <IconText text="Houses" fontWeight="bold" color={colors.black} />
         <IconText
           left={false}
           text="View all"
@@ -118,7 +143,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     padding: 10,
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   title: {
     fontSize: 30,
@@ -129,7 +154,9 @@ const styles = StyleSheet.create({
     lineHeight: 30,
   },
   searchContainer: {
-    paddingHorizontal: 10,
+    paddingHorizontal: 20,
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   search: {
     borderRadius: 10,
@@ -139,7 +166,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
   },
   list: {
-    width: 250,
+    width: 300,
     height: 300,
     marginHorizontal: 5,
   },

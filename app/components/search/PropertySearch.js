@@ -1,12 +1,22 @@
-import { StyleSheet, Text, View, ScrollView, FlatList } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import colors from "../../utils/colors";
 import { useProperty } from "../../api/hooks";
 import AppSearch from "../AppSearch";
-import SelectableBadge from "../SelectableBadge";
 import ScrollableIconButtons from "../button/ScrollableIconButtons";
 import ScrollableBadgeButtons from "../button/ScrollableBagdeButtons";
 import SmallPropertyCard from "../property/SmallPropertyCard";
+import { Menu, MenuItem, MenuDivider } from "react-native-material-menu";
+import AppCheckBox from "../input/AppCheckBox";
+import MultiSlider from "@ptomasroos/react-native-multi-slider";
+import AppIcon from "../AppIcon";
 
 const PropertySearch = () => {
   const [search, setSearch] = useState({});
@@ -14,6 +24,12 @@ const PropertySearch = () => {
   const [statuses, setStatuses] = useState([]);
   const { getPropertyTypes, getPropertyStatus, filterProperty } = useProperty();
   const [searchResults, setSearchResults] = useState([]);
+  const [visible, setVisible] = useState(false);
+  const [activeFilters, setActiveFilters] = useState({
+    status: false,
+    type: false,
+    price: false,
+  });
 
   useEffect(() => {
     (async () => {
@@ -70,19 +86,68 @@ const PropertySearch = () => {
           value={search.search}
           onPress={handleSearch}
         />
+        <Menu
+          visible={visible}
+          onRequestClose={() => setVisible(false)}
+          anchor={
+            <TouchableOpacity onPress={() => setVisible(true)}>
+              <AppIcon
+                name="filter-menu-outline"
+                scale={0.25}
+                size={50}
+                backgroundColor={colors.black}
+                color={colors.white}
+              />
+            </TouchableOpacity>
+          }
+        >
+          <MenuItem disabled={true}>
+            <AppCheckBox
+              text="Status Filter"
+              value={activeFilters.status}
+              onValueChange={(status) =>
+                setActiveFilters({ ...activeFilters, status })
+              }
+            />
+          </MenuItem>
+          <MenuItem disabled={true}>
+            <AppCheckBox
+              text="Type Filter"
+              value={activeFilters.type}
+              onValueChange={(type) =>
+                setActiveFilters({ ...activeFilters, type })
+              }
+            />
+          </MenuItem>
+          <MenuItem disabled={true}>
+            <AppCheckBox
+              text="Price Filter"
+              value={activeFilters.price}
+              onValueChange={(price) => {
+                if (!price) {
+                  const s = { ...search };
+                  delete s.price_min;
+                  delete s.price_max;
+                  setSearch(s);
+                }
+                setActiveFilters({ ...activeFilters, price });
+              }}
+            />
+          </MenuItem>
+        </Menu>
       </View>
-      {statuses.length > 0 && (
+      {statuses.length > 0 && activeFilters.status && (
         <ScrollableBadgeButtons
           data={statuses}
           onItemChange={handleStatusChange}
           keyExtractor={(status) => status.url}
-          title="Property Status"
+          title="House Status"
           labelExtractor={(status) => status.status}
         />
       )}
-      {types.length > 0 && (
+      {types.length > 0 && activeFilters.type && (
         <ScrollableIconButtons
-          title="Property Types"
+          title="House Types"
           data={types}
           onItemClicked={hadleTypeItemClick}
           titleExtractor={(item) => item.type}
@@ -90,6 +155,36 @@ const PropertySearch = () => {
           keyExtractor={(type) => type.url}
           selectable
         />
+      )}
+      {activeFilters.price && (
+        <>
+          <Text style={{ paddingHorizontal: 10, fontWeight: "bold" }}>
+            House Prices
+          </Text>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "center",
+              paddingHorizontal: 10,
+              alignItems: "center",
+            }}
+          >
+            <Text>Min</Text>
+            <MultiSlider
+              max={10000000}
+              min={1000}
+              values={[1000000, 5000000]}
+              // onValuesChange={(values) => console.log(values)}
+              step={5000}
+              enableLabel={true}
+              containerStyle={{ paddingHorizontal: 10 }}
+              onValuesChangeFinish={([price_min, price_max]) => {
+                setSearch({ ...search, price_min, price_max });
+              }}
+            />
+            <Text>Max</Text>
+          </View>
+        </>
       )}
       <FlatList
         data={searchResults}
@@ -107,6 +202,10 @@ const PropertySearch = () => {
 export default PropertySearch;
 
 const styles = StyleSheet.create({
+  card: {
+    margin: 5,
+    backgroundColorL: colors.primary,
+  },
   container: {
     padding: 10,
   },
@@ -120,9 +219,13 @@ const styles = StyleSheet.create({
   },
   searchContainer: {
     paddingHorizontal: 10,
+    flexDirection: "row",
+    alignItems: "center",
   },
   search: {
     borderRadius: 10,
     backgroundColor: colors.white,
+    flex: 1,
+    marginRight: 10,
   },
 });
