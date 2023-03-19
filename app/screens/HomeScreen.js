@@ -11,6 +11,7 @@ import IconText from "../components/display/IconText";
 import AppIcon from "../components/AppIcon";
 import UserContext from "../context/UserContext";
 import { Image } from "react-native";
+import LargePropertCard from "../components/property/LargePropertCard";
 
 const HomeScreen = ({ navigation }) => {
   const [properties, setProperties] = useState([]);
@@ -19,7 +20,6 @@ const HomeScreen = ({ navigation }) => {
   const { getProperties } = useProperty();
   const { getAllHouses } = useHouses();
   const [refresh, setRefresh] = useState(false);
-  
 
   const { user } = useContext(UserContext);
   const { getUser } = useUser();
@@ -101,15 +101,7 @@ const HomeScreen = ({ navigation }) => {
           keyExtractor={(property) => property.url}
           renderItem={({ item }) => (
             <View style={styles.list}>
-              <HouseCard
-                image={{ uri: item.image }}
-                title={item.title}
-                subTitle={item.description ? item.description.slice(0, 53) : ""}
-                price={item.price}
-                onPress={() => {
-                  navigation.navigate(routes.PROPERTY_DETAIL_PROP, item);
-                }}
-              />
+              <LargePropertCard item={item} />
             </View>
           )}
         />
@@ -166,7 +158,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
   },
   list: {
-    width: 300,
+    width: 350,
     height: 300,
     marginHorizontal: 5,
   },

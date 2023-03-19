@@ -19,6 +19,7 @@ const IconText = ({
         alignItems: "center",
       }}
       onPress={onPress}
+      disabled={!(onPress instanceof Function)}
     >
       {icon && <MaterialCommunityIcons name={icon} size={size} color={color} />}
       {text && (
