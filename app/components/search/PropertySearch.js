@@ -90,7 +90,11 @@ const PropertySearch = () => {
           visible={visible}
           onRequestClose={() => setVisible(false)}
           anchor={
-            <TouchableOpacity onPress={() => setVisible(true)}>
+            <TouchableOpacity
+              onPress={() => {
+                setVisible(true);
+              }}
+            >
               <AppIcon
                 name="filter-menu-outline"
                 scale={0.25}

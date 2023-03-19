@@ -23,7 +23,7 @@ const SearchScreen = () => {
           },
           {
             title: "Properties",
-            icon: <MaterialCommunityIcons name="account" size={20} />,
+            icon: <MaterialCommunityIcons name="home-modern" size={20} />,
           },
         ]}
         onTabItemClicked={(item, index) => {
