@@ -5,6 +5,7 @@ import colors from "../../utils/colors";
 import { useProperty } from "../../api/hooks";
 import routes from "../../navigation/routes";
 import HouseCard from "../../components/HouseCard";
+import LargePropertCard from "../../components/property/LargePropertCard";
 
 function PropertyListScreen({ navigation }) {
   const [properties, setProperties] = useState([]);
@@ -38,19 +39,12 @@ function PropertyListScreen({ navigation }) {
         data={properties}
         keyExtractor={(property) => property.url}
         refreshing={refresh}
+        contentContainerStyle={styles.listContainer}
         onRefresh={loadProps}
+        showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
-          <View style={styles.list}>
-            <HouseCard
-              image={{ uri: item.image }}
-              title={item.title}
-              subTitle={item.description.slice(0, 197)}
-              price={item.price}
-              imgHeight={300}
-              onPress={() => {
-                navigation.navigate(routes.PROPERTY_DETAIL_PROP, item);
-              }}
-            />
+          <View style={styles.listItem}>
+            <LargePropertCard item={item} />
           </View>
         )}
       />
@@ -64,13 +58,16 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     flex: 1,
   },
-  list: {
-    paddingHorizontal: 5,
+  listContainer: {
+    padding: 5,
   },
   error: {
     textAlign: "center",
     fontWeight: "bold",
     fontSize: 20,
+  },
+  listItem: {
+    margin: 5,
   },
 });
 

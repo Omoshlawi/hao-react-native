@@ -34,7 +34,11 @@ const SmallPropertyCard = ({ item }) => {
           />
           <View style={styles.row}>
             <IconText icon="star-outline" text={4.5} color={colors.medium} />
-            <IconText icon="cards-heart-outline" text="1000" color={colors.medium} />
+            <IconText
+              icon="cards-heart-outline"
+              text="1000"
+              color={colors.medium}
+            />
           </View>
           <View style={styles.row}>
             <IconText
@@ -59,7 +63,7 @@ export default SmallPropertyCard;
 const styles = StyleSheet.create({
   card: {
     margin: 5,
-    backgroundColorL: colors.primary,
+    backgroundColor: colors.primary,
   },
   row: {
     flexDirection: "row",

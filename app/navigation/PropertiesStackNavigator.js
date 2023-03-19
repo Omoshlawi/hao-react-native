@@ -20,7 +20,13 @@ function PropertiesStackNavigator(props) {
         component={HomeScreen}
         options={{ headerShown: false }}
       />
-      <Screen name={routes.PROPERTY_LIST_PROP} component={PropertyListScreen} />
+      <Screen
+        name={routes.PROPERTY_LIST_PROP}
+        component={PropertyListScreen}
+        options={{
+          headerTitle: "Properties",
+        }}
+      />
       <Screen
         name={routes.PROPERTY_DETAIL_PROP}
         component={PropertyDetailScreen}
