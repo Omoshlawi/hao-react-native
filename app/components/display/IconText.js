@@ -23,7 +23,10 @@ const IconText = ({
     >
       {icon && <MaterialCommunityIcons name={icon} size={size} color={color} />}
       {text && (
-        <Text style={[styles.text, { fontSize: size, color, fontWeight }]}>
+        <Text
+          numberOfLines={1}
+          style={[styles.text, { fontSize: size, color, fontWeight }]}
+        >
           {text}
         </Text>
       )}

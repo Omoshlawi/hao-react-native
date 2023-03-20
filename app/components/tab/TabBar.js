@@ -29,7 +29,8 @@ const TabBar = ({
             <TouchableOpacity
               style={styles.btn}
               onPress={() => {
-                onTabItemClicked(item, index);
+                if (onTabItemClicked instanceof Function)
+                  onTabItemClicked(item, index);
                 setActive(index);
               }}
             >

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import {
   View,
@@ -7,93 +7,107 @@ import {
   TouchableOpacity,
   Text,
   ImageBackground,
+  ScrollView,
 } from "react-native";
 import AppText from "../../components/AppText";
 import colors from "../../utils/colors";
-import ListItem from "../../components/ListItem";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FlatList } from "react-native";
 import routes from "../../navigation/routes";
-import AppIcon from "../../components/AppIcon";
 import IconText from "../../components/display/IconText";
+import AppButton from "../../components/AppButton";
 
 function PropertyDetailScreen({ navigation, route }) {
   item = route.params;
   return (
-    <View>
-      <ImageBackground style={styles.image} source={{ uri: item.image }}>
-        <View style={styles.header}>
-          <TouchableOpacity
-            style={styles.back}
-            onPress={() => {
-              navigation.goBack();
-            }}
-          >
-            <MaterialCommunityIcons
-              name="chevron-left"
-              color={colors.white}
-              size={50}
-            />
-          </TouchableOpacity>
-          <Text style={styles.headerTitle}>{item.title}</Text>
-          <View
-            style={{
-              backgroundColor: colors.black,
-              alignItems: "center",
-              justifyContent: "center",
-              padding: 10,
-              borderRadius: 10,
-            }}
-          >
-            <IconText
-              icon="star-outline"
-              size={20}
-              color={colors.white}
-              text={`${item.reviews.average_rating}`}
-            />
-          </View>
-        </View>
-        <View>
-          <View style={styles.filters}>
-            <IconText
-              icon="bed-single-outline"
-              text={`${item.type.type} | `}
-              size={20}
-            />
-            <IconText
-              icon="progress-check"
-              text={`${item.status.status} | `}
-              size={20}
-            />
-          </View>
-          {item.images && (
-            <View style={styles.thumbnailsContainer}>
-              <FlatList
-                data={item.images}
-                horizontal
-                renderItem={({ item }) => (
-                  <TouchableOpacity
-                    onPress={() => {
-                      navigation.navigate(routes.IMAGE_VIEW, {
-                        image: { uri: item.image },
-                      });
-                    }}
-                  >
-                    <Image
-                      source={{ uri: item.image }}
-                      style={styles.thumbnail}
-                    />
-                  </TouchableOpacity>
-                )}
-                keyExtractor={(item) => item.image}
+    <View style={styles.screen}>
+      <ScrollView>
+        <ImageBackground style={styles.image} source={{ uri: item.image }}>
+          <View style={styles.header}>
+            <TouchableOpacity
+              style={styles.back}
+              onPress={() => {
+                navigation.goBack();
+              }}
+            >
+              <MaterialCommunityIcons
+                name="chevron-left"
+                color={colors.white}
+                size={50}
+              />
+            </TouchableOpacity>
+            <Text style={styles.headerTitle}>{item.title}</Text>
+            <View
+              style={{
+                backgroundColor: colors.black,
+                alignItems: "center",
+                justifyContent: "center",
+                padding: 10,
+                borderRadius: 10,
+              }}
+            >
+              <IconText
+                icon="star-outline"
+                size={20}
+                color={colors.white}
+                text={`${item.reviews.average_rating}`}
               />
             </View>
-          )}
+          </View>
+          <View>
+            <View style={styles.filters}>
+              <IconText
+                icon="bed-single-outline"
+                text={`${item.type.type} | `}
+                size={20}
+                color={colors.white}
+              />
+              <IconText
+                icon="progress-check"
+                text={`${item.status.status} | `}
+                size={20}
+                color={colors.white}
+              />
+              <IconText
+                icon="google-maps"
+                text={`${item.location.address} ${item.location.city} ${item.location.country}`}
+                size={15}
+              />
+            </View>
+            {item.images && (
+              <View style={styles.thumbnailsContainer}>
+                <FlatList
+                  data={item.images}
+                  horizontal
+                  renderItem={({ item }) => (
+                    <TouchableOpacity
+                      onPress={() => {
+                        navigation.navigate(routes.IMAGE_VIEW, {
+                          image: { uri: item.image },
+                        });
+                      }}
+                    >
+                      <Image
+                        source={{ uri: item.image }}
+                        style={styles.thumbnail}
+                      />
+                    </TouchableOpacity>
+                  )}
+                  keyExtractor={(item) => item.image}
+                />
+              </View>
+            )}
+          </View>
+        </ImageBackground>
+        <View style={styles.detailsContainer}>
+          <AppText>{item.description}</AppText>
         </View>
-      </ImageBackground>
-      <View style={styles.detailsContainer}>
-        <AppText style={styles.price}>Ksh.{item.price}</AppText>
-        <AppText>{item.description}</AppText>
+      </ScrollView>
+      <View style={styles.row}>
+        <IconText text={`Ksh.${item.price}`} size={30} />
+        <TouchableOpacity>
+          <Text style={styles.btnText}>Check availability</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -106,21 +120,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   detailsContainer: {
-    padding: 20,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-  },
-  price: {
-    color: colors.secondary,
-    fontWeight: "bold",
-    fontSize: 20,
-    marginVertical: 10,
-  },
-  userContainer: {
-    marginVertical: 20,
-    bottom: 100,
+    padding: 10,
   },
   back: {
     backgroundColor: colors.black,
@@ -137,9 +137,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     fontWeight: "bold",
     color: colors.white,
-    // backgroundColor: colors.dark,
     flex: 1,
-    // borderRadius: 10,
   },
   thumbnailsContainer: {
     padding: 10,
@@ -155,11 +153,22 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: colors.dark,
   },
-  filtersText: {
-    color: colors.white,
-    fontWeight: "bold",
-    fontSize: 20,
+  screen: {
+    backgroundColor: colors.background,
+    flex: 1,
   },
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  btnText: {
+    backgroundColor: colors.primary,
+    fontWeight: "bold",
+    padding: 10,
+    margin: 10,
+    borderRadius:10
+
+  }
 });
 
 PropertyDetailScreen.propTypes = {};
