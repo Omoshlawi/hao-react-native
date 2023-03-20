@@ -17,6 +17,7 @@ import routes from "../../navigation/routes";
 import IconText from "../../components/display/IconText";
 import AppButton from "../../components/AppButton";
 import ScrollableBadgeButtons from "../../components/button/ScrollableBagdeButtons";
+import ExpandableText from "../../components/display/ExpandableText";
 
 function PropertyDetailScreen({ navigation, route }) {
   item = route.params;
@@ -111,7 +112,11 @@ function PropertyDetailScreen({ navigation, route }) {
           )}
           <View>
             <Text style={{ fontWeight: "bold" }}>Description</Text>
-            <AppText>{item.description}</AppText>
+            <ExpandableText
+              contentStyle={{ padding: 20 }}
+              text={item.description}
+              threshHold={350}
+            />
           </View>
         </View>
       </ScrollView>
