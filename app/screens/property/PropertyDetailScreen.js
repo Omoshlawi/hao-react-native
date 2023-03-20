@@ -16,6 +16,7 @@ import { FlatList } from "react-native";
 import routes from "../../navigation/routes";
 import IconText from "../../components/display/IconText";
 import AppButton from "../../components/AppButton";
+import ScrollableBadgeButtons from "../../components/button/ScrollableBagdeButtons";
 
 function PropertyDetailScreen({ navigation, route }) {
   item = route.params;
@@ -100,7 +101,18 @@ function PropertyDetailScreen({ navigation, route }) {
           </View>
         </ImageBackground>
         <View style={styles.detailsContainer}>
-          <AppText>{item.description}</AppText>
+          {item.features.length > 0 && (
+            <ScrollableBadgeButtons
+              data={item.features}
+              labelExtractor={({ feature }) => feature}
+              selectable={false}
+              title="Features"
+            />
+          )}
+          <View>
+            <Text style={{ fontWeight: "bold" }}>Description</Text>
+            <AppText>{item.description}</AppText>
+          </View>
         </View>
       </ScrollView>
       <View style={styles.row}>
@@ -166,9 +178,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     padding: 10,
     margin: 10,
-    borderRadius:10
-
-  }
+    borderRadius: 10,
+  },
 });
 
 PropertyDetailScreen.propTypes = {};
