@@ -47,7 +47,10 @@ function AccountScreen({ navigation }) {
               )
             }
             onPress={() => {
-              navigation.navigate(routes.USER_PROFILE_EDIT_ACCOUNT, user);
+              navigation.navigate(routes.USER_NAV, {
+                screen: routes.USER_PROFILE_EDIT_ACCOUNT,
+                params: user,
+              });
             }}
           />
         )}
@@ -60,7 +63,7 @@ function AccountScreen({ navigation }) {
           renderItem={({ item }) => (
             <ListItem
               title={item.title}
-              onPress={() => navigation.navigate(item.route)}
+              onPress={() => {}}
               IconComponent={
                 <AppIcon
                   name={item.icon.name}

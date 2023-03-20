@@ -1,10 +1,9 @@
 // Freeze prevent the object from being mordified eith acciendanty or intentinally
 
 export default Object.freeze({
-  HOME: "HomePage",
-  HOME_MAIN: "Home",
-  SEARCH_MAIN: "Search",
-  PROPERTY_ADD_MAIN: "Add",
+  HOME_MAIN: "HomeScreen",
+  SEARCH_MAIN: "SearchScreen",
+  PROPERTY_ADD_MAIN: "PropertyEditingScreen",
   USER_CENTER_MAIN: "Account",
   WELCOME_AUTH: "Welcome",
   LOGIN_AUTH: "Login",
@@ -16,4 +15,8 @@ export default Object.freeze({
   PROPERTIES_LOCATION: "PropertyLocations",
   USER_PROPERTIES: "UserProps",
   IMAGE_VIEW: "ImageView",
+  TABS: "Tabs",
+  AUTH: "Auth",
+  PROPERTY_NAV: "PropNav",
+  USER_NAV: "UserNav",
 });

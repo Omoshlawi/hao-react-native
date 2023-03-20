@@ -10,7 +10,12 @@ const LargePropertCard = ({ item }) => {
   const navigation = useNavigation();
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate(routes.PROPERTY_DETAIL_PROP, item)}
+      onPress={() =>
+        navigation.navigate(routes.PROPERTY_NAV, {
+          screen: routes.PROPERTY_DETAIL_PROP,
+          params: item,
+        })
+      }
     >
       <View style={styles.container}>
         <TouchableOpacity style={styles.like}>

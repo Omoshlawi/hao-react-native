@@ -11,7 +11,10 @@ const SmallPropertyCard = ({ item }) => {
     <View style={styles.card}>
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate(routes.PROPERTY_DETAIL_PROP, item);
+          navigation.navigate(routes.PROPERTY_NAV, {
+            params: item,
+            screen: routes.PROPERTY_DETAIL_PROP,
+          });
         }}
       >
         <Image
@@ -33,7 +36,11 @@ const SmallPropertyCard = ({ item }) => {
             fontWeight="bold"
           />
           <View style={styles.row}>
-            <IconText icon="star-outline" text={`${item.reviews.average_rating}`} color={colors.medium} />
+            <IconText
+              icon="star-outline"
+              text={`${item.reviews.average_rating}`}
+              color={colors.medium}
+            />
             <IconText
               icon="chat-outline"
               text={`${item.reviews.count}`}
@@ -65,7 +72,7 @@ const styles = StyleSheet.create({
     margin: 5,
     backgroundColor: colors.white,
     borderRadius: 10,
-    paddingBottom: 10
+    paddingBottom: 10,
   },
   row: {
     flexDirection: "row",

@@ -5,7 +5,6 @@ import React from "react";
 import PropertyDetailScreen from "../screens/property/PropertyDetailScreen";
 import PropertyListScreen from "../screens/property/PropertyListScreen";
 import routes from "./routes";
-import HomeScreen from "../screens/HomeScreen";
 import ViewImageScreen from "../screens/ViewImageScreen";
 
 const Stack = createNativeStackNavigator();
@@ -15,11 +14,6 @@ const Screen = Stack.Screen;
 function PropertiesStackNavigator(props) {
   return (
     <Navigator screenOptions={{ headerTintColor: colors.primary }}>
-      <Screen
-        name={routes.HOME}
-        component={HomeScreen}
-        options={{ headerShown: false }}
-      />
       <Screen
         name={routes.PROPERTY_LIST_PROP}
         component={PropertyListScreen}

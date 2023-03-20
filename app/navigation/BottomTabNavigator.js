@@ -4,13 +4,12 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import colors from "../utils/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import PropertyEditingScreen from "../screens/property/PropertyEditingScreen";
-import PropertiesStackNavigator from "./PropertiesStackNavigator";
 import SearchScreen from "../screens/SearchScreen";
-import UserStackNavigation from "./UserStackNavigation";
 import routes from "./routes";
 import PropertyLocationsScreen from "../screens/property/PropertyLocationsScreen";
 import TabBarButton from "../components/TabBarButton";
-import { View } from "react-native";
+import HomeScreen from "../screens/HomeScreen";
+import AccountScreen from "../screens/user/AccountScreen";
 const Tab = createBottomTabNavigator();
 
 const Navigator = Tab.Navigator;
@@ -32,7 +31,7 @@ const getTabBarVisibility = (route) => {
   return true;
 };
 
-function MainBottomTabNavigator(props) {
+function BottomTabNavigator(props) {
   return (
     <Navigator
       screenOptions={({ route }) => ({
@@ -47,7 +46,7 @@ function MainBottomTabNavigator(props) {
     >
       <Screen
         name={routes.HOME_MAIN}
-        component={PropertiesStackNavigator}
+        component={HomeScreen}
         options={{
           tabBarIcon: ({ size, color }) => (
             <MaterialCommunityIcons size={size} name="home" color={color} />
@@ -109,7 +108,7 @@ function MainBottomTabNavigator(props) {
 
       <Screen
         name={routes.USER_CENTER_MAIN}
-        component={UserStackNavigation}
+        component={AccountScreen}
         options={{
           tabBarIcon: ({ size, color, focused }) => (
             <MaterialCommunityIcons
@@ -125,6 +124,6 @@ function MainBottomTabNavigator(props) {
   );
 }
 
-MainBottomTabNavigator.propTypes = {};
+BottomTabNavigator.propTypes = {};
 
-export default MainBottomTabNavigator;
+export default BottomTabNavigator;

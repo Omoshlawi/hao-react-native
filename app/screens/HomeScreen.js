@@ -51,7 +51,7 @@ const HomeScreen = ({ navigation }) => {
     <AppSafeAreaScreen style={styles.screen}>
       <View style={styles.searchContainer}>
         <TouchableOpacity
-          onPress={() => navigation.navigate(routes.SEARCH_MAIN)}
+          onPress={() => navigation.navigate(routes.PROPERTY_NAV)}
         >
           <AppIcon
             name="magnify"
@@ -89,9 +89,7 @@ const HomeScreen = ({ navigation }) => {
             left={false}
             text="View all"
             icon="chevron-right"
-            onPress={() => {
-              navigation.navigate(routes.PROPERTY_LIST_PROP);
-            }}
+            onPress={() => navigation.navigate(routes.PROPERTY_NAV)}
           />
         </View>
         <FlatList
@@ -112,9 +110,7 @@ const HomeScreen = ({ navigation }) => {
           left={false}
           text="View all"
           icon="chevron-right"
-          onPress={() => {
-            navigation.navigate(routes.PROPERTY_LIST_PROP);
-          }}
+          onPress={() => {}}
         />
       </View>
       <FlatList
