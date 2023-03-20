@@ -12,11 +12,17 @@ const ExpandableText = ({
   contentStyle,
   color = colors.primary,
   size = 20,
+  title,
 }) => {
   const [expanded, setExpanded] = useState(false);
   const displayText = expanded ? text : `${text}`.slice(0, threshHold);
   return (
     <View>
+      {title && (
+        <Text style={{ fontWeight: "bold", paddingHorizontal: 10 }}>
+          {title}
+        </Text>
+      )}
       <Text style={contentStyle}>{displayText}</Text>
       {text.length > threshHold && (
         <View style={styles.button}>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import {
   View,
@@ -18,9 +18,27 @@ import IconText from "../../components/display/IconText";
 import AppButton from "../../components/AppButton";
 import ScrollableBadgeButtons from "../../components/button/ScrollableBagdeButtons";
 import ExpandableText from "../../components/display/ExpandableText";
+import { useHouses } from "../../api/hooks";
+import SmallHouseCard from "../../components/house/SmallHouseCard";
 
 function PropertyDetailScreen({ navigation, route }) {
   item = route.params;
+  const [searchResults, setSearchResults] = useState([]);
+  const { filterHouses } = useHouses();
+  const handleSearch = async () => {
+    const response = await filterHouses({ property: item.title });
+    if (!response.ok) {
+      return console.log(response.problem);
+    }
+    const {
+      data: { results },
+    } = response;
+    setSearchResults(results);
+  };
+
+  useEffect(() => {
+    handleSearch();
+  }, []);
   return (
     <View style={styles.screen}>
       <ScrollView>
@@ -110,12 +128,52 @@ function PropertyDetailScreen({ navigation, route }) {
               title="Features"
             />
           )}
+          <ExpandableText
+            title="Description"
+            contentStyle={{ paddingHorizontal: 20, paddingVertical: 10 }}
+            text={item.description}
+            threshHold={350}
+          />
           <View>
-            <Text style={{ fontWeight: "bold" }}>Description</Text>
-            <ExpandableText
-              contentStyle={{ padding: 20 }}
-              text={item.description}
-              threshHold={350}
+            <Text style={{ fontWeight: "bold", paddingHorizontal: 10 }}>
+              Property Details
+            </Text>
+            <View style={styles.textRow}>
+              <Text>Title: </Text>
+              <Text style={styles.detailText}>{item.title}</Text>
+            </View>
+            <View style={styles.textRow}>
+              <Text>Price: </Text>
+              <Text style={styles.detailText}>{item.price}</Text>
+            </View>
+            <View style={styles.textRow}>
+              <Text>Size: </Text>
+              <Text style={styles.detailText}>{item.area}</Text>
+            </View>
+            <View style={styles.textRow}>
+              <Text>Type: </Text>
+              <Text style={styles.detailText}>{item.type.type}</Text>
+            </View>
+            <View style={styles.textRow}>
+              <Text>Status: </Text>
+              <Text style={styles.detailText}>{item.status.status}</Text>
+            </View>
+          </View>
+          <View>
+            {searchResults.length > 0 && (
+              <Text style={{ fontWeight: "bold", paddingHorizontal: 10 }}>
+                Houses
+              </Text>
+            )}
+            <FlatList
+              data={searchResults}
+              keyExtractor={(house) => house.url}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={{
+                alignItems: "center",
+              }}
+              renderItem={({ item: house }) => <SmallHouseCard item={house} />}
             />
           </View>
         </View>
@@ -184,6 +242,14 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 10,
     borderRadius: 10,
+  },
+  textRow: {
+    flexDirection: "row",
+    paddingVertical: 5,
+    paddingHorizontal: 20,
+  },
+  detailText: {
+    fontWeight: "bold",
   },
 });
 
