@@ -33,10 +33,10 @@ const SmallPropertyCard = ({ item }) => {
             fontWeight="bold"
           />
           <View style={styles.row}>
-            <IconText icon="star-outline" text={4.5} color={colors.medium} />
+            <IconText icon="star-outline" text={`${item.reviews.average_rating}`} color={colors.medium} />
             <IconText
-              icon="cards-heart-outline"
-              text="1000"
+              icon="chat-outline"
+              text={`${item.reviews.count}`}
               color={colors.medium}
             />
           </View>
@@ -44,12 +44,12 @@ const SmallPropertyCard = ({ item }) => {
             <IconText
               text={item.type.type}
               color={colors.medium}
-              icon="format-list-bulleted-type"
+              icon="bed-single-outline"
             />
             <IconText
               text={item.status.status}
               color={colors.medium}
-              icon="checkbook"
+              icon="progress-check"
             />
           </View>
         </View>
@@ -63,7 +63,9 @@ export default SmallPropertyCard;
 const styles = StyleSheet.create({
   card: {
     margin: 5,
-    backgroundColor: colors.primary,
+    backgroundColor: colors.white,
+    borderRadius: 10,
+    paddingBottom: 10
   },
   row: {
     flexDirection: "row",

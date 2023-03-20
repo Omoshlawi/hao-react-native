@@ -7,9 +7,11 @@ import { useNavigation } from "@react-navigation/native";
 import routes from "../../navigation/routes";
 
 const LargePropertCard = ({ item }) => {
-  const navigation  = useNavigation()
+  const navigation = useNavigation();
   return (
-    <TouchableOpacity onPress={()=>navigation.navigate(routes.PROPERTY_DETAIL_PROP, item)}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate(routes.PROPERTY_DETAIL_PROP, item)}
+    >
       <View style={styles.container}>
         <TouchableOpacity style={styles.like}>
           <AppIcon name="cards-heart" />
@@ -45,7 +47,7 @@ const LargePropertCard = ({ item }) => {
         <View style={styles.row}>
           <IconText
             icon="star-outline"
-            text={3.5}
+            text={`${item.reviews.average_rating}`}
             fontWeight="bold"
             color={colors.medium}
           />
@@ -57,7 +59,7 @@ const LargePropertCard = ({ item }) => {
           />
           <IconText
             icon="chat-outline"
-            text="10k"
+            text={`${item.reviews.count}`}
             fontWeight="bold"
             color={colors.medium}
           />

@@ -41,19 +41,15 @@ const SmallHouseCard = ({ item }) => {
             fontWeight="bold"
           />
           <View style={styles.row}>
-            <IconText icon="star-outline" text={4.5} color={colors.medium}/>
-            <IconText icon="cards-heart-outline" text="1000" color={colors.medium} />
-          </View>
-          <View style={styles.row}>
             <IconText
               text={item.type.type}
               color={colors.medium}
-              icon="format-list-bulleted-type"
+              icon="bed-single-outline"
             />
             <IconText
               text={item.status.status}
               color={colors.medium}
-              icon="checkbook"
+              icon="progress-check"
             />
           </View>
         </View>
@@ -67,7 +63,9 @@ export default SmallHouseCard;
 const styles = StyleSheet.create({
   card: {
     margin: 5,
-    backgroundColorL: colors.primary,
+    backgroundColor: colors.white,
+    paddingBottom: 10,
+    borderRadius: 10,
   },
   row: {
     flexDirection: "row",

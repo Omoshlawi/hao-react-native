@@ -1,54 +1,91 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { View, Image, StyleSheet, TouchableOpacity, Text } from "react-native";
+import {
+  View,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  ImageBackground,
+} from "react-native";
 import AppText from "../../components/AppText";
 import colors from "../../utils/colors";
 import ListItem from "../../components/ListItem";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FlatList } from "react-native";
 import routes from "../../navigation/routes";
+import AppIcon from "../../components/AppIcon";
+import IconText from "../../components/display/IconText";
 
 function PropertyDetailScreen({ navigation, route }) {
   item = route.params;
   return (
     <View>
-      <Image style={styles.image} source={{ uri: item.image }} />
-      <View style={styles.header}>
-        <TouchableOpacity
-          style={styles.back}
-          onPress={() => {
-            navigation.goBack();
-          }}
-        >
-          <MaterialCommunityIcons
-            name="chevron-left"
-            color={colors.white}
-            size={50}
-          />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>{item.title}</Text>
-      </View>
-      {item.images && (
-        <View style={styles.thumbnailsContainer}>
-          <Text style={{ fontWeight: "bold" }}>{item.title} Images</Text>
-          <FlatList
-            data={item.images}
-            horizontal
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate(routes.IMAGE_VIEW, {
-                    image: { uri: item.image },
-                  });
-                }}
-              >
-                <Image source={{ uri: item.image }} style={styles.thumbnail} />
-              </TouchableOpacity>
-            )}
-            keyExtractor={(item) => item.image}
-          />
+      <ImageBackground style={styles.image} source={{ uri: item.image }}>
+        <View style={styles.header}>
+          <TouchableOpacity
+            style={styles.back}
+            onPress={() => {
+              navigation.goBack();
+            }}
+          >
+            <MaterialCommunityIcons
+              name="chevron-left"
+              color={colors.white}
+              size={50}
+            />
+          </TouchableOpacity>
+          <Text style={styles.headerTitle}>{item.title}</Text>
+          <View
+            style={{
+              backgroundColor: colors.black,
+              alignItems: "center",
+              justifyContent: "center",
+              padding: 10,
+              borderRadius: 10,
+            }}
+          >
+            <IconText
+              icon="star-outline"
+              size={20}
+              color={colors.white}
+              text={`${item.reviews.average_rating}`}
+            />
+          </View>
         </View>
-      )}
+        <View>
+          <View style={styles.filters}>
+            <Text style={styles.filtersText}>
+              {item.type.type}
+              {" | "}
+            </Text>
+            <Text style={styles.filtersText}>{item.status.status}</Text>
+          </View>
+          {item.images && (
+            <View style={styles.thumbnailsContainer}>
+              <FlatList
+                data={item.images}
+                horizontal
+                renderItem={({ item }) => (
+                  <TouchableOpacity
+                    onPress={() => {
+                      navigation.navigate(routes.IMAGE_VIEW, {
+                        image: { uri: item.image },
+                      });
+                    }}
+                  >
+                    <Image
+                      source={{ uri: item.image }}
+                      style={styles.thumbnail}
+                    />
+                  </TouchableOpacity>
+                )}
+                keyExtractor={(item) => item.image}
+              />
+            </View>
+          )}
+        </View>
+      </ImageBackground>
       <View style={styles.detailsContainer}>
         <AppText style={styles.price}>Ksh.{item.price}</AppText>
         <AppText>{item.description}</AppText>
@@ -60,9 +97,8 @@ function PropertyDetailScreen({ navigation, route }) {
 const styles = StyleSheet.create({
   image: {
     width: "100%",
-    height: 400,
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
+    height: 500,
+    justifyContent: "space-between",
   },
   detailsContainer: {
     padding: 20,
@@ -86,11 +122,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   header: {
-    top: 5,
-    marginLeft: 10,
-    marginTop: 30,
-    position: "absolute",
     flexDirection: "row",
+    justifyContent: "space-between",
+    margin: 30,
   },
   headerTitle: {
     fontSize: 30,
@@ -110,6 +144,16 @@ const styles = StyleSheet.create({
     margin: 5,
     width: 80,
     borderRadius: 10,
+  },
+  filters: {
+    flexDirection: "row",
+    padding: 10,
+    backgroundColor: colors.dark,
+  },
+  filtersText: {
+    color: colors.white,
+    fontWeight: "bold",
+    fontSize: 20,
   },
 });
 
