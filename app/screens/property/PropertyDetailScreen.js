@@ -55,11 +55,16 @@ function PropertyDetailScreen({ navigation, route }) {
         </View>
         <View>
           <View style={styles.filters}>
-            <Text style={styles.filtersText}>
-              {item.type.type}
-              {" | "}
-            </Text>
-            <Text style={styles.filtersText}>{item.status.status}</Text>
+            <IconText
+              icon="bed-single-outline"
+              text={`${item.type.type} | `}
+              size={20}
+            />
+            <IconText
+              icon="progress-check"
+              text={`${item.status.status} | `}
+              size={20}
+            />
           </View>
           {item.images && (
             <View style={styles.thumbnailsContainer}>
