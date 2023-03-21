@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import { View, StyleSheet, FlatList, Text } from "react-native";
 import colors from "../../utils/colors";
 import { useProperty } from "../../api/hooks";
-import routes from "../../navigation/routes";
-import HouseCard from "../../components/HouseCard";
 import LargePropertCard from "../../components/property/LargePropertCard";
 
 function PropertyListScreen({ navigation }) {
