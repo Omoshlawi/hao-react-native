@@ -29,14 +29,6 @@ function PropertiesStackNavigator(props) {
           headerShown: false,
         })}
       />
-      <Screen
-        name={routes.IMAGE_VIEW}
-        component={ViewImageScreen}
-        options={{
-          headerShown: false,
-          presentation: "modal",
-        }}
-      />
     </Navigator>
   );
 }

@@ -19,4 +19,7 @@ export default Object.freeze({
   AUTH: "Auth",
   PROPERTY_NAV: "PropNav",
   USER_NAV: "UserNav",
+  HOUSE_LIST_SCREEN: "HouseListScreen",
+  HOUSE_DETAIL_SCREEN: "HouseDetailScreen",
+  HOUSES_NAV: "HousesNav",
 });

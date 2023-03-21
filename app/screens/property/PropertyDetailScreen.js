@@ -42,6 +42,7 @@ function PropertyDetailScreen({ navigation, route }) {
   return (
     <View style={styles.screen}>
       <ScrollView>
+        {/* Primary image background with titles and thumbnails*/}
         <ImageBackground style={styles.image} source={{ uri: item.image }}>
           <View style={styles.header}>
             <TouchableOpacity
@@ -222,6 +223,8 @@ const styles = StyleSheet.create({
     margin: 5,
     width: 80,
     borderRadius: 10,
+    borderWidth: 2,
+    borderColor: colors.white,
   },
   filters: {
     flexDirection: "row",

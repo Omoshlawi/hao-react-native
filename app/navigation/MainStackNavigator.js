@@ -8,6 +8,7 @@ import PropertiesStackNavigator from "./PropertiesStackNavigator";
 import routes from "./routes";
 import UserStackNavigation from "./UserStackNavigation";
 import ViewImageScreen from "../screens/ViewImageScreen";
+import HousesStackNavigator from "./HousesStackNavigator";
 
 const Stack = createNativeStackNavigator();
 const Navigator = Stack.Navigator;
@@ -40,6 +41,12 @@ function MainStackNavigator(props) {
       <Screen
         name={routes.USER_NAV}
         component={UserStackNavigation}
+        options={{ headerShown: false }}
+        scre
+      />
+      <Screen
+        name={routes.HOUSES_NAV}
+        component={HousesStackNavigator}
         options={{ headerShown: false }}
         scre
       />
