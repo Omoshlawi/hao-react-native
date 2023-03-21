@@ -110,7 +110,9 @@ const HomeScreen = ({ navigation }) => {
           left={false}
           text="View all"
           icon="chevron-right"
-          onPress={() => {}}
+          onPress={() => {
+            navigation.navigate(routes.HOUSES_NAV);
+          }}
         />
       </View>
       <FlatList
