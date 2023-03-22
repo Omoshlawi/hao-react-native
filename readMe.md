@@ -1,20 +1,95 @@
-## Navigation
+# Home Hub
+![img.png](img.png)
 
-It is simalar to one in [react native]("https://reactnative.dev/docs/navigation") main doc only that it is more detailed,
-It contains all 3 types of navigations:
+Introducing our revolutionary real estate mobile app system! 
+Our system is designed to provide you with an unparalleled real 
+estate experience. Whether you're a client looking to buy or rent
+a property, our system is the perfect solution for all your needs.
 
-- [Stack]("https://reactnavigation.org/docs/hello-react-navigation")
-- [Drawer]("https://reactnavigation.org/docs/drawer-based-navigation")
-- [Tab]("https://reactnavigation.org/docs/tab-based-navigation")
+Our app features a user-friendly interface that makes it easy to search 
+for properties based on your specific requirements. You can filter your 
+search based on location, price, property type, and other criteria to find 
+exactly what you're looking for. Plus, our app provides detailed property 
+information, including high-quality images and virtual tours, so you can get 
+a better idea of what the property looks like before you visit it.
 
-  For set up its same
+Our real estate mobile app system offers a range of features that make it 
+easier for tenants, property owners, and entrepreneurs to find and market 
+properties. Here are some of the key features:
 
-[Full Documentation]("https://reactnavigation.org/docs/")
+- `Property search`
+- `House search`
+- `Property listing`
+- `Property management`
+- `House listing`
+- `Investment search`
 
-You can use hooks `useRoute` and `useNavigation` in child components to screen component with no direct acces to the rouut instead of drilling it
 
-## Nb: Modal also surport pobs **presentation** that assumes `modal` or `card `, ettc, for the mordal mode you can swipe downwars to move backward
+It also supports a wide range of properties, including land, 
+rental apartments, shops, offices, and many more. This means that users can find and 
+market a variety of properties through our app, making it a one-stop-shop for all
+their real estate needs.
 
-# NB for getting data we use librari `apisauce` which is a wrapper around axios
+Whether you're looking to rent an apartment, lease a shop, or buy a piece of land, 
+our app has you covered. You can easily filter your search based on property type,
+location, price, and other criteria, and view detailed property information, including 
+photos and videos.
 
-`eas build -p android --profile preview`
+For Tenants, they  can easily search for houses, shops, offices for rent based on their preferences,
+such as location, price, and property type. The app provides a user-friendly interface 
+that allows tenants to filter their search and view detailed property information, 
+including photos and videos.
+
+
+For property owners, our app provides a platform to market their properties to potential 
+buyers or renters.They can add detailed property information, including photos and videos, 
+to attract more renters. Property owners can also receive inquiries and messages 
+from interested tenants through the app.
+They can easily list their properties on the app and reach a wider audience,
+making it easier to find the right tenant or buyer.They can also use the app to manage 
+their properties, including tracking rent payments, maintenance requests, and other important 
+information. This makes it easier for property owners to keep track of their properties and 
+ensure that their tenants are happy.
+
+
+For entrepreneurs, our app provides a comprehensive investment platform that allows 
+them to search for properties based on their investment criteria. Whether you're looking
+to invest in a rental apartment, an office building, or a piece of land, our app provides 
+real-time market data and analysis to help you make informed investment decisions.
+
+# User Interface
+
+## Home screen,
+
+![img_1.png](img_1.png)
+ 
+## Property Listing and detailed
+
+<img src="img_2.png" alt="image2" width="400"/>
+<img src="img_9.png" alt="image2" width="400"/>
+<img src="img_10.png" alt="image2" width="400"/>
+
+## House Listings
+
+<img src="img_3.png" alt="image2" width="400"/>
+<img src="img_11.png" alt="image2" width="400"/>
+<img src="img_12.png" alt="image2" width="400"/>
+
+## Near by properties and properties at different locations
+
+![img_4.png](img_4.png)
+
+## Advance House and Property search and filter
+
+<img src="img_5.png" alt="image2" width="400"/>
+<img src="img_6.png" alt="image2" width="400"/>
+
+## Property step by step registration
+
+![img_7.png](img_7.png)
+
+## Application User center
+
+![img_8.png](img_8.png)
+
+
