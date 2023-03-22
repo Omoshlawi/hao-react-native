@@ -6,17 +6,45 @@ import {
   TouchableOpacity,
   FlatList,
   ScrollView,
-  Image
+  Image,
 } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import colors from "../../utils/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import IconText from "../../components/display/IconText";
 import ExpandableText from "../../components/display/ExpandableText";
 import routes from "../../navigation/routes";
+import { useHouses, useProperty } from "../../api/hooks";
+import ScrollableBadgeButtons from "../../components/button/ScrollableBagdeButtons";
+import SmallHouseCard from "../../components/house/SmallHouseCard";
 
 const HouseDetailsScreen = ({ navigation, route }) => {
-  item = route.params;
+  const item = route.params;
+  const { getProperty } = useProperty();
+  const { filterHouses } = useHouses();
+  const [searchResults, setSearchResults] = useState([]);
+  const [currentProperty, setCurrentProperty] = useState(null);
+  const fetchData = async () => {
+    const resp = await getProperty(item.property.url);
+    if (!resp.ok) return console.log(resp.problem);
+    setCurrentProperty(resp.data);
+  };
+
+  const handleSearch = async () => {
+    const response = await filterHouses({ property: item.property.title });
+    if (!response.ok) {
+      return console.log(response.problem);
+    }
+    const {
+      data: { results },
+    } = response;
+    setSearchResults(results);
+  };
+
+  useEffect(() => {
+    fetchData();
+    handleSearch();
+  }, []);
   return (
     <View style={styles.screen}>
       <ScrollView>
@@ -46,12 +74,14 @@ const HouseDetailsScreen = ({ navigation, route }) => {
                 borderRadius: 10,
               }}
             >
-              <IconText
-                icon="star-outline"
-                size={20}
-                color={colors.white}
-                // text={`${item.reviews.average_rating}`}
-              />
+              {currentProperty && (
+                <IconText
+                  icon="star-outline"
+                  size={20}
+                  color={colors.white}
+                  text={`${currentProperty.reviews.average_rating}`}
+                />
+              )}
             </View>
           </View>
           <View>
@@ -71,7 +101,7 @@ const HouseDetailsScreen = ({ navigation, route }) => {
               <IconText
                 icon="home-modern"
                 text={item.property.title}
-                // text={`${item.location.address} ${item.location.city} ${item.location.country}`}
+                // text={`${currentProperty.location.address} ${currentProperty.location.city} ${currentProperty.location.country}`}
                 size={15}
               />
             </View>
@@ -98,14 +128,14 @@ const HouseDetailsScreen = ({ navigation, route }) => {
           </View>
         </ImageBackground>
         <View style={styles.detailsContainer}>
-          {/* {item.features.length > 0 && (
+          {currentProperty && currentProperty.features.length > 0 && (
             <ScrollableBadgeButtons
-              data={item.features}
+              data={currentProperty.features}
               labelExtractor={({ feature }) => feature}
               selectable={false}
               title="Features"
             />
-          )} */}
+          )}
           <ExpandableText
             title="Description"
             contentStyle={{ paddingHorizontal: 20, paddingVertical: 10 }}
@@ -128,7 +158,15 @@ const HouseDetailsScreen = ({ navigation, route }) => {
               <Text>Price: </Text>
               <Text style={styles.detailText}>{item.price}</Text>
             </View>
-            
+            {currentProperty && (
+              <View style={styles.textRow}>
+                <Text>Location: </Text>
+                <Text
+                  style={styles.detailText}
+                >{`${currentProperty.location.address} ${currentProperty.location.city} ${currentProperty.location.country}`}</Text>
+              </View>
+            )}
+
             <View style={styles.textRow}>
               <Text>Type: </Text>
               <Text style={styles.detailText}>{item.type.type}</Text>
@@ -138,6 +176,21 @@ const HouseDetailsScreen = ({ navigation, route }) => {
               <Text style={styles.detailText}>{item.status.status}</Text>
             </View>
           </View>
+          {searchResults.length > 0 && (
+            <Text style={{ fontWeight: "bold", paddingHorizontal: 10 }}>
+              Other Houses
+            </Text>
+          )}
+          <FlatList
+            data={searchResults}
+            keyExtractor={(house) => house.url}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{
+              alignItems: "center",
+            }}
+            renderItem={({ item: house }) => <SmallHouseCard item={house} />}
+          />
         </View>
       </ScrollView>
       <View style={styles.row}>

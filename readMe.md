@@ -16,3 +16,5 @@ You can use hooks `useRoute` and `useNavigation` in child components to screen c
 ## Nb: Modal also surport pobs **presentation** that assumes `modal` or `card `, ettc, for the mordal mode you can swipe downwars to move backward
 
 # NB for getting data we use librari `apisauce` which is a wrapper around axios
+
+`eas build -p android --profile preview`

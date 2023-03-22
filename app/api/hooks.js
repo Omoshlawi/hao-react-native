@@ -8,7 +8,7 @@ export const useProperty = () => {
   const getProperties = () => apiClient.get(endPoint);
   const putProperties = async () => apiClient.put(endPoint);
   const deleteProperties = async () => {};
-
+  const getProperty = (url) => apiClient.get(url);
   const getPropertyTypes = () => apiClient.get(endPoint + "types/");
   const getPropertyStatus = () => apiClient.get(endPoint + "status/");
   const getPropertyLocations = () => apiClient.get(endPoint + "location/");
@@ -24,6 +24,7 @@ export const useProperty = () => {
     });
   return {
     getProperties,
+    getProperty,
     putProperties,
     deleteProperties,
     getPropertyTypes,
@@ -31,7 +32,7 @@ export const useProperty = () => {
     getPropertyLocations,
     getUserProperties,
     postProperty,
-    filterProperty
+    filterProperty,
   };
 };
 
