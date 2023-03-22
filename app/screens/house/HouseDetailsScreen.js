@@ -38,7 +38,7 @@ const HouseDetailsScreen = ({ navigation, route }) => {
     const {
       data: { results },
     } = response;
-    setSearchResults(results);
+    setSearchResults(results.filter(({ url }) => url !== item.url));
   };
 
   useEffect(() => {
@@ -136,12 +136,14 @@ const HouseDetailsScreen = ({ navigation, route }) => {
               title="Features"
             />
           )}
-          <ExpandableText
-            title="Description"
-            contentStyle={{ paddingHorizontal: 20, paddingVertical: 10 }}
-            text={item.description}
-            threshHold={350}
-          />
+          {item.description && (
+            <ExpandableText
+              title="Description"
+              contentStyle={{ paddingHorizontal: 20, paddingVertical: 10 }}
+              text={item.description}
+              threshHold={350}
+            />
+          )}
           <View>
             <Text style={{ fontWeight: "bold", paddingHorizontal: 10 }}>
               House Details

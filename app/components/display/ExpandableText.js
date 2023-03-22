@@ -12,7 +12,10 @@ const ExpandableText = ({
   title,
 }) => {
   const [expanded, setExpanded] = useState(false);
-  const displayText = expanded ? text : `${text}`.slice(0, threshHold);
+  let displayText = "";
+  if (text) {
+    displayText = expanded ? text : `${text}`.slice(0, threshHold);
+  }
   return (
     <View>
       {title && (
@@ -21,7 +24,7 @@ const ExpandableText = ({
         </Text>
       )}
       <Text style={contentStyle}>{displayText}</Text>
-      {text.length > threshHold && (
+      {text instanceof String && text.length > threshHold && (
         <View style={styles.button}>
           <IconText
             left={false}
