@@ -51,7 +51,7 @@ const HomeScreen = ({ navigation }) => {
     <AppSafeAreaScreen style={styles.screen}>
       <View style={styles.searchContainer}>
         <TouchableOpacity
-          onPress={() => navigation.navigate(routes.PROPERTY_NAV)}
+          onPress={() => navigation.navigate(routes.SEARCH_MAIN)}
         >
           <AppIcon
             name="magnify"

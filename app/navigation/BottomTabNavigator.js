@@ -99,6 +99,7 @@ function BottomTabNavigator(props) {
               color={color}
             />
           ),
+          tabBarLabel: "New Property",
           headerTitleContainerStyle: {
             justifyContent: "center",
             alignItems: "center",
