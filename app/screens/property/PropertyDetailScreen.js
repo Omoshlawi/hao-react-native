@@ -23,11 +23,11 @@ import SmallHouseCard from "../../components/house/SmallHouseCard";
 import ReviewSummary from "../../components/ReviewSummary";
 
 function PropertyDetailScreen({ navigation, route }) {
-  item = route.params;
+  const item = route.params;
   const [searchResults, setSearchResults] = useState([]);
-  const [reviews, setReviews] = useState([]);
+
   const { filterHouses } = useHouses();
-  const { getPropertyReviews } = useProperty();
+
   const handleFetch = async () => {
     const response = await filterHouses({ property: item.title });
     if (!response.ok) {
@@ -37,12 +37,6 @@ function PropertyDetailScreen({ navigation, route }) {
       data: { results },
     } = response;
     setSearchResults(results);
-    const reviewsResponse = await getPropertyReviews({ property: item.title });
-    if (!reviewsResponse.ok) return console.log(reviewsResponse.problem);
-    const {
-      data: { results: reviewResults },
-    } = reviewsResponse;
-    setReviews(reviewResults);
   };
 
   useEffect(() => {
@@ -168,10 +162,16 @@ function PropertyDetailScreen({ navigation, route }) {
             </View>
           </View>
           <View>
-            <Text style={styles.title}>What peoples say about use</Text>
+            <Text style={styles.title}>What peoples say about us</Text>
             <ReviewSummary
               rating={item.reviews.average_rating}
               reviews={item.reviews.count}
+              onReviewButtonClicked={() =>
+                navigation.navigate(routes.PROPERTY_NAV, {
+                  screen: routes.PROPERTY_REVIEW_PROP,
+                  params: item,
+                })
+              }
             />
           </View>
           <View>

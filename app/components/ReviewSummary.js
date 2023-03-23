@@ -4,7 +4,7 @@ import RatingBar from "./ratingbar/RatingBar";
 import colors from "../utils/colors";
 import IconText from "./display/IconText";
 
-const ReviewSummary = ({ rating, reviews }) => {
+const ReviewSummary = ({ rating, reviews, onReviewButtonClicked }) => {
   return (
     <View style={styles.container}>
       <View style={styles.row}>
@@ -25,6 +25,7 @@ const ReviewSummary = ({ rating, reviews }) => {
           icon={parseInt(reviews) > 0 ? "dots-horizontal" : "plus"}
           size={15}
           text={parseInt(reviews) > 0 ? "View More" : "Leave Review"}
+          onPress={onReviewButtonClicked}
         />
       </View>
     </View>

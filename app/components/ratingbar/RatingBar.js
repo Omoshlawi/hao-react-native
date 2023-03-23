@@ -8,7 +8,9 @@ const RatingBar = ({
   minRating = 1,
   onRatingChange,
   disabled,
-  startSize = 30,
+  starSize = 30,
+  align = "center",
+  contentStyle,
 }) => {
   const [currentRating, setcurrentRating] = useState(
     defaultRating >= minRating && defaultRating <= maxRating ? defaultRating : 0
@@ -20,7 +22,13 @@ const RatingBar = ({
   const starImageCorner = require("./asset/star_corner.png");
 
   return (
-    <View style={styles.customRatingBarStyle}>
+    <View
+      style={[
+        styles.customRatingBarStyle,
+        contentStyle,
+        { justifyContent: align },
+      ]}
+    >
       {ratings.map((item, key) => {
         return (
           <TouchableOpacity
@@ -35,7 +43,7 @@ const RatingBar = ({
             <Image
               style={[
                 styles.starImageStyle,
-                { width: startSize, height: startSize },
+                { width: starSize, height: starSize },
               ]}
               source={item <= currentRating ? starImageFilled : starImageCorner}
             />
@@ -50,7 +58,6 @@ export default RatingBar;
 
 const styles = StyleSheet.create({
   customRatingBarStyle: {
-    justifyContent: "center",
     flexDirection: "row",
   },
   starImageStyle: {

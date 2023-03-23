@@ -6,6 +6,7 @@ import PropertyDetailScreen from "../screens/property/PropertyDetailScreen";
 import PropertyListScreen from "../screens/property/PropertyListScreen";
 import routes from "./routes";
 import ViewImageScreen from "../screens/ViewImageScreen";
+import ReviewsScreen from "../screens/property/ReviewsScreen";
 
 const Stack = createNativeStackNavigator();
 const Navigator = Stack.Navigator; //Contain children stack screens and only one how to do to navigate between the screens
@@ -27,6 +28,13 @@ function PropertiesStackNavigator(props) {
         options={({ route }) => ({
           headerTitle: route.params.title,
           headerShown: false,
+        })}
+      />
+      <Screen
+        name={routes.PROPERTY_REVIEW_PROP}
+        component={ReviewsScreen}
+        options={({ route }) => ({
+          headerTitle: `${route.params.title} Reviews`,
         })}
       />
     </Navigator>
