@@ -39,3 +39,11 @@ export const getFormFileFromUri = (uri) => {
     type: mimeType,
   };
 };
+
+export const rangeToListInclusive = (start, end) => {
+  const list = [];
+  for (let index = start; index < end + 1; index++) {
+    list.push(index);
+  }
+  return list;
+};

@@ -18,14 +18,17 @@ import IconText from "../../components/display/IconText";
 import AppButton from "../../components/AppButton";
 import ScrollableBadgeButtons from "../../components/button/ScrollableBagdeButtons";
 import ExpandableText from "../../components/display/ExpandableText";
-import { useHouses } from "../../api/hooks";
+import { useHouses, useProperty } from "../../api/hooks";
 import SmallHouseCard from "../../components/house/SmallHouseCard";
+import ReviewSummary from "../../components/ReviewSummary";
 
 function PropertyDetailScreen({ navigation, route }) {
   item = route.params;
   const [searchResults, setSearchResults] = useState([]);
+  const [reviews, setReviews] = useState([]);
   const { filterHouses } = useHouses();
-  const handleSearch = async () => {
+  const { getPropertyReviews } = useProperty();
+  const handleFetch = async () => {
     const response = await filterHouses({ property: item.title });
     if (!response.ok) {
       return console.log(response.problem);
@@ -34,10 +37,16 @@ function PropertyDetailScreen({ navigation, route }) {
       data: { results },
     } = response;
     setSearchResults(results);
+    const reviewsResponse = await getPropertyReviews({ property: item.title });
+    if (!reviewsResponse.ok) return console.log(reviewsResponse.problem);
+    const {
+      data: { results: reviewResults },
+    } = reviewsResponse;
+    setReviews(reviewResults);
   };
 
   useEffect(() => {
-    handleSearch();
+    handleFetch();
   }, []);
   return (
     <View style={styles.screen}>
@@ -136,9 +145,7 @@ function PropertyDetailScreen({ navigation, route }) {
             threshHold={350}
           />
           <View>
-            <Text style={{ fontWeight: "bold", paddingHorizontal: 10 }}>
-              Property Details
-            </Text>
+            <Text style={styles.title}>Property Details</Text>
             <View style={styles.textRow}>
               <Text>Title: </Text>
               <Text style={styles.detailText}>{item.title}</Text>
@@ -159,6 +166,13 @@ function PropertyDetailScreen({ navigation, route }) {
               <Text>Status: </Text>
               <Text style={styles.detailText}>{item.status.status}</Text>
             </View>
+          </View>
+          <View>
+            <Text style={styles.title}>What peoples say about use</Text>
+            <ReviewSummary
+              rating={item.reviews.average_rating}
+              reviews={item.reviews.count}
+            />
           </View>
           <View>
             {searchResults.length > 0 && (
@@ -190,6 +204,10 @@ function PropertyDetailScreen({ navigation, route }) {
 }
 
 const styles = StyleSheet.create({
+  title: {
+    fontWeight: "bold",
+    paddingHorizontal: 10,
+  },
   image: {
     width: "100%",
     height: 500,

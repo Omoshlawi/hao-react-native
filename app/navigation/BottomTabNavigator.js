@@ -52,6 +52,7 @@ function BottomTabNavigator(props) {
             <MaterialCommunityIcons size={size} name="home" color={color} />
           ),
           headerShown: false,
+          tabBarLabel: "Home",
         }}
       />
 
