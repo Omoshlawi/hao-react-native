@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { TouchableOpacity, StyleSheet } from "react-native";
 import AppText from "./AppText";
 
@@ -16,7 +15,5 @@ const styles = StyleSheet.create({
     padding: 20,
   },
 });
-
-PickerItem.propTypes = {};
 
 export default PickerItem;

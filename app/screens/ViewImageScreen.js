@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import {
   View,
   Image,
@@ -43,6 +42,5 @@ const styles = StyleSheet.create({
     width: "100%",
   },
 });
-ViewImageScreen.propTypes = {};
 
 export default ViewImageScreen;

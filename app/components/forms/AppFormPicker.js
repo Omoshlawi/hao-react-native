@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import AppPicker from "../AppPicker";
 import { useFormikContext } from "formik";
 import { zip } from "../../utils/helpers";
@@ -49,6 +48,5 @@ function AppFormPicker({
   );
 }
 
-AppFormPicker.propTypes = {};
 
 export default AppFormPicker;

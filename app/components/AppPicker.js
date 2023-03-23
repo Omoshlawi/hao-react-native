@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import {
   View,
   StyleSheet,
@@ -86,6 +85,5 @@ const styles = StyleSheet.create({
   },
 });
 
-AppPicker.propTypes = {};
 
 export default AppPicker;

@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import {
   View,
   Text,
@@ -48,8 +47,6 @@ function WelcomeScreen({ navigation }) {
     </ImageBackground>
   );
 }
-
-WelcomeScreen.propTypes = {};
 
 const styles = StyleSheet.create({
   imageBackground: {

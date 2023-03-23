@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import {
   View,
   Image,
@@ -9,16 +8,14 @@ import {
   ImageBackground,
   ScrollView,
 } from "react-native";
-import AppText from "../../components/AppText";
 import colors from "../../utils/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FlatList } from "react-native";
 import routes from "../../navigation/routes";
 import IconText from "../../components/display/IconText";
-import AppButton from "../../components/AppButton";
 import ScrollableBadgeButtons from "../../components/button/ScrollableBagdeButtons";
 import ExpandableText from "../../components/display/ExpandableText";
-import { useHouses, useProperty } from "../../api/hooks";
+import { useHouses } from "../../api/hooks";
 import SmallHouseCard from "../../components/house/SmallHouseCard";
 import ReviewSummary from "../../components/ReviewSummary";
 
@@ -274,6 +271,5 @@ const styles = StyleSheet.create({
   },
 });
 
-PropertyDetailScreen.propTypes = {};
 
 export default PropertyDetailScreen;

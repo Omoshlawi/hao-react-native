@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { SafeAreaView, StyleSheet } from "react-native";
 import Constants from "expo-constants";
 
@@ -14,6 +13,5 @@ const styles = StyleSheet.create({
   },
 });
 
-AppSafeAreaScreen.propTypes = {};
 
 export default AppSafeAreaScreen;

@@ -7,7 +7,6 @@ import AppIcon from "../../components/AppIcon";
 import ListItemSeparator from "../../components/ListItemSeparator";
 import UserContext from "../../context/UserContext";
 import { useUser } from "../../api/hooks";
-import useSecureStore from "../../hooks/useSecureStore";
 import routes from "../../navigation/routes";
 
 const menuItems = [
@@ -102,6 +101,5 @@ const styles = StyleSheet.create({
   },
 });
 
-AccountScreen.propTypes = {};
 
 export default AccountScreen;

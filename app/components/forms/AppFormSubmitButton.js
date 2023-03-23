@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import AppButton from "../AppButton";
 import { useFormikContext } from "formik";
 
@@ -8,6 +7,5 @@ function AppFormSubmitButton({ title }) {
   return <AppButton title={title} onPress={handleSubmit} />;
 }
 
-AppFormSubmitButton.propTypes = {};
 
 export default AppFormSubmitButton;

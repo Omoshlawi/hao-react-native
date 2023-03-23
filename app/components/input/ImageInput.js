@@ -1,6 +1,5 @@
 import { Image, StyleSheet, View, TouchableOpacity, Alert } from "react-native";
 import React, { useEffect } from "react";
-import PropTypes from "prop-types";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../../utils/colors";
 import {
@@ -39,7 +38,7 @@ const ImageInput = ({
       const { assets, canceled } = await launchImageLibraryAsync({
         allowsEditing: true,
         mediaTypes: MediaTypeOptions.Images,
-        quality: 0.5,//hold value between o and 1, 1 for highest quality and 1 best highest quality
+        quality: 0.5, //hold value between o and 1, 1 for highest quality and 1 best highest quality
       });
       if (canceled) {
       } else {
@@ -95,10 +94,4 @@ const styles = StyleSheet.create({
   },
 });
 
-ImageInput.propTypes = {
-  onImageChange: PropTypes.func.isRequired,
-  radiusScaleFactor: PropTypes.number,
-  size: PropTypes.number,
-  localImage: PropTypes.object,
-};
 export default ImageInput;

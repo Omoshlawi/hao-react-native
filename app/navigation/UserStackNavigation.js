@@ -1,6 +1,5 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import colors from "../utils/colors";
-import PropTypes from "prop-types";
 import React from "react";
 import routes from "./routes";
 import UserProfileScreen from "../screens/user/UserProfileScreen";
@@ -27,6 +26,5 @@ function UserStackNavigation(props) {
   );
 }
 
-UserStackNavigation.propTypes = {};
 
 export default UserStackNavigation;

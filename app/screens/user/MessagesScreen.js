@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import {
   FlatList,
   SafeAreaView,
@@ -101,6 +100,5 @@ const styles = StyleSheet.create({
   backRow: {},
 });
 
-MessagesScreen.propTypes = {};
 
 export default MessagesScreen;

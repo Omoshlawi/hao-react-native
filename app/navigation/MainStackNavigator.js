@@ -60,6 +60,5 @@ function MainStackNavigator(props) {
   );
 }
 
-MainStackNavigator.propTypes = {};
 
 export default MainStackNavigator;

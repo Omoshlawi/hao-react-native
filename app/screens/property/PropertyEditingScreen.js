@@ -1,18 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import AppSafeAreaScreen from "../../components/AppSafeAreaScreen";
 import {
   View,
   StyleSheet,
-  Text,
   ScrollView,
-  TouchableOpacity,
 } from "react-native";
 import * as Yup from "yup";
 import { useProperty } from "../../api/hooks";
 import Step1 from "../../components/property/form/Step1";
 import Step2 from "../../components/property/form/Step2";
-import { AppForm, AppFormSubmitButton } from "../../components/forms";
 import colors from "../../utils/colors";
 import Step3 from "../../components/property/form/Step3";
 import { getFormFileFromUri } from "../../utils/helpers";
@@ -124,7 +120,5 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
-
-PropertyEditingScreen.propTypes = {};
 
 export default PropertyEditingScreen;

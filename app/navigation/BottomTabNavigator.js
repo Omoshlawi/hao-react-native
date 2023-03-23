@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import colors from "../utils/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -125,7 +124,5 @@ function BottomTabNavigator(props) {
     </Navigator>
   );
 }
-
-BottomTabNavigator.propTypes = {};
 
 export default BottomTabNavigator;

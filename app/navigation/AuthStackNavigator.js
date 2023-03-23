@@ -47,6 +47,5 @@ function AuthStackNavigator(props) {
   );
 }
 
-AuthStackNavigator.propTypes = {};
 
 export default AuthStackNavigator;

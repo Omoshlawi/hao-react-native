@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import {
   View,
   Text,
@@ -34,8 +33,6 @@ function ListItem({ image, title, subTitle, onPress, style, IconComponent }) {
     </TouchableHighlight>
   );
 }
-
-ListItem.propTypes = {};
 
 const styles = StyleSheet.create({
   containerDetails: {

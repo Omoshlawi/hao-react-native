@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import { View, StyleSheet, FlatList, Text } from "react-native";
 import colors from "../../utils/colors";
 import { useProperty } from "../../api/hooks";
@@ -68,9 +67,5 @@ const styles = StyleSheet.create({
     margin: 5,
   },
 });
-
-PropertyListScreen.propTypes = {
-  navigation: PropTypes.object,
-};
 
 export default PropertyListScreen;

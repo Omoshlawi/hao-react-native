@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { View, StyleSheet, TextInput, Platform } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../utils/colors";
@@ -40,6 +39,5 @@ const styles = StyleSheet.create({
   },
 });
 
-AppTextInput.propTypes = {};
 
 export default AppTextInput;

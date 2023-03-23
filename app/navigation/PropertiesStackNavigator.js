@@ -1,6 +1,5 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import colors from "../utils/colors";
-import PropTypes from "prop-types";
 import React from "react";
 import PropertyDetailScreen from "../screens/property/PropertyDetailScreen";
 import PropertyListScreen from "../screens/property/PropertyListScreen";
@@ -41,6 +40,5 @@ function PropertiesStackNavigator(props) {
   );
 }
 
-PropertiesStackNavigator.propTypes = {};
 
 export default PropertiesStackNavigator;

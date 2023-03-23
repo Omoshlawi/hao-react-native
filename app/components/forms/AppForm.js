@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Formik } from "formik";
 
 function AppForm({ initialValues, onSubmit, validationSchema, children }) {
@@ -13,7 +12,5 @@ function AppForm({ initialValues, onSubmit, validationSchema, children }) {
     </Formik>
   );
 }
-
-AppForm.propTypes = {};
 
 export default AppForm;

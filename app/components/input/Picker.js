@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import {
   View,
   Text,
@@ -137,6 +136,5 @@ const styles = StyleSheet.create({
   },
 });
 
-Picker.propTypes = {};
 
 export default Picker;

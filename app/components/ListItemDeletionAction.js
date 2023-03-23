@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { TouchableWithoutFeedback, View, StyleSheet } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../utils/colors";
@@ -30,6 +29,5 @@ const styles = StyleSheet.create({
   },
 });
 
-ListItemDeletionAction.propTypes = {};
 
 export default ListItemDeletionAction;

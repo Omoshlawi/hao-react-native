@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { View, StyleSheet } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 const AppIcon = ({
@@ -33,6 +32,5 @@ const styles = StyleSheet.create({
   },
 });
 
-AppIcon.propTypes = {};
 
 export default AppIcon;

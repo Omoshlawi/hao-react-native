@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import colors from "../utils/colors";
 import {
   Image,
@@ -45,7 +44,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
-
-AppCard.propTypes = {};
 
 export default AppCard;

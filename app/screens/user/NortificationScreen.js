@@ -1,8 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
 import AppSafeAreaScreen from "../../components/AppSafeAreaScreen";
 import { FlatList } from "react-native";
-import ListItemSwepableDeleteAction from "../../components/ListItemSwepableDeleteAction";
 import ListItemSwipable from "../../components/ListItemSwipable";
 
 const nortifications = [
@@ -26,7 +24,5 @@ function NortificationScreen(props) {
     </AppSafeAreaScreen>
   );
 }
-
-NortificationScreen.propTypes = {};
 
 export default NortificationScreen;
