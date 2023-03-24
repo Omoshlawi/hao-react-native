@@ -43,6 +43,7 @@ const ReviewsScreen = ({ navigation, route }) => {
     }
     setVisible(true);
     await handleFetch();
+    setFormState({ comment: "", rating: 3 });
   };
   useEffect(() => {
     handleFetch();
@@ -92,6 +93,7 @@ const ReviewsScreen = ({ navigation, route }) => {
             placeholder="Leave your review here"
             width="85%"
             onChangeText={(comment) => setFormState({ ...formState, comment })}
+            value={formState.comment}
           />
           <TouchableOpacity onPress={handleSubmit}>
             <AppIcon
@@ -114,7 +116,7 @@ const ReviewsScreen = ({ navigation, route }) => {
           },
         }}
       >
-        ReVview added successfully.Thank you!.
+        Review added successfully.Thank you!.
       </Snackbar>
     </View>
   );
