@@ -10,6 +10,7 @@ const ReviewsScreen = ({ navigation, route }) => {
   const item = route.params;
   const [reviews, setReviews] = useState([]);
   const { getPropertyReviews } = useProperty();
+  const [refresh, setRefresh] = useState(false);
 
   const handleFetch = async () => {
     const reviewsResponse = await getPropertyReviews({ property: item.title });
@@ -27,6 +28,8 @@ const ReviewsScreen = ({ navigation, route }) => {
       <FlatList
         data={reviews}
         keyExtractor={({ url }) => url}
+        refreshing={refresh}
+        onRefresh={handleFetch}
         renderItem={({ item: review }) => (
           <View style={[styles.card]}>
             <View style={styles.user}>
