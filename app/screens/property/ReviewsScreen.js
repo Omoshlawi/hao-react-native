@@ -5,6 +5,9 @@ import { FlatList } from "react-native";
 import colors from "../../utils/colors";
 import RatingBar from "../../components/ratingbar/RatingBar";
 import moment from "moment/moment";
+import AppTextInput from "../../components/AppTextInput";
+import { TouchableOpacity } from "react-native";
+import AppIcon from "../../components/AppIcon";
 
 const ReviewsScreen = ({ navigation, route }) => {
   const item = route.params;
@@ -55,6 +58,22 @@ const ReviewsScreen = ({ navigation, route }) => {
           </View>
         )}
       />
+      <View style={styles.form}>
+        <Text style={styles.label}>Rating:</Text>
+        <RatingBar align="flex-start" />
+        <Text style={styles.label}>Review:</Text>
+        <View style={styles.input}>
+          <AppTextInput placeholder="Leave your review here" width="85%" />
+          <TouchableOpacity>
+            <AppIcon
+              name="send"
+              size={50}
+              color={colors.white}
+              backgroundColor={colors.primary}
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   );
 };
@@ -85,5 +104,21 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     flexDirection: "row",
     alignItems: "center",
+  },
+  form: {
+    backgroundColor: colors.white,
+    padding: 20,
+    borderRadius: 20,
+    marginTop: 20
+  },
+  input: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  label: {
+    color: colors.medium,
+    fontWeight: "bold",
+    padding: 5,
   },
 });
