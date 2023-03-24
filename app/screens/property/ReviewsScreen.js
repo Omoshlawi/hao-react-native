@@ -41,7 +41,7 @@ const ReviewsScreen = ({ navigation, route }) => {
     );
     if (!response.ok) {
       setMessage("Please provide both rating and review");
-      setVisible(true)
+      setVisible(true);
       return console.log("ReviewScreen: ", response.problem, response.data);
     }
     setMessage("Review added successfully.Thank you!");
@@ -62,10 +62,15 @@ const ReviewsScreen = ({ navigation, route }) => {
         renderItem={({ item: review }) => (
           <View style={[styles.card]}>
             <View style={styles.user}>
-              <Image
-                source={{ uri: review.user.image }}
-                style={styles.avatar}
-              />
+              {review.user.image ? (
+                <Image
+                  source={{ uri: review.user.image }}
+                  style={styles.avatar}
+                />
+              ) : (
+                <AppIcon name="account" backgroundColor={colors.background} />
+              )}
+
               <Text style={{ padding: 10, fontWeight: "bold" }}>
                 {review.user.name}
               </Text>
@@ -94,7 +99,7 @@ const ReviewsScreen = ({ navigation, route }) => {
         <Text style={styles.label}>Review:</Text>
         <View style={styles.input}>
           <AppTextInput
-            placeholder="Leave your review here"
+            placeholder="Leave your review here ..."
             width="85%"
             onChangeText={(comment) => setFormState({ ...formState, comment })}
             value={formState.comment}
