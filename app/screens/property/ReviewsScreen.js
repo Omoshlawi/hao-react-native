@@ -19,6 +19,7 @@ const ReviewsScreen = ({ navigation, route }) => {
   const [formState, setFormState] = useState({ comment: "", rating: 3 });
   const { token } = useContext(UserContext);
   const [visible, setVisible] = useState(false);
+  const [message, setMessage] = useState("");
 
   const handleFetch = async () => {
     const reviewsResponse = await getPropertyReviews({
@@ -39,8 +40,11 @@ const ReviewsScreen = ({ navigation, route }) => {
       token
     );
     if (!response.ok) {
+      setMessage("Please provide both rating and review");
+      setVisible(true)
       return console.log("ReviewScreen: ", response.problem, response.data);
     }
+    setMessage("Review added successfully.Thank you!");
     setVisible(true);
     await handleFetch();
     setFormState({ comment: "", rating: 3 });
@@ -116,7 +120,7 @@ const ReviewsScreen = ({ navigation, route }) => {
           },
         }}
       >
-        Review added successfully.Thank you!.
+        {message}
       </Snackbar>
     </View>
   );
