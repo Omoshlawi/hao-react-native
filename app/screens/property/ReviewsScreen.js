@@ -9,6 +9,7 @@ import AppTextInput from "../../components/AppTextInput";
 import { TouchableOpacity } from "react-native";
 import AppIcon from "../../components/AppIcon";
 import UserContext from "../../context/UserContext";
+import { Button, Snackbar } from "react-native-paper";
 
 const ReviewsScreen = ({ navigation, route }) => {
   const item = route.params;
@@ -17,6 +18,7 @@ const ReviewsScreen = ({ navigation, route }) => {
   const [refresh, setRefresh] = useState(false);
   const [formState, setFormState] = useState({ comment: "", rating: 3 });
   const { token } = useContext(UserContext);
+  const [visible, setVisible] = useState(false);
 
   const handleFetch = async () => {
     const reviewsResponse = await getPropertyReviews({
@@ -31,6 +33,7 @@ const ReviewsScreen = ({ navigation, route }) => {
   };
 
   const handleSubmit = async () => {
+    setVisible(false);
     const response = await postPropertyReview(
       { ...formState, property: item.url },
       token
@@ -38,6 +41,7 @@ const ReviewsScreen = ({ navigation, route }) => {
     if (!response.ok) {
       return console.log("ReviewScreen: ", response.problem, response.data);
     }
+    setVisible(true);
     await handleFetch();
   };
   useEffect(() => {
@@ -99,6 +103,19 @@ const ReviewsScreen = ({ navigation, route }) => {
           </TouchableOpacity>
         </View>
       </View>
+      <Snackbar
+        visible={visible}
+        onDismiss={() => setVisible(false)}
+        duration={5000}
+        action={{
+          label: "Dismiss",
+          onPress: () => {
+            // setVisible(false);
+          },
+        }}
+      >
+        ReVview added successfully.Thank you!.
+      </Snackbar>
     </View>
   );
 };
