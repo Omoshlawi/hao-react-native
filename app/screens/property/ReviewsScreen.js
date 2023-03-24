@@ -14,6 +14,7 @@ const ReviewsScreen = ({ navigation, route }) => {
   const [reviews, setReviews] = useState([]);
   const { getPropertyReviews } = useProperty();
   const [refresh, setRefresh] = useState(false);
+  const [formState, setFormState] = useState({ comment: "", rating: 3 });
 
   const handleFetch = async () => {
     const reviewsResponse = await getPropertyReviews({ property: item.title });
@@ -22,6 +23,10 @@ const ReviewsScreen = ({ navigation, route }) => {
       data: { results: reviewResults },
     } = reviewsResponse;
     setReviews(reviewResults);
+  };
+
+  const handleSubmit = async () => {
+    console.log(formState);
   };
   useEffect(() => {
     handleFetch();
@@ -60,11 +65,19 @@ const ReviewsScreen = ({ navigation, route }) => {
       />
       <View style={styles.form}>
         <Text style={styles.label}>Rating:</Text>
-        <RatingBar align="flex-start" />
+        <RatingBar
+          align="flex-start"
+          defaultRating={formState.rating}
+          onRatingChange={(rating) => setFormState({ ...formState, rating })}
+        />
         <Text style={styles.label}>Review:</Text>
         <View style={styles.input}>
-          <AppTextInput placeholder="Leave your review here" width="85%" />
-          <TouchableOpacity>
+          <AppTextInput
+            placeholder="Leave your review here"
+            width="85%"
+            onChangeText={(comment) => setFormState({ ...formState, comment })}
+          />
+          <TouchableOpacity onPress={handleSubmit}>
             <AppIcon
               name="send"
               size={50}
@@ -109,7 +122,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     padding: 20,
     borderRadius: 20,
-    marginTop: 20
+    marginTop: 20,
   },
   input: {
     flexDirection: "row",
