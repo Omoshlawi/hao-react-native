@@ -16,6 +16,10 @@ export const useProperty = () => {
     apiClient.get(endPoint + "user/", {}, { headers: getAuthHeader(token) });
   const getPropertyReviews = (params) =>
     apiClient.get(endPoint + "reviews/", params);
+  const postPropertyReview = (data, token) =>
+    apiClient.post(endPoint + "reviews/", data, {
+      headers: getAuthHeader(token),
+    });
   const filterProperty = (params) => apiClient.get(endPoint, params);
   const postProperty = (token, data) =>
     apiClient.post(endPoint, data, {
@@ -25,6 +29,7 @@ export const useProperty = () => {
       },
     });
   return {
+    postPropertyReview,
     getPropertyReviews,
     getProperties,
     getProperty,

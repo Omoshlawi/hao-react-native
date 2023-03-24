@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Image } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useProperty } from "../../api/hooks";
 import { FlatList } from "react-native";
 import colors from "../../utils/colors";
@@ -8,16 +8,21 @@ import moment from "moment/moment";
 import AppTextInput from "../../components/AppTextInput";
 import { TouchableOpacity } from "react-native";
 import AppIcon from "../../components/AppIcon";
+import UserContext from "../../context/UserContext";
 
 const ReviewsScreen = ({ navigation, route }) => {
   const item = route.params;
   const [reviews, setReviews] = useState([]);
-  const { getPropertyReviews } = useProperty();
+  const { getPropertyReviews, postPropertyReview } = useProperty();
   const [refresh, setRefresh] = useState(false);
   const [formState, setFormState] = useState({ comment: "", rating: 3 });
+  const { token } = useContext(UserContext);
 
   const handleFetch = async () => {
-    const reviewsResponse = await getPropertyReviews({ property: item.title });
+    const reviewsResponse = await getPropertyReviews({
+      property: item.title,
+      ordering: "-created",
+    });
     if (!reviewsResponse.ok) return console.log(reviewsResponse.problem);
     const {
       data: { results: reviewResults },
@@ -26,7 +31,14 @@ const ReviewsScreen = ({ navigation, route }) => {
   };
 
   const handleSubmit = async () => {
-    console.log(formState);
+    const response = await postPropertyReview(
+      { ...formState, property: item.url },
+      token
+    );
+    if (!response.ok) {
+      return console.log("ReviewScreen: ", response.problem, response.data);
+    }
+    await handleFetch();
   };
   useEffect(() => {
     handleFetch();
