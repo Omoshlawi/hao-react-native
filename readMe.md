@@ -56,7 +56,7 @@ real-time market data and analysis to help you make informed investment decision
 
 # User Interface
 
-    <picture>
-
-  <img alt="Shows an illustrated sun in light mode and a moon with stars in dark mode." src="./images/collage.jpg">
+    
+  <picture>
+    <img alt="Shows an illustrated sun in light mode and a moon with stars in dark mode." src="./images/collage.jpg">
   </picture>
